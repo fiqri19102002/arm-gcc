@@ -12034,7 +12034,7 @@ includes experimental options that may produce broken code.
      'modref-max-bases'
      'modref-max-refs'
      'modref-max-accesses'
-          Specifies the maximal number of base pointers, referneces and
+          Specifies the maximal number of base pointers, references and
           accesses stored for a single function by mod/ref analysis.
 
      'modref-max-tests'
