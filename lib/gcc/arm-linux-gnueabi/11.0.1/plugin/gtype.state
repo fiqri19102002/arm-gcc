@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "11.0.1 20210305 (experimental)")
+(!version  "11.0.1 20210306 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 228
@@ -28562,15 +28562,15 @@
   nil 0 nil nil )
  
  (!type struct 2102 nil  gc_used "macro_export"
-  (!srcfileloc  "cp/module.cc" 16562)
+  (!srcfileloc  "cp/module.cc" 16567)
   (!fields 2 
    (!pair  "def"
     (!type already_seen 19)
-    (!srcfileloc  "cp/module.cc" 16555)
+    (!srcfileloc  "cp/module.cc" 16560)
     nil )
    (!pair  "undef_loc"
     (!type already_seen 2)
-    (!srcfileloc  "cp/module.cc" 16556)
+    (!srcfileloc  "cp/module.cc" 16561)
     nil )
   )
   nil 1032 nil nil )
@@ -28584,15 +28584,15 @@
    (!type already_seen 2104)
   )
   gc_pointed_to "vec<macro_export,va_gc>"
-  (!srcfileloc  "cp/module.cc" 16719)
+  (!srcfileloc  "cp/module.cc" 16724)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "cp/module.cc" 16719)
+    (!srcfileloc  "cp/module.cc" 16724)
     nil )
    (!pair  "macro_export"
     (!type already_seen 2102)
-    (!srcfileloc  "cp/module.cc" 16719)
+    (!srcfileloc  "cp/module.cc" 16724)
     nil )
   )
  )
@@ -28742,15 +28742,15 @@
    (!type already_seen 2136)
   )
   gc_pointed_to "hash_map<tree,tree_pair_p>"
-  (!srcfileloc  "cp/pt.c" 29150)
+  (!srcfileloc  "cp/pt.c" 29153)
   (!fields 2 
    (!pair  "tree_pair_p"
     (!type already_seen 530)
-    (!srcfileloc  "cp/pt.c" 29150)
+    (!srcfileloc  "cp/pt.c" 29153)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "cp/pt.c" 29150)
+    (!srcfileloc  "cp/pt.c" 29153)
     nil )
   )
  )
@@ -29917,7 +29917,7 @@
   nil )
  (!pair  "hash_map<tree,tree_pair_p>"
   (!type already_seen 2136)
-  (!srcfileloc  "cp/pt.c" 29150)
+  (!srcfileloc  "cp/pt.c" 29153)
   nil )
  (!pair  "pending_template"
   (!type already_seen 2123)
@@ -29967,11 +29967,11 @@
   nil )
  (!pair  "vec<macro_export,va_gc>"
   (!type already_seen 2104)
-  (!srcfileloc  "cp/module.cc" 16719)
+  (!srcfileloc  "cp/module.cc" 16724)
   nil )
  (!pair  "macro_export"
   (!type already_seen 2102)
-  (!srcfileloc  "cp/module.cc" 16558)
+  (!srcfileloc  "cp/module.cc" 16563)
   nil )
  (!pair  "note_defs_table_t"
   (!type already_seen 2098)
@@ -34300,21 +34300,21 @@
   nil )
  (!pair  "dguide_cache"
   (!type already_seen 2137)
-  (!srcfileloc  "cp/pt.c" 29150)
+  (!srcfileloc  "cp/pt.c" 29153)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "explicit_specifier_map"
   (!type already_seen 923)
-  (!srcfileloc  "cp/pt.c" 13702)
+  (!srcfileloc  "cp/pt.c" 13704)
   (!options 
    (!option cache string  "")
   )
  )
  (!pair  "defarg_inst"
   (!type already_seen 923)
-  (!srcfileloc  "cp/pt.c" 13586)
+  (!srcfileloc  "cp/pt.c" 13588)
   (!options 
    (!option cache string  "")
   )
@@ -34404,14 +34404,14 @@
  )
  (!pair  "free_saved_scope"
   (!type already_seen 1898)
-  (!srcfileloc  "cp/name-lookup.c" 8374)
+  (!srcfileloc  "cp/name-lookup.c" 8375)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "free_binding_level"
   (!type already_seen 82)
-  (!srcfileloc  "cp/name-lookup.c" 4244)
+  (!srcfileloc  "cp/name-lookup.c" 4245)
   (!options 
    (!option deletable string  "")
   )
@@ -34429,11 +34429,11 @@
  )
  (!pair  "headers"
   (!type already_seen 385)
-  (!srcfileloc  "cp/module.cc" 16723)
+  (!srcfileloc  "cp/module.cc" 16728)
   nil )
  (!pair  "macro_exports"
   (!type already_seen 2105)
-  (!srcfileloc  "cp/module.cc" 16719)
+  (!srcfileloc  "cp/module.cc" 16724)
   nil )
  (!pair  "note_defs"
   (!type already_seen 2099)
@@ -34793,7 +34793,7 @@
   nil )
  (!pair  "default_arg_context"
   (!type already_seen 84)
-  (!srcfileloc  "cp/call.c" 8283)
+  (!srcfileloc  "cp/call.c" 8285)
   nil )
  (!pair  "unemitted_tinfo_decls"
   (!type already_seen 84)
