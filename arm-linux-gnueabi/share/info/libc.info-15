@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.
+This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -3782,6 +3782,8 @@ operating system are declared in ‘sys/platform/x86.h’.
    • ‘PSE_36’ – 36-Bit Page Size Extension.
 
    • ‘PSN’ – Processor Serial Number.
+
+   • ‘PTWRITE’ – PTWRITE instruction.
 
    • ‘RDPID’ – RDPID instruction.
 

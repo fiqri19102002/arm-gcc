@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2020-07-23" "gcc-10.2.0" "GNU"
+.TH GCC 1 "2021-03-06" "gcc-10.2.1" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -571,11 +571,12 @@ in the following sections.
 \&\-fprofile\-dir=\fR\fIpath\fR  \fB\-fprofile\-generate  \-fprofile\-generate=\fR\fIpath\fR 
 \&\fB\-fprofile\-note=\fR\fIpath\fR \fB\-fprofile\-prefix\-path=\fR\fIpath\fR 
 \&\fB\-fprofile\-update=\fR\fImethod\fR \fB\-fprofile\-filter\-files=\fR\fIregex\fR 
-\&\fB\-fprofile\-exclude\-files=\fR\fIregex\fR \fB\-fprofile\-reproducibility 
-\&\-fsanitize=\fR\fIstyle\fR  \fB\-fsanitize\-recover  \-fsanitize\-recover=\fR\fIstyle\fR 
+\&\fB\-fprofile\-exclude\-files=\fR\fIregex\fR 
+\&\fB\-fprofile\-reproducible=\fR[\fBmultithreaded\fR|\fBparallel-runs\fR|\fBserial\fR] 
+\&\fB\-fsanitize=\fR\fIstyle\fR  \fB\-fsanitize\-recover  \-fsanitize\-recover=\fR\fIstyle\fR 
 \&\fB\-fasan\-shadow\-offset=\fR\fInumber\fR  \fB\-fsanitize\-sections=\fR\fIs1\fR\fB,\fR\fIs2\fR\fB,... 
 \&\-fsanitize\-undefined\-trap\-on\-error  \-fbounds\-check 
-\&\-fcf\-protection=\fR[\fBfull\fR|\fBbranch\fR|\fBreturn\fR|\fBnone\fR] 
+\&\-fcf\-protection=\fR[\fBfull\fR|\fBbranch\fR|\fBreturn\fR|\fBnone\fR|\fBcheck\fR] 
 \&\fB\-fstack\-protector  \-fstack\-protector\-all  \-fstack\-protector\-strong 
 \&\-fstack\-protector\-explicit  \-fstack\-check 
 \&\-fstack\-limit\-register=\fR\fIreg\fR  \fB\-fstack\-limit\-symbol=\fR\fIsym\fR 
@@ -705,6 +706,7 @@ in the following sections.
 \&\-msign\-return\-address=\fR\fIscope\fR 
 \&\fB\-mbranch\-protection=\fR\fInone\fR\fB|\fR\fIstandard\fR\fB|\fR\fIpac-ret\fR\fB[+\fR\fIleaf\fR
 \&\fB+\fR\fIb\-key\fR\fB]|\fR\fIbti\fR 
+\&\fB\-mharden\-sls=\fR\fIopts\fR 
 \&\fB\-march=\fR\fIname\fR  \fB\-mcpu=\fR\fIname\fR  \fB\-mtune=\fR\fIname\fR  
 \&\fB\-moverride=\fR\fIstring\fR  \fB\-mverbose\-cost\-dump 
 \&\-mstack\-protector\-guard=\fR\fIguard\fR \fB\-mstack\-protector\-guard\-reg=\fR\fIsysreg\fR 
@@ -871,7 +873,7 @@ in the following sections.
 .Sp
 \&\fIeBPF Options\fR
 \&\fB\-mbig\-endian \-mlittle\-endian \-mkernel=\fR\fIversion\fR
-\&\fB\-mframe\-limit=\fR\fIbytes\fR
+\&\fB\-mframe\-limit=\fR\fIbytes\fR \fB\-mxbpf\fR
 .Sp
 \&\fI\s-1FR30\s0 Options\fR
 \&\fB\-msmall\-model  \-mno\-lsim\fR
@@ -12317,6 +12319,32 @@ approximation is enabled.  The default value is 1.
 The number of Newton iterations for calculating the reciprocal for double type.
 The precision of division is propotional to this param when division
 approximation is enabled.  The default value is 2.
+.IP "\fBaarch64\-autovec\-preference\fR" 4
+.IX Item "aarch64-autovec-preference"
+Force an \s-1ISA\s0 selection strategy for auto-vectorization.  Accepts values from
+0 to 4, inclusive.
+.RS 4
+.IP "\fB0\fR" 4
+.IX Item "0"
+Use the default heuristics.
+.IP "\fB1\fR" 4
+.IX Item "1"
+Use only Advanced \s-1SIMD\s0 for auto-vectorization.
+.IP "\fB2\fR" 4
+.IX Item "2"
+Use only \s-1SVE\s0 for auto-vectorization.
+.IP "\fB3\fR" 4
+.IX Item "3"
+Use both Advanced \s-1SIMD\s0 and \s-1SVE.\s0  Prefer Advanced \s-1SIMD\s0 when the costs are
+deemed equal.
+.IP "\fB4\fR" 4
+.IX Item "4"
+Use both Advanced \s-1SIMD\s0 and \s-1SVE.\s0  Prefer \s-1SVE\s0 when the costs are deemed equal.
+.RE
+.RS 4
+.Sp
+The default value is 0.
+.RE
 .RE
 .RS 4
 .RE
@@ -12521,14 +12549,14 @@ all the regular expressions (separated by a semi-colon).
 .Sp
 For example, \fB\-fprofile\-exclude\-files=/usr/*\fR will prevent instrumentation
 of all files that are located in \fI/usr/\fR folder.
-.IP "\fB\-fprofile\-reproducible\fR" 4
-.IX Item "-fprofile-reproducible"
+.IP "\fB\-fprofile\-reproducible=\fR[\fBmultithreaded\fR|\fBparallel-runs\fR|\fBserial\fR]" 4
+.IX Item "-fprofile-reproducible=[multithreaded|parallel-runs|serial]"
 Control level of reproducibility of profile gathered by
 \&\f(CW\*(C`\-fprofile\-generate\*(C'\fR.  This makes it possible to rebuild program
 with same outcome which is useful, for example, for distribution
 packages.
 .Sp
-With \fB\-fprofile\-reproducibility=serial\fR the profile gathered by
+With \fB\-fprofile\-reproducible=serial\fR the profile gathered by
 \&\fB\-fprofile\-generate\fR is reproducible provided the trained program
 behaves the same at each invocation of the train run, it is not
 multi-threaded and profile data streaming is always done in the same
@@ -12543,7 +12571,7 @@ Such non-reproducible part of programs may be annotated by
 \&\fB\-l\fR can be used to dump gathered data and verify that they are
 indeed reproducible.
 .Sp
-With \fB\-fprofile\-reproducibility=parallel\-runs\fR collected profile
+With \fB\-fprofile\-reproducible=parallel\-runs\fR collected profile
 stays reproducible regardless the order of streaming of the data into
 gcda files.  This setting makes it possible to run multiple instances of
 instrumented program in parallel (such as with \f(CW\*(C`make \-j\*(C'\fR). This
@@ -12827,8 +12855,8 @@ variable or \f(CW\*(C`_\|_sanitizer_cov_trace_const_cmp1\*(C'\fR,
 operand constant, \f(CW\*(C`_\|_sanitizer_cov_trace_cmpf\*(C'\fR or
 \&\f(CW\*(C`_\|_sanitizer_cov_trace_cmpd\*(C'\fR for float or double comparisons and
 \&\f(CW\*(C`_\|_sanitizer_cov_trace_switch\*(C'\fR for switch statements.
-.IP "\fB\-fcf\-protection=\fR[\fBfull\fR|\fBbranch\fR|\fBreturn\fR|\fBnone\fR]" 4
-.IX Item "-fcf-protection=[full|branch|return|none]"
+.IP "\fB\-fcf\-protection=\fR[\fBfull\fR|\fBbranch\fR|\fBreturn\fR|\fBnone\fR|\fBcheck\fR]" 4
+.IX Item "-fcf-protection=[full|branch|return|none|check]"
 Enable code instrumentation of control-flow transfers to increase
 program security by checking that target addresses of control-flow
 transfer instructions (such as indirect function call, function return,
@@ -12844,6 +12872,11 @@ implements checking of validity at the point of returning from a
 function.  The value \f(CW\*(C`full\*(C'\fR is an alias for specifying both
 \&\f(CW\*(C`branch\*(C'\fR and \f(CW\*(C`return\*(C'\fR. The value \f(CW\*(C`none\*(C'\fR turns off
 instrumentation.
+.Sp
+The value \f(CW\*(C`check\*(C'\fR is used for the final link with link-time
+optimization (\s-1LTO\s0).  An error is issued if \s-1LTO\s0 object files are
+compiled with different \fB\-fcf\-protection\fR values.  The
+value \f(CW\*(C`check\*(C'\fR is ignored at the compile time.
 .Sp
 The macro \f(CW\*(C`_\|_CET_\|_\*(C'\fR is defined when \fB\-fcf\-protection\fR is
 used.  The first bit of \f(CW\*(C`_\|_CET_\|_\*(C'\fR is set to 1 for the value
@@ -16287,13 +16320,14 @@ performance of the code.  Permissible values for this option are:
 \&\fBcortex\-a57\fR, \fBcortex\-a72\fR, \fBcortex\-a73\fR, \fBcortex\-a75\fR,
 \&\fBcortex\-a76\fR, \fBcortex\-a76ae\fR, \fBcortex\-a77\fR,
 \&\fBcortex\-a65\fR, \fBcortex\-a65ae\fR, \fBcortex\-a34\fR,
-\&\fBares\fR, \fBexynos\-m1\fR, \fBemag\fR, \fBfalkor\fR,
-\&\fBneoverse\-e1\fR,\fBneoverse\-n1\fR,\fBqdf24xx\fR, \fBsaphira\fR,
-\&\fBphecda\fR, \fBxgene1\fR, \fBvulcan\fR, \fBocteontx\fR,
+\&\fBares\fR, \fBexynos\-m1\fR, \fBemag\fR, \fBfalkor\fR, \fBneoverse\-e1\fR,
+\&\fBneoverse\-n1\fR, \fBneoverse\-n2\fR, \fBneoverse\-v1\fR, \fBqdf24xx\fR,
+\&\fBsaphira\fR, \fBphecda\fR, \fBxgene1\fR, \fBvulcan\fR, \fBocteontx\fR,
 \&\fBocteontx81\fR,  \fBocteontx83\fR,
 \&\fBocteontx2\fR, \fBocteontx2t98\fR, \fBocteontx2t96\fR
 \&\fBocteontx2t93\fR, \fBocteontx2f95\fR, \fBocteontx2f95n\fR,
-\&\fBocteontx2f95mm\fR
+\&\fBocteontx2f95mm\fR,
+\&\fBa64fx\fR,
 \&\fBthunderx\fR, \fBthunderxt88\fR,
 \&\fBthunderxt88p1\fR, \fBthunderxt81\fR, \fBtsv110\fR,
 \&\fBthunderxt83\fR, \fBthunderx2t99\fR, \fBthunderx3t110\fR, \fBzeus\fR,
@@ -16378,6 +16412,23 @@ argument \fBleaf\fR can be used to extend the signing to include leaf
 functions.  The optional argument \fBb\-key\fR can be used to sign the functions
 with the B\-key instead of the A\-key.
 \&\fBbti\fR turns on branch target identification mechanism.
+.IP "\fB\-mharden\-sls=\fR\fIopts\fR" 4
+.IX Item "-mharden-sls=opts"
+Enable compiler hardening against straight line speculation (\s-1SLS\s0).
+\&\fIopts\fR is a comma-separated list of the following options:
+.RS 4
+.IP "\fBretbr\fR" 4
+.IX Item "retbr"
+.PD 0
+.IP "\fBblr\fR" 4
+.IX Item "blr"
+.RE
+.RS 4
+.PD
+.Sp
+In addition, \fB\-mharden\-sls=all\fR enables all \s-1SLS\s0 hardening while
+\&\fB\-mharden\-sls=none\fR disables all \s-1SLS\s0 hardening.
+.RE
 .IP "\fB\-msve\-vector\-bits=\fR\fIbits\fR" 4
 .IX Item "-msve-vector-bits=bits"
 Specify the number of bits in an \s-1SVE\s0 vector register.  This option only has
@@ -18090,9 +18141,9 @@ Permissible names are: \fBarm7tdmi\fR, \fBarm7tdmi\-s\fR, \fBarm710t\fR,
 \&\fBcortex\-m35p\fR, \fBcortex\-m55\fR,
 \&\fBcortex\-m1.small\-multiply\fR, \fBcortex\-m0.small\-multiply\fR,
 \&\fBcortex\-m0plus.small\-multiply\fR, \fBexynos\-m1\fR, \fBmarvell\-pj4\fR,
-\&\fBneoverse\-n1\fR, \fBxscale\fR, \fBiwmmxt\fR, \fBiwmmxt2\fR,
-\&\fBep9312\fR, \fBfa526\fR, \fBfa626\fR, \fBfa606te\fR, \fBfa626te\fR,
-\&\fBfmp626\fR, \fBfa726te\fR, \fBxgene1\fR.
+\&\fBneoverse\-n1\fR, \fBneoverse\-n2\fR, \fBneoverse\-v1\fR, \fBxscale\fR,
+\&\fBiwmmxt\fR, \fBiwmmxt2\fR, \fBep9312\fR, \fBfa526\fR, \fBfa626\fR,
+\&\fBfa606te\fR, \fBfa626te\fR, \fBfmp626\fR, \fBfa726te\fR, \fBxgene1\fR.
 .Sp
 Additionally, this option can specify that \s-1GCC\s0 should tune the performance
 of the code for a big.LITTLE system.  Permissible names are:
@@ -18459,7 +18510,7 @@ is only available when generating non-pic code for M\-profile targets.
 .IX Item "-mcmse"
 Generate secure code as per the \*(L"ARMv8\-M Security Extensions: Requirements on
 Development Tools Engineering Specification\*(R", which can be found on
-<\fBhttp://infocenter.arm.com/help/topic/com.arm.doc.ecm0359818/ECM0359818_armv8m_security_extensions_reqs_on_dev_tools_1_0.pdf\fR>.
+<\fBhttps://developer.arm.com/documentation/ecm0359818/latest/\fR>.
 .IP "\fB\-mfdpic\fR" 4
 .IX Item "-mfdpic"
 .PD 0
@@ -20381,6 +20432,17 @@ Generate code for a big-endian target.
 .IP "\fB\-mlittle\-endian\fR" 4
 .IX Item "-mlittle-endian"
 Generate code for a little-endian target.  This is the default.
+.IP "\fB\-mxbpf\fR" 4
+.IX Item "-mxbpf"
+Generate code for an expanded version of \s-1BPF,\s0 which relaxes some of
+the restrictions imposed by the \s-1BPF\s0 architecture:
+.RS 4
+.IP "\-<Save and restore callee-saved registers at function entry and>" 4
+.IX Item "-<Save and restore callee-saved registers at function entry and>"
+exit, respectively.
+.RE
+.RS 4
+.RE
 .PP
 \fI\s-1FR30\s0 Options\fR
 .IX Subsection "FR30 Options"
@@ -26058,7 +26120,7 @@ system representing a certain processor type.  Possible values for
 \&\fIcpu-type\fR are \fBz900\fR/\fBarch5\fR, \fBz990\fR/\fBarch6\fR,
 \&\fBz9\-109\fR, \fBz9\-ec\fR/\fBarch7\fR, \fBz10\fR/\fBarch8\fR,
 \&\fBz196\fR/\fBarch9\fR, \fBzEC12\fR, \fBz13\fR/\fBarch11\fR,
-\&\fBz14\fR/\fBarch12\fR, and \fBnative\fR.
+\&\fBz14\fR/\fBarch12\fR, \fBz15\fR/\fBarch13\fR, and \fBnative\fR.
 .Sp
 The default is \fB\-march=z900\fR.
 .Sp
@@ -27582,14 +27644,14 @@ BMI, BMI2\s0 and F16C instruction set support.
 .IP "\fBbroadwell\fR" 4
 .IX Item "broadwell"
 Intel Broadwell \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3, SSSE3,
-SSE4.1, SSE4.2, POPCNT, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA,
-BMI, BMI2, F16C, RDSEED, ADCX\s0 and \s-1PREFETCHW\s0 instruction set support.
+SSE4.1, SSE4.2, POPCNT, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA, BMI, BMI2,
+F16C, RDSEED ADCX\s0 and \s-1PREFETCHW\s0 instruction set support.
 .IP "\fBskylake\fR" 4
 .IX Item "skylake"
 Intel Skylake \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3, SSSE3,
 SSE4.1, SSE4.2, POPCNT, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA,
-BMI, BMI2, F16C, RDSEED, ADCX, PREFETCHW, CLFLUSHOPT, XSAVEC\s0 and
-\&\s-1XSAVES\s0 instruction set support.
+BMI, BMI2, F16C, RDSEED, ADCX, PREFETCHW, CLFLUSHOPT, XSAVEC\s0 and \s-1XSAVES\s0
+instruction set support.
 .IP "\fBbonnell\fR" 4
 .IX Item "bonnell"
 Intel Bonnell \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3\s0 and \s-1SSSE3\s0
@@ -27597,34 +27659,36 @@ instruction set support.
 .IP "\fBsilvermont\fR" 4
 .IX Item "silvermont"
 Intel Silvermont \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3, SSSE3,
-SSE4.1, SSE4.2, POPCNT, AES, PCLMUL\s0 and \s-1RDRND\s0 instruction set support.
+SSE4.1, SSE4.2, POPCNT, AES, PREFETCHW, PCLMUL\s0 and \s-1RDRND\s0 instruction set support.
 .IP "\fBgoldmont\fR" 4
 .IX Item "goldmont"
 Intel Goldmont \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3, SSSE3,
-SSE4.1, SSE4.2, POPCNT, AES, PCLMUL, RDRND, XSAVE, XSAVEOPT\s0 and \s-1FSGSBASE\s0
-instruction set support.
+SSE4.1, SSE4.2, POPCNT, AES, PREFETCHW, PCLMUL, RDRND, XSAVE, XSAVEC, XSAVES,
+XSAVEOPT\s0 and \s-1FSGSBASE\s0 instruction set support.
 .IP "\fBgoldmont-plus\fR" 4
 .IX Item "goldmont-plus"
 Intel Goldmont Plus \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3,
-SSSE3, SSE4.1, SSE4.2, POPCNT, AES, PCLMUL, RDRND, XSAVE, XSAVEOPT, FSGSBASE,
-PTWRITE, RDPID, SGX\s0 and \s-1UMIP\s0 instruction set support.
+SSSE3, SSE4.1, SSE4.2, POPCNT, AES, PREFETCHW, PCLMUL, RDRND, XSAVE, XSAVEC,
+XSAVES, XSAVEOPT, FSGSBASE, PTWRITE, RDPID, SGX\s0 and \s-1UMIP\s0 instruction set support.
 .IP "\fBtremont\fR" 4
 .IX Item "tremont"
 Intel Tremont \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3, SSSE3,
-SSE4.1, SSE4.2, POPCNT, AES, PCLMUL, RDRND, XSAVE, XSAVEOPT, FSGSBASE, PTWRITE,
-RDPID, SGX, UMIP,\s0 GFNI-SSE, \s-1CLWB\s0 and \s-1ENCLV\s0 instruction set support.
+SSE4.1, SSE4.2, POPCNT, AES, PREFETCHW, PCLMUL, RDRND, XSAVE, XSAVEC, XSAVES,
+XSAVEOPT, FSGSBASE, PTWRITE, RDPID, SGX, UMIP,\s0 GFNI-SSE, \s-1CLWB, MOVDIRI,
+MOVDIR64B, CLDEMOTE\s0 and \s-1WAITPKG\s0 instruction set support.
 .IP "\fBknl\fR" 4
 .IX Item "knl"
 Intel Knight's Landing \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3,
 SSSE3, SSE4.1, SSE4.2, POPCNT, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA,
-BMI, BMI2, F16C, RDSEED, ADCX, PREFETCHW, AVX512F, AVX512PF, AVX512ER\s0 and
-\&\s-1AVX512CD\s0 instruction set support.
+BMI, BMI2, F16C, RDSEED, ADCX, PREFETCHW, PREFETCHWT1, AVX512F, AVX512PF,
+AVX512ER\s0 and \s-1AVX512CD\s0 instruction set support.
 .IP "\fBknm\fR" 4
 .IX Item "knm"
 Intel Knights Mill \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3,
 SSSE3, SSE4.1, SSE4.2, POPCNT, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA,
-BMI, BMI2, F16C, RDSEED, ADCX, PREFETCHW, AVX512F, AVX512PF, AVX512ER, AVX512CD,
-AVX5124VNNIW, AVX5124FMAPS\s0 and \s-1AVX512VPOPCNTDQ\s0 instruction set support.
+BMI, BMI2, F16C, RDSEED, ADCX, PREFETCHW, PREFETCHWT1, AVX512F, AVX512PF,
+AVX512ER, AVX512CD, AVX5124VNNIW, AVX5124FMAPS\s0 and \s-1AVX512VPOPCNTDQ\s0 instruction
+set support.
 .IP "\fBskylake\-avx512\fR" 4
 .IX Item "skylake-avx512"
 Intel Skylake Server \s-1CPU\s0 with 64\-bit extensions, \s-1MOVBE, MMX, SSE, SSE2, SSE3,
@@ -27675,8 +27739,8 @@ SSE4.1, SSE4.2, POPCNT, PKU, AVX, AVX2, AES, PCLMUL, FSGSBASE, RDRND, FMA, BMI,
 BMI2, F16C, RDSEED, ADCX, PREFETCHW, CLFLUSHOPT, XSAVEC, XSAVES, AVX512F,
 AVX512VL, AVX512BW, AVX512DQ, AVX512CD, AVX512VBMI, AVX512IFMA, SHA, CLWB, UMIP,
 RDPID, GFNI, AVX512VBMI2, AVX512VPOPCNTDQ, AVX512BITALG, AVX512VNNI, VPCLMULQDQ,
-VAES, PCONFIG, WBNOINVD, MOVDIRI, MOVDIR64B\s0 and  \s-1AVX512VP2INTERSECT\s0 instruction
-set support.
+VAES, PCONFIG, WBNOINVD, MOVDIRI, MOVDIR64B, AVX512VP2INTERSECT\s0 and \s-1KEYLOCKER\s0
+instruction set support.
 .IP "\fBk6\fR" 4
 .IX Item "k6"
 \&\s-1AMD K6 CPU\s0 with \s-1MMX\s0 instruction set support.
