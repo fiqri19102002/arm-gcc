@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "11.0.1 20210320 (experimental)")
+(!version  "11.0.1 20210321 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 228
@@ -27917,19 +27917,19 @@
   nil 0 nil nil )
  
  (!type struct 2020 nil  gc_pointed_to "source_location_table_entry"
-  (!srcfileloc  "cp/cp-gimplify.c" 2886)
+  (!srcfileloc  "cp/cp-gimplify.c" 2858)
   (!fields 3 
    (!pair  "loc"
     (!type already_seen 2)
-    (!srcfileloc  "cp/cp-gimplify.c" 2883)
+    (!srcfileloc  "cp/cp-gimplify.c" 2855)
     nil )
    (!pair  "uid"
     (!type already_seen 2)
-    (!srcfileloc  "cp/cp-gimplify.c" 2884)
+    (!srcfileloc  "cp/cp-gimplify.c" 2856)
     nil )
    (!pair  "var"
     (!type already_seen 23)
-    (!srcfileloc  "cp/cp-gimplify.c" 2885)
+    (!srcfileloc  "cp/cp-gimplify.c" 2857)
     nil )
   )
   (!options 
@@ -27938,7 +27938,7 @@
   1032 nil nil )
  
  (!type struct 2021 nil  gc_used "source_location_table_entry_hash"
-  (!srcfileloc  "cp/cp-gimplify.c" 2962)
+  (!srcfileloc  "cp/cp-gimplify.c" 2934)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -27947,11 +27947,11 @@
    (!type already_seen 2022)
   )
   gc_pointed_to "hash_table<source_location_table_entry_hash>"
-  (!srcfileloc  "cp/cp-gimplify.c" 2962)
+  (!srcfileloc  "cp/cp-gimplify.c" 2934)
   (!fields 1 
    (!pair  "source_location_table_entry_hash"
     (!type already_seen 2021)
-    (!srcfileloc  "cp/cp-gimplify.c" 2962)
+    (!srcfileloc  "cp/cp-gimplify.c" 2934)
     nil )
   )
  )
@@ -30217,11 +30217,11 @@
   nil )
  (!pair  "source_location_table_entry_hash"
   (!type already_seen 2021)
-  (!srcfileloc  "cp/cp-gimplify.c" 2962)
+  (!srcfileloc  "cp/cp-gimplify.c" 2934)
   nil )
  (!pair  "hash_table<source_location_table_entry_hash>"
   (!type already_seen 2022)
-  (!srcfileloc  "cp/cp-gimplify.c" 2962)
+  (!srcfileloc  "cp/cp-gimplify.c" 2934)
   nil )
  (!pair  "coroutine_info_hasher"
   (!type already_seen 2002)
@@ -34614,15 +34614,15 @@
   nil )
  (!pair  "source_location_id"
   (!type already_seen 2)
-  (!srcfileloc  "cp/cp-gimplify.c" 2964)
+  (!srcfileloc  "cp/cp-gimplify.c" 2936)
   nil )
  (!pair  "source_location_table"
   (!type already_seen 2023)
-  (!srcfileloc  "cp/cp-gimplify.c" 2963)
+  (!srcfileloc  "cp/cp-gimplify.c" 2935)
   nil )
  (!pair  "fold_cache"
   (!type already_seen 392)
-  (!srcfileloc  "cp/cp-gimplify.c" 2204)
+  (!srcfileloc  "cp/cp-gimplify.c" 2176)
   (!options 
    (!option deletable string  "")
   )
