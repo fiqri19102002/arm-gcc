@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "10.2.1 20210322")
+(!version  "10.2.1 20210323")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 217
@@ -28373,15 +28373,15 @@
   nil 0 nil nil )
  
  (!type struct 2105 nil  gc_used "ident_data_tuple"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
   (!fields 2 
    (!pair  "ident"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1019)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1020)
     nil )
    (!pair  "data"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1020)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1021)
     nil )
   )
   nil 1536 nil nil )
@@ -28391,33 +28391,33 @@
    (!type already_seen 2106)
   )
   gc_pointed_to "vec<ident_data_tuple,va_gc>"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
     nil )
    (!pair  "ident_data_tuple"
     (!type already_seen 2105)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
     nil )
   )
  )
  
  (!type struct 2108 nil  gc_used "msgref_entry"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
   (!fields 3 
    (!pair  "func"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1203)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1204)
     nil )
    (!pair  "selname"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1204)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1205)
     nil )
    (!pair  "refdecl"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1205)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1206)
     nil )
   )
   nil 1536 nil nil )
@@ -28427,29 +28427,29 @@
    (!type already_seen 2109)
   )
   gc_pointed_to "vec<msgref_entry,va_gc>"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
     nil )
    (!pair  "msgref_entry"
     (!type already_seen 2108)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
     nil )
   )
  )
  
  (!type struct 2111 nil  gc_used "prot_list_entry"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
   (!fields 2 
    (!pair  "id"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1259)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1260)
     nil )
    (!pair  "refdecl"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1260)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1261)
     nil )
   )
   nil 1536 nil nil )
@@ -28459,29 +28459,29 @@
    (!type already_seen 2112)
   )
   gc_pointed_to "vec<prot_list_entry,va_gc>"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
     nil )
    (!pair  "prot_list_entry"
     (!type already_seen 2111)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
     nil )
   )
  )
  
  (!type struct 2114 nil  gc_used "ivarref_entry"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
   (!fields 2 
    (!pair  "decl"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2764)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2765)
     nil )
    (!pair  "offset"
     (!type already_seen 23)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2765)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2766)
     nil )
   )
   nil 1536 nil nil )
@@ -28491,15 +28491,15 @@
    (!type already_seen 2115)
   )
   gc_pointed_to "vec<ivarref_entry,va_gc>"
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
     nil )
    (!pair  "ivarref_entry"
     (!type already_seen 2114)
-    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+    (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
     nil )
   )
  )
@@ -28507,35 +28507,35 @@
 (!typedefs 818
  (!pair  "ivarref_entry"
   (!type already_seen 2114)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
   nil )
  (!pair  "vec<ivarref_entry,va_gc>"
   (!type already_seen 2115)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
   nil )
  (!pair  "prot_list_entry"
   (!type already_seen 2111)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
   nil )
  (!pair  "vec<prot_list_entry,va_gc>"
   (!type already_seen 2112)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
   nil )
  (!pair  "msgref_entry"
   (!type already_seen 2108)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
   nil )
  (!pair  "vec<msgref_entry,va_gc>"
   (!type already_seen 2109)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
   nil )
  (!pair  "ident_data_tuple"
   (!type already_seen 2105)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
   nil )
  (!pair  "vec<ident_data_tuple,va_gc>"
   (!type already_seen 2106)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
   nil )
  (!pair  "objc_string_hasher"
   (!type already_seen 2101)
@@ -31785,67 +31785,67 @@
 (!variables 724
  (!pair  "objc_eh_personality_decl"
   (!type already_seen 23)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3611)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3612)
   nil )
  (!pair  "next_v2_EHTYPE_id_decl"
   (!type already_seen 23)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3401)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3402)
   nil )
  (!pair  "next_v2_ehvtable_decl"
   (!type already_seen 23)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3400)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3401)
   nil )
  (!pair  "objc_v2_ehtype_template"
   (!type already_seen 23)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3399)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3400)
   nil )
  (!pair  "ehtype_list"
   (!type already_seen 2107)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3058)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3059)
   nil )
  (!pair  "ivar_offset_refs"
   (!type already_seen 2116)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2768)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2769)
   nil )
  (!pair  "protlist"
   (!type already_seen 2113)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2113)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2114)
   nil )
  (!pair  "nonlazy_category_list"
   (!type already_seen 84)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2025)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2026)
   nil )
  (!pair  "category_list"
   (!type already_seen 84)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2014)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2015)
   nil )
  (!pair  "nonlazy_class_list"
   (!type already_seen 84)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2003)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 2004)
   nil )
  (!pair  "class_list"
   (!type already_seen 84)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1995)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1996)
   nil )
  (!pair  "metaclass_super_refs"
   (!type already_seen 2107)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1439)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1440)
   nil )
  (!pair  "class_super_refs"
   (!type already_seen 2107)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1438)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1439)
   nil )
  (!pair  "protrefs"
   (!type already_seen 2113)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1262)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1263)
   nil )
  (!pair  "msgrefs"
   (!type already_seen 2110)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1208)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1209)
   nil )
  (!pair  "classrefs"
   (!type already_seen 2107)
-  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1043)
+  (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 1044)
   nil )
  (!pair  "extern_names"
   (!type already_seen 2094)
