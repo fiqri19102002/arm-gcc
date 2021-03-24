@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "11.0.1 20210323 (experimental)")
+(!version  "11.0.1 20210324 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 228
@@ -20470,13 +20470,13 @@
      (!type user_struct 1132 
       (!type already_seen 1131)
       gc_pointed_to "int_range<1>"
-      (!srcfileloc  "value-range.h" 175)
+      (!srcfileloc  "value-range.h" 177)
       (!fields 1 
        (!pair  "1"
         (!type undefined 1133 nil  gc_unused "1"
-         (!srcfileloc  "value-range.h" 175)
+         (!srcfileloc  "value-range.h" 177)
         )
-        (!srcfileloc  "value-range.h" 175)
+        (!srcfileloc  "value-range.h" 177)
         nil )
       )
      )
@@ -24602,7 +24602,7 @@
   nil 0 nil nil )
  
  (!type user_struct 1646 nil  gc_unused "int_range"
-  (!srcfileloc  "value-range.h" 165)
+  (!srcfileloc  "value-range.h" 167)
   (!fields 0 )
  )
  
@@ -24611,13 +24611,13 @@
  (!type already_seen 1133)
  
  (!type user_struct 1647 nil  gc_unused "int_range<255>"
-  (!srcfileloc  "value-range.h" 179)
+  (!srcfileloc  "value-range.h" 181)
   (!fields 1 
    (!pair  "255"
     (!type undefined 1648 nil  gc_unused "255"
-     (!srcfileloc  "value-range.h" 179)
+     (!srcfileloc  "value-range.h" 181)
     )
-    (!srcfileloc  "value-range.h" 179)
+    (!srcfileloc  "value-range.h" 181)
     nil )
   )
  )
@@ -27999,7 +27999,7 @@
   nil 0 nil nil )
  
  (!type struct 2029 nil  gc_used "typename_hasher"
-  (!srcfileloc  "cp/decl.c" 3966)
+  (!srcfileloc  "cp/decl.c" 3964)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -28008,11 +28008,11 @@
    (!type already_seen 2030)
   )
   gc_pointed_to "hash_table<typename_hasher>"
-  (!srcfileloc  "cp/decl.c" 3966)
+  (!srcfileloc  "cp/decl.c" 3964)
   (!fields 1 
    (!pair  "typename_hasher"
     (!type already_seen 2029)
-    (!srcfileloc  "cp/decl.c" 3966)
+    (!srcfileloc  "cp/decl.c" 3964)
     nil )
   )
  )
@@ -29036,7 +29036,7 @@
   nil 0 nil nil )
  
  (!type struct 2178 nil  gc_used "module_hasher"
-  (!srcfileloc  "fortran/trans-decl.c" 5163)
+  (!srcfileloc  "fortran/trans-decl.c" 5167)
   (!fields 0 )
   nil 32 nil nil )
  
@@ -29045,11 +29045,11 @@
    (!type already_seen 2179)
   )
   gc_pointed_to "hash_table<module_hasher>"
-  (!srcfileloc  "fortran/trans-decl.c" 5163)
+  (!srcfileloc  "fortran/trans-decl.c" 5167)
   (!fields 1 
    (!pair  "module_hasher"
     (!type already_seen 2178)
-    (!srcfileloc  "fortran/trans-decl.c" 5163)
+    (!srcfileloc  "fortran/trans-decl.c" 5167)
     nil )
   )
  )
@@ -29825,11 +29825,11 @@
   nil )
  (!pair  "module_hasher"
   (!type already_seen 2178)
-  (!srcfileloc  "fortran/trans-decl.c" 5163)
+  (!srcfileloc  "fortran/trans-decl.c" 5167)
   nil )
  (!pair  "hash_table<module_hasher>"
   (!type already_seen 2179)
-  (!srcfileloc  "fortran/trans-decl.c" 5163)
+  (!srcfileloc  "fortran/trans-decl.c" 5167)
   nil )
  (!pair  "tree_frame_info"
   (!type already_seen 648)
@@ -30193,11 +30193,11 @@
   nil )
  (!pair  "typename_hasher"
   (!type already_seen 2029)
-  (!srcfileloc  "cp/decl.c" 3966)
+  (!srcfileloc  "cp/decl.c" 3964)
   nil )
  (!pair  "hash_table<typename_hasher>"
   (!type already_seen 2030)
-  (!srcfileloc  "cp/decl.c" 3966)
+  (!srcfileloc  "cp/decl.c" 3964)
   nil )
  (!pair  "incomplete_var"
   (!type already_seen 2024)
@@ -30969,31 +30969,31 @@
   nil )
  (!pair  "int_range_max"
   (!type already_seen 1647)
-  (!srcfileloc  "value-range.h" 179)
+  (!srcfileloc  "value-range.h" 181)
   nil )
  (!pair  "255"
   (!type already_seen 1648)
-  (!srcfileloc  "value-range.h" 179)
+  (!srcfileloc  "value-range.h" 181)
   nil )
  (!pair  "int_range<255>"
   (!type already_seen 1647)
-  (!srcfileloc  "value-range.h" 179)
+  (!srcfileloc  "value-range.h" 181)
   nil )
  (!pair  "value_range"
   (!type already_seen 1132)
-  (!srcfileloc  "value-range.h" 175)
+  (!srcfileloc  "value-range.h" 177)
   nil )
  (!pair  "1"
   (!type already_seen 1133)
-  (!srcfileloc  "value-range.h" 175)
+  (!srcfileloc  "value-range.h" 177)
   nil )
  (!pair  "int_range<1>"
   (!type already_seen 1132)
-  (!srcfileloc  "value-range.h" 175)
+  (!srcfileloc  "value-range.h" 177)
   nil )
  (!pair  "int_range"
   (!type already_seen 1646)
-  (!srcfileloc  "value-range.h" 165)
+  (!srcfileloc  "value-range.h" 167)
   nil )
  (!pair  "TRAILING_WIDE_INT_ACCESSOR"
   (!type already_seen 1643)
@@ -34136,7 +34136,7 @@
   nil )
  (!pair  "module_htab"
   (!type already_seen 2180)
-  (!srcfileloc  "fortran/trans-decl.c" 5163)
+  (!srcfileloc  "fortran/trans-decl.c" 5167)
   nil )
  (!pair  "saved_local_decls"
   (!type already_seen 23)
@@ -34408,14 +34408,14 @@
  )
  (!pair  "free_saved_scope"
   (!type already_seen 1898)
-  (!srcfileloc  "cp/name-lookup.c" 8366)
+  (!srcfileloc  "cp/name-lookup.c" 8381)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "free_binding_level"
   (!type already_seen 82)
-  (!srcfileloc  "cp/name-lookup.c" 4234)
+  (!srcfileloc  "cp/name-lookup.c" 4249)
   (!options 
    (!option deletable string  "")
   )
@@ -34577,18 +34577,18 @@
   nil )
  (!pair  "start_cleanup_cnt"
   (!type already_seen 2)
-  (!srcfileloc  "cp/decl.c" 8944)
+  (!srcfileloc  "cp/decl.c" 8948)
   nil )
  (!pair  "decomp_type_table"
   (!type already_seen 923)
-  (!srcfileloc  "cp/decl.c" 8403)
+  (!srcfileloc  "cp/decl.c" 8401)
   (!options 
    (!option cache string  "")
   )
  )
  (!pair  "typename_htab"
   (!type already_seen 2031)
-  (!srcfileloc  "cp/decl.c" 3966)
+  (!srcfileloc  "cp/decl.c" 3964)
   nil )
  (!pair  "local_entities"
   (!type already_seen 84)
