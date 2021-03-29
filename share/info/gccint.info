@@ -46736,8 +46736,8 @@ exponential growth of the exploded graph like this:
 Part of the state stored at a 'exploded_node' is a 'region_model'.  This
 is an implementation of the region-based ternary model described in "A
 Memory Model for Static Analysis of C Programs"
-(http://lcs.ios.ac.cn/~xzx/memmodel.pdf) (Zhongxing Xu, Ted Kremenek,
-and Jian Zhang).
+(https://www.researchgate.net/publication/221430855_A_Memory_Model_for_Static_Analysis_of_C_Programs)
+(Zhongxing Xu, Ted Kremenek, and Jian Zhang).
 
  A 'region_model' encapsulates a representation of the state of memory,
 with a 'store' recording a binding between 'region' instances, to
@@ -58251,18 +58251,18 @@ Node: GIMPLE API2016123
 Node: The Language2018918
 Node: Static Analyzer2031417
 Node: Analyzer Internals2031682
-Node: Debugging the Analyzer2047508
-Node: User Experience Guidelines2049945
-Node: Guidelines for Diagnostics2050881
-Ref: input_location_example2059056
-Node: Guidelines for Options2068741
-Node: Funding2068918
-Node: GNU Project2071425
-Node: Copying2072074
-Node: GNU Free Documentation License2109585
-Node: Contributors2134706
-Node: Option Index2175682
-Node: Concept Index2176559
+Node: Debugging the Analyzer2047569
+Node: User Experience Guidelines2050006
+Node: Guidelines for Diagnostics2050942
+Ref: input_location_example2059117
+Node: Guidelines for Options2068802
+Node: Funding2068979
+Node: GNU Project2071486
+Node: Copying2072135
+Node: GNU Free Documentation License2109646
+Node: Contributors2134767
+Node: Option Index2175743
+Node: Concept Index2176620
 
 End Tag Table
 
