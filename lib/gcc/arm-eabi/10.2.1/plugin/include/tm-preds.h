@@ -258,6 +258,7 @@ enum constraint_num
   CONSTRAINT_F,
   CONSTRAINT_X,
   CONSTRAINT_Tu,
+  CONSTRAINT_Ui,
   CONSTRAINT__LIMIT
 };
 
