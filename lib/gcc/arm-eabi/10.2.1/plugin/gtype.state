@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "10.2.1 20210330")
+(!version  "10.2.1 20210331")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 217
@@ -9231,8 +9231,8 @@
                            (!type struct 475 
                             (!type already_seen 474)
                             gc_pointed_to "dw_fde_node"
-                            (!srcfileloc  "dwarf2out.h" 111)
-                            (!fields 22 
+                            (!srcfileloc  "dwarf2out.h" 117)
+                            (!fields 23 
                              (!pair  "decl"
                               (!type already_seen 23)
                               (!srcfileloc  "dwarf2out.h" 79)
@@ -9317,27 +9317,27 @@
                                           (!type struct 482 
                                            (!type already_seen 481)
                                            gc_pointed_to "dw_loc_descr_node"
-                                           (!srcfileloc  "dwarf2out.h" 258)
+                                           (!srcfileloc  "dwarf2out.h" 264)
                                            (!fields 7 
                                             (!pair  "dw_loc_next"
                                              (!type already_seen 481)
-                                             (!srcfileloc  "dwarf2out.h" 246)
+                                             (!srcfileloc  "dwarf2out.h" 252)
                                              nil )
                                             (!pair  "dw_loc_opc"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 247)
+                                             (!srcfileloc  "dwarf2out.h" 253)
                                              nil )
                                             (!pair  "dtprel"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 250)
+                                             (!srcfileloc  "dwarf2out.h" 256)
                                              nil )
                                             (!pair  "frame_offset_rel"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 254)
+                                             (!srcfileloc  "dwarf2out.h" 260)
                                              nil )
                                             (!pair  "dw_loc_addr"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 255)
+                                             (!srcfileloc  "dwarf2out.h" 261)
                                              nil )
                                             (!pair  "dw_loc_oprnd1"
                                              (!type struct 483 
@@ -9345,11 +9345,11 @@
                                                (!type already_seen 483)
                                               )
                                               gc_used "dw_val_node"
-                                              (!srcfileloc  "dwarf2out.h" 256)
+                                              (!srcfileloc  "dwarf2out.h" 262)
                                               (!fields 3 
                                                (!pair  "val_class"
                                                 (!type already_seen 2)
-                                                (!srcfileloc  "dwarf2out.h" 201)
+                                                (!srcfileloc  "dwarf2out.h" 207)
                                                 nil )
                                                (!pair  "val_entry"
                                                 (!type pointer 485 nil  gc_used
@@ -9401,22 +9401,22 @@
                                                   )
                                                   2047 nil nil )
                                                 )
-                                                (!srcfileloc  "dwarf2out.h" 202)
+                                                (!srcfileloc  "dwarf2out.h" 208)
                                                 nil )
                                                (!pair  "v"
                                                 (!type union 488 nil  gc_used "dw_val_struct_union"
-                                                 (!srcfileloc  "dwarf2out.h" 238)
+                                                 (!srcfileloc  "dwarf2out.h" 244)
                                                  (!fields 23 
                                                   (!pair  "val_addr"
                                                    (!type already_seen 100)
-                                                   (!srcfileloc  "dwarf2out.h" 205)
+                                                   (!srcfileloc  "dwarf2out.h" 211)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_addr")
                                                    )
                                                   )
                                                   (!pair  "val_offset"
                                                    (!type already_seen 2)
-                                                   (!srcfileloc  "dwarf2out.h" 206)
+                                                   (!srcfileloc  "dwarf2out.h" 212)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_offset")
                                                    )
@@ -9503,7 +9503,7 @@
                                                      )
                                                      nil 2047 nil nil )
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 207)
+                                                   (!srcfileloc  "dwarf2out.h" 213)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_loc_list")
                                                    )
@@ -9661,35 +9661,35 @@
                                                      )
                                                      2047 nil nil )
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 208)
+                                                   (!srcfileloc  "dwarf2out.h" 214)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_view_list")
                                                    )
                                                   )
                                                   (!pair  "val_loc"
                                                    (!type already_seen 481)
-                                                   (!srcfileloc  "dwarf2out.h" 209)
+                                                   (!srcfileloc  "dwarf2out.h" 215)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_loc")
                                                    )
                                                   )
                                                   (!pair  "val_int"
                                                    (!type already_seen 2)
-                                                   (!srcfileloc  "dwarf2out.h" 210)
+                                                   (!srcfileloc  "dwarf2out.h" 216)
                                                    (!options 
                                                     (!option default string  "")
                                                    )
                                                   )
                                                   (!pair  "val_unsigned"
                                                    (!type already_seen 2)
-                                                   (!srcfileloc  "dwarf2out.h" 212)
+                                                   (!srcfileloc  "dwarf2out.h" 218)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_unsigned_const")
                                                    )
                                                   )
                                                   (!pair  "val_double"
                                                    (!type already_seen 2)
-                                                   (!srcfileloc  "dwarf2out.h" 213)
+                                                   (!srcfileloc  "dwarf2out.h" 219)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_const_double")
                                                    )
@@ -9726,59 +9726,59 @@
                                                      )
                                                     )
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 214)
+                                                   (!srcfileloc  "dwarf2out.h" 220)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_wide_int")
                                                    )
                                                   )
                                                   (!pair  "val_vec"
                                                    (!type struct 504 nil  gc_used "dw_vec_const"
-                                                    (!srcfileloc  "dwarf2out.h" 215)
+                                                    (!srcfileloc  "dwarf2out.h" 221)
                                                     (!fields 3 
                                                      (!pair  "array"
                                                       (!type already_seen 3)
-                                                      (!srcfileloc  "dwarf2out.h" 171)
+                                                      (!srcfileloc  "dwarf2out.h" 177)
                                                       (!options 
                                                        (!option atomic string  "")
                                                       )
                                                      )
                                                      (!pair  "length"
                                                       (!type already_seen 2)
-                                                      (!srcfileloc  "dwarf2out.h" 172)
+                                                      (!srcfileloc  "dwarf2out.h" 178)
                                                       nil )
                                                      (!pair  "elt_size"
                                                       (!type already_seen 2)
-                                                      (!srcfileloc  "dwarf2out.h" 173)
+                                                      (!srcfileloc  "dwarf2out.h" 179)
                                                       nil )
                                                     )
                                                     nil 2047 nil nil )
-                                                   (!srcfileloc  "dwarf2out.h" 215)
+                                                   (!srcfileloc  "dwarf2out.h" 221)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_vec")
                                                    )
                                                   )
                                                   (!pair  "val_die_ref"
                                                    (!type struct 505 nil  gc_used "dw_val_die_union"
-                                                    (!srcfileloc  "dwarf2out.h" 220)
+                                                    (!srcfileloc  "dwarf2out.h" 226)
                                                     (!fields 2 
                                                      (!pair  "die"
                                                       (!type already_seen 491)
-                                                      (!srcfileloc  "dwarf2out.h" 218)
+                                                      (!srcfileloc  "dwarf2out.h" 224)
                                                       nil )
                                                      (!pair  "external"
                                                       (!type already_seen 2)
-                                                      (!srcfileloc  "dwarf2out.h" 219)
+                                                      (!srcfileloc  "dwarf2out.h" 225)
                                                       nil )
                                                     )
                                                     nil 2047 nil nil )
-                                                   (!srcfileloc  "dwarf2out.h" 220)
+                                                   (!srcfileloc  "dwarf2out.h" 226)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_die_ref")
                                                    )
                                                   )
                                                   (!pair  "val_fde_index"
                                                    (!type already_seen 2)
-                                                   (!srcfileloc  "dwarf2out.h" 221)
+                                                   (!srcfileloc  "dwarf2out.h" 227)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_fde_ref")
                                                    )
@@ -9816,21 +9816,21 @@
                                                      )
                                                      2047 nil nil )
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 222)
+                                                   (!srcfileloc  "dwarf2out.h" 228)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_str")
                                                    )
                                                   )
                                                   (!pair  "val_lbl_id"
                                                    (!type already_seen 11)
-                                                   (!srcfileloc  "dwarf2out.h" 223)
+                                                   (!srcfileloc  "dwarf2out.h" 229)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_lbl_id")
                                                    )
                                                   )
                                                   (!pair  "val_flag"
                                                    (!type already_seen 8)
-                                                   (!srcfileloc  "dwarf2out.h" 224)
+                                                   (!srcfileloc  "dwarf2out.h" 230)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_flag")
                                                    )
@@ -9856,14 +9856,14 @@
                                                      )
                                                      2047 nil nil )
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 225)
+                                                   (!srcfileloc  "dwarf2out.h" 231)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_file")
                                                    )
                                                   )
                                                   (!pair  "val_file_implicit"
                                                    (!type already_seen 508)
-                                                   (!srcfileloc  "dwarf2out.h" 227)
+                                                   (!srcfileloc  "dwarf2out.h" 233)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_file_implicit")
                                                    )
@@ -9872,73 +9872,73 @@
                                                    (!type array 510 nil  gc_used "8" 
                                                     (!type already_seen 8)
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 228)
+                                                   (!srcfileloc  "dwarf2out.h" 234)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_data8")
                                                    )
                                                   )
                                                   (!pair  "val_decl_ref"
                                                    (!type already_seen 23)
-                                                   (!srcfileloc  "dwarf2out.h" 229)
+                                                   (!srcfileloc  "dwarf2out.h" 235)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_decl_ref")
                                                    )
                                                   )
                                                   (!pair  "val_vms_delta"
                                                    (!type struct 511 nil  gc_used "dw_val_vms_delta_union"
-                                                    (!srcfileloc  "dwarf2out.h" 234)
+                                                    (!srcfileloc  "dwarf2out.h" 240)
                                                     (!fields 2 
                                                      (!pair  "lbl1"
                                                       (!type already_seen 11)
-                                                      (!srcfileloc  "dwarf2out.h" 232)
+                                                      (!srcfileloc  "dwarf2out.h" 238)
                                                       nil )
                                                      (!pair  "lbl2"
                                                       (!type already_seen 11)
-                                                      (!srcfileloc  "dwarf2out.h" 233)
+                                                      (!srcfileloc  "dwarf2out.h" 239)
                                                       nil )
                                                     )
                                                     nil 2047 nil nil )
-                                                   (!srcfileloc  "dwarf2out.h" 234)
+                                                   (!srcfileloc  "dwarf2out.h" 240)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_vms_delta")
                                                    )
                                                   )
                                                   (!pair  "val_discr_value"
                                                    (!type struct 512 nil  gc_used "dw_discr_value"
-                                                    (!srcfileloc  "dwarf2out.h" 235)
+                                                    (!srcfileloc  "dwarf2out.h" 241)
                                                     (!fields 2 
                                                      (!pair  "pos"
                                                       (!type already_seen 2)
-                                                      (!srcfileloc  "dwarf2out.h" 186)
+                                                      (!srcfileloc  "dwarf2out.h" 192)
                                                       nil )
                                                      (!pair  "v"
-                                                      (!type union 513 nil  gc_used "anonymous:../../gcc/gcc/dwarf2out.h:188"
-                                                       (!srcfileloc  "dwarf2out.h" 191)
+                                                      (!type union 513 nil  gc_used "anonymous:../../gcc/gcc/dwarf2out.h:194"
+                                                       (!srcfileloc  "dwarf2out.h" 197)
                                                        (!fields 2 
                                                         (!pair  "sval"
                                                          (!type already_seen 2)
-                                                         (!srcfileloc  "dwarf2out.h" 189)
+                                                         (!srcfileloc  "dwarf2out.h" 195)
                                                          (!options 
                                                           (!option tag string  "0")
                                                          )
                                                         )
                                                         (!pair  "uval"
                                                          (!type already_seen 2)
-                                                         (!srcfileloc  "dwarf2out.h" 190)
+                                                         (!srcfileloc  "dwarf2out.h" 196)
                                                          (!options 
                                                           (!option tag string  "1")
                                                          )
                                                         )
                                                        )
                                                        nil 2047 nil )
-                                                      (!srcfileloc  "dwarf2out.h" 192)
+                                                      (!srcfileloc  "dwarf2out.h" 198)
                                                       (!options 
                                                        (!option desc string  "%1.pos")
                                                       )
                                                      )
                                                     )
                                                     nil 2047 nil nil )
-                                                   (!srcfileloc  "dwarf2out.h" 235)
+                                                   (!srcfileloc  "dwarf2out.h" 241)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_discr_value")
                                                    )
@@ -9948,53 +9948,53 @@
                                                     (!type struct 515 
                                                      (!type already_seen 514)
                                                      gc_pointed_to "dw_discr_list_node"
-                                                     (!srcfileloc  "dwarf2out.h" 273)
+                                                     (!srcfileloc  "dwarf2out.h" 279)
                                                      (!fields 4 
                                                       (!pair  "dw_discr_next"
                                                        (!type already_seen 514)
-                                                       (!srcfileloc  "dwarf2out.h" 265)
+                                                       (!srcfileloc  "dwarf2out.h" 271)
                                                        nil )
                                                       (!pair  "dw_discr_lower_bound"
                                                        (!type already_seen 512)
-                                                       (!srcfileloc  "dwarf2out.h" 267)
+                                                       (!srcfileloc  "dwarf2out.h" 273)
                                                        nil )
                                                       (!pair  "dw_discr_upper_bound"
                                                        (!type already_seen 512)
-                                                       (!srcfileloc  "dwarf2out.h" 268)
+                                                       (!srcfileloc  "dwarf2out.h" 274)
                                                        nil )
                                                       (!pair  "dw_discr_range"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.h" 272)
+                                                       (!srcfileloc  "dwarf2out.h" 278)
                                                        nil )
                                                      )
                                                      nil 2047 nil nil )
                                                    )
-                                                   (!srcfileloc  "dwarf2out.h" 236)
+                                                   (!srcfileloc  "dwarf2out.h" 242)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_discr_list")
                                                    )
                                                   )
                                                   (!pair  "val_symbolic_view"
                                                    (!type already_seen 11)
-                                                   (!srcfileloc  "dwarf2out.h" 237)
+                                                   (!srcfileloc  "dwarf2out.h" 243)
                                                    (!options 
                                                     (!option tag string  "dw_val_class_symview")
                                                    )
                                                   )
                                                  )
                                                  nil 2047 nil )
-                                                (!srcfileloc  "dwarf2out.h" 239)
+                                                (!srcfileloc  "dwarf2out.h" 245)
                                                 (!options 
                                                  (!option desc string  "%1.val_class")
                                                 )
                                                )
                                               )
                                               nil 2047 nil nil )
-                                             (!srcfileloc  "dwarf2out.h" 256)
+                                             (!srcfileloc  "dwarf2out.h" 262)
                                              nil )
                                             (!pair  "dw_loc_oprnd2"
                                              (!type already_seen 483)
-                                             (!srcfileloc  "dwarf2out.h" 257)
+                                             (!srcfileloc  "dwarf2out.h" 263)
                                              nil )
                                            )
                                            (!options 
@@ -10016,23 +10016,23 @@
                                            (!fields 5 
                                             (!pair  "offset"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 120)
+                                             (!srcfileloc  "dwarf2out.h" 126)
                                              nil )
                                             (!pair  "base_offset"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 121)
+                                             (!srcfileloc  "dwarf2out.h" 127)
                                              nil )
                                             (!pair  "reg"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 123)
+                                             (!srcfileloc  "dwarf2out.h" 129)
                                              nil )
                                             (!pair  "indirect"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 124)
+                                             (!srcfileloc  "dwarf2out.h" 130)
                                              nil )
                                             (!pair  "in_use"
                                              (!type already_seen 2)
-                                             (!srcfileloc  "dwarf2out.h" 125)
+                                             (!srcfileloc  "dwarf2out.h" 131)
                                              nil )
                                            )
                                            nil 2047 nil nil )
@@ -10117,6 +10117,10 @@
                              (!pair  "second_in_std_section"
                               (!type already_seen 2)
                               (!srcfileloc  "dwarf2out.h" 110)
+                              nil )
+                             (!pair  "rule18"
+                              (!type already_seen 2)
+                              (!srcfileloc  "dwarf2out.h" 116)
                               nil )
                             )
                             nil 2047 nil nil )
@@ -21975,23 +21979,23 @@
   nil 0 nil nil )
  
  (!type struct 1291 nil  gc_pointed_to "inline_entry_data"
-  (!srcfileloc  "dwarf2out.c" 23555)
+  (!srcfileloc  "dwarf2out.c" 23565)
   (!fields 4 
    (!pair  "block"
     (!type already_seen 23)
-    (!srcfileloc  "dwarf2out.c" 23547)
+    (!srcfileloc  "dwarf2out.c" 23557)
     nil )
    (!pair  "label_pfx"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 23550)
+    (!srcfileloc  "dwarf2out.c" 23560)
     nil )
    (!pair  "label_num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 23551)
+    (!srcfileloc  "dwarf2out.c" 23561)
     nil )
    (!pair  "view"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 23554)
+    (!srcfileloc  "dwarf2out.c" 23564)
     nil )
   )
   (!options 
@@ -22000,7 +22004,7 @@
   2047 nil nil )
  
  (!type struct 1292 nil  gc_used "inline_entry_data_hasher"
-  (!srcfileloc  "dwarf2out.c" 23581)
+  (!srcfileloc  "dwarf2out.c" 23591)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -22009,26 +22013,26 @@
    (!type already_seen 1293)
   )
   gc_pointed_to "hash_table<inline_entry_data_hasher>"
-  (!srcfileloc  "dwarf2out.c" 23581)
+  (!srcfileloc  "dwarf2out.c" 23591)
   (!fields 1 
    (!pair  "inline_entry_data_hasher"
     (!type already_seen 1292)
-    (!srcfileloc  "dwarf2out.c" 23581)
+    (!srcfileloc  "dwarf2out.c" 23591)
     nil )
   )
  )
  
  (!type struct 1295 nil  gc_unused "macinfo_entry_hasher"
-  (!srcfileloc  "dwarf2out.c" 28187)
+  (!srcfileloc  "dwarf2out.c" 28197)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1296 nil  gc_unused "hash_table<macinfo_entry_hasher>"
-  (!srcfileloc  "dwarf2out.c" 28187)
+  (!srcfileloc  "dwarf2out.c" 28197)
   (!fields 1 
    (!pair  "macinfo_entry_hasher"
     (!type already_seen 1295)
-    (!srcfileloc  "dwarf2out.c" 28187)
+    (!srcfileloc  "dwarf2out.c" 28197)
     nil )
   )
  )
@@ -22038,16 +22042,16 @@
   nil 0 nil nil )
  
  (!type struct 1298 nil  gc_unused "loc_list_hasher"
-  (!srcfileloc  "dwarf2out.c" 31137)
+  (!srcfileloc  "dwarf2out.c" 31147)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1299 nil  gc_unused "hash_table<loc_list_hasher>"
-  (!srcfileloc  "dwarf2out.c" 31137)
+  (!srcfileloc  "dwarf2out.c" 31147)
   (!fields 1 
    (!pair  "loc_list_hasher"
     (!type already_seen 1298)
-    (!srcfileloc  "dwarf2out.c" 31137)
+    (!srcfileloc  "dwarf2out.c" 31147)
     nil )
   )
  )
@@ -27062,19 +27066,19 @@
   nil 0 nil nil )
  
  (!type struct 1933 nil  gc_pointed_to "source_location_table_entry"
-  (!srcfileloc  "cp/cp-gimplify.c" 3161)
+  (!srcfileloc  "cp/cp-gimplify.c" 3169)
   (!fields 3 
    (!pair  "loc"
     (!type already_seen 2)
-    (!srcfileloc  "cp/cp-gimplify.c" 3158)
+    (!srcfileloc  "cp/cp-gimplify.c" 3166)
     nil )
    (!pair  "uid"
     (!type already_seen 2)
-    (!srcfileloc  "cp/cp-gimplify.c" 3159)
+    (!srcfileloc  "cp/cp-gimplify.c" 3167)
     nil )
    (!pair  "var"
     (!type already_seen 23)
-    (!srcfileloc  "cp/cp-gimplify.c" 3160)
+    (!srcfileloc  "cp/cp-gimplify.c" 3168)
     nil )
   )
   (!options 
@@ -27083,7 +27087,7 @@
   1032 nil nil )
  
  (!type struct 1934 nil  gc_used "source_location_table_entry_hash"
-  (!srcfileloc  "cp/cp-gimplify.c" 3222)
+  (!srcfileloc  "cp/cp-gimplify.c" 3230)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -27092,11 +27096,11 @@
    (!type already_seen 1935)
   )
   gc_pointed_to "hash_table<source_location_table_entry_hash>"
-  (!srcfileloc  "cp/cp-gimplify.c" 3222)
+  (!srcfileloc  "cp/cp-gimplify.c" 3230)
   (!fields 1 
    (!pair  "source_location_table_entry_hash"
     (!type already_seen 1934)
-    (!srcfileloc  "cp/cp-gimplify.c" 3222)
+    (!srcfileloc  "cp/cp-gimplify.c" 3230)
     nil )
   )
  )
@@ -28893,11 +28897,11 @@
   nil )
  (!pair  "source_location_table_entry_hash"
   (!type already_seen 1934)
-  (!srcfileloc  "cp/cp-gimplify.c" 3222)
+  (!srcfileloc  "cp/cp-gimplify.c" 3230)
   nil )
  (!pair  "hash_table<source_location_table_entry_hash>"
   (!type already_seen 1935)
-  (!srcfileloc  "cp/cp-gimplify.c" 3222)
+  (!srcfileloc  "cp/cp-gimplify.c" 3230)
   nil )
  (!pair  "coroutine_info_hasher"
   (!type already_seen 1915)
@@ -30129,35 +30133,35 @@
   nil )
  (!pair  "loc_list_hash_type"
   (!type already_seen 1299)
-  (!srcfileloc  "dwarf2out.c" 31137)
+  (!srcfileloc  "dwarf2out.c" 31147)
   nil )
  (!pair  "loc_list_hasher"
   (!type already_seen 1298)
-  (!srcfileloc  "dwarf2out.c" 31137)
+  (!srcfileloc  "dwarf2out.c" 31147)
   nil )
  (!pair  "hash_table<loc_list_hasher>"
   (!type already_seen 1299)
-  (!srcfileloc  "dwarf2out.c" 31137)
+  (!srcfileloc  "dwarf2out.c" 31147)
   nil )
  (!pair  "macinfo_hash_type"
   (!type already_seen 1296)
-  (!srcfileloc  "dwarf2out.c" 28187)
+  (!srcfileloc  "dwarf2out.c" 28197)
   nil )
  (!pair  "macinfo_entry_hasher"
   (!type already_seen 1295)
-  (!srcfileloc  "dwarf2out.c" 28187)
+  (!srcfileloc  "dwarf2out.c" 28197)
   nil )
  (!pair  "hash_table<macinfo_entry_hasher>"
   (!type already_seen 1296)
-  (!srcfileloc  "dwarf2out.c" 28187)
+  (!srcfileloc  "dwarf2out.c" 28197)
   nil )
  (!pair  "inline_entry_data_hasher"
   (!type already_seen 1292)
-  (!srcfileloc  "dwarf2out.c" 23581)
+  (!srcfileloc  "dwarf2out.c" 23591)
   nil )
  (!pair  "hash_table<inline_entry_data_hasher>"
   (!type already_seen 1293)
-  (!srcfileloc  "dwarf2out.c" 23581)
+  (!srcfileloc  "dwarf2out.c" 23591)
   nil )
  (!pair  "external_ref_hash_type"
   (!type already_seen 1285)
@@ -30385,15 +30389,15 @@
   nil )
  (!pair  "dw_val_node"
   (!type already_seen 483)
-  (!srcfileloc  "dwarf2out.h" 256)
+  (!srcfileloc  "dwarf2out.h" 262)
   nil )
  (!pair  "dw_discr_value"
   (!type already_seen 512)
-  (!srcfileloc  "dwarf2out.h" 235)
+  (!srcfileloc  "dwarf2out.h" 241)
   nil )
  (!pair  "dw_vec_const"
   (!type already_seen 504)
-  (!srcfileloc  "dwarf2out.h" 215)
+  (!srcfileloc  "dwarf2out.h" 221)
   nil )
  (!pair  "dw_fde_ref"
   (!type already_seen 474)
@@ -32828,7 +32832,7 @@
   nil )
  (!pair  "deleted_copy_types"
   (!type already_seen 472)
-  (!srcfileloc  "cp/tree.c" 4094)
+  (!srcfileloc  "cp/tree.c" 4136)
   nil )
  (!pair  "list_hash_table"
   (!type already_seen 2018)
@@ -33097,7 +33101,7 @@
   nil )
  (!pair  "start_cleanup_cnt"
   (!type already_seen 2)
-  (!srcfileloc  "cp/decl.c" 8677)
+  (!srcfileloc  "cp/decl.c" 8683)
   nil )
  (!pair  "decomp_type_table"
   (!type already_seen 939)
@@ -33134,15 +33138,15 @@
   nil )
  (!pair  "source_location_id"
   (!type already_seen 2)
-  (!srcfileloc  "cp/cp-gimplify.c" 3224)
+  (!srcfileloc  "cp/cp-gimplify.c" 3232)
   nil )
  (!pair  "source_location_table"
   (!type already_seen 1936)
-  (!srcfileloc  "cp/cp-gimplify.c" 3223)
+  (!srcfileloc  "cp/cp-gimplify.c" 3231)
   nil )
  (!pair  "fold_cache"
   (!type already_seen 398)
-  (!srcfileloc  "cp/cp-gimplify.c" 2477)
+  (!srcfileloc  "cp/cp-gimplify.c" 2485)
   (!options 
    (!option deletable string  "")
   )
@@ -34380,7 +34384,7 @@
   nil )
  (!pair  "inline_entry_data_table"
   (!type already_seen 1294)
-  (!srcfileloc  "dwarf2out.c" 23581)
+  (!srcfileloc  "dwarf2out.c" 23591)
   nil )
  (!pair  "external_die_map"
   (!type already_seen 1279)
@@ -34644,7 +34648,7 @@
   nil )
  (!pair  "saved_do_cfi_asm"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2cfi.c" 3518)
+  (!srcfileloc  "dwarf2cfi.c" 3540)
   nil )
  (!pair  "dwarf2out_cfi_label_num"
   (!type already_seen 2)
@@ -34668,7 +34672,7 @@
   nil )
  (!pair  "cie_cfi_vec"
   (!type already_seen 476)
-  (!srcfileloc  "dwarf2out.h" 297)
+  (!srcfileloc  "dwarf2out.h" 303)
   nil )
  (!pair  "lastfile_is_base"
   (!type already_seen 2)
