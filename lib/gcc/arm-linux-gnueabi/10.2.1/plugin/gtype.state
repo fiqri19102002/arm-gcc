@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "10.2.1 20210401")
+(!version  "10.2.1 20210402")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 222
@@ -26757,15 +26757,15 @@
    (!type already_seen 1890)
   )
   gc_pointed_to "hash_map<tree,int>"
-  (!srcfileloc  "cp/class.c" 3302)
+  (!srcfileloc  "cp/class.c" 3310)
   (!fields 2 
    (!pair  "int"
     (!type already_seen 378)
-    (!srcfileloc  "cp/class.c" 3302)
+    (!srcfileloc  "cp/class.c" 3310)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "cp/class.c" 3302)
+    (!srcfileloc  "cp/class.c" 3310)
     nil )
   )
  )
@@ -28946,7 +28946,7 @@
   nil )
  (!pair  "hash_map<tree,int>"
   (!type already_seen 1890)
-  (!srcfileloc  "cp/class.c" 3302)
+  (!srcfileloc  "cp/class.c" 3310)
   nil )
  (!pair  "subobject_offset_fn"
   (!type already_seen 2)
@@ -33293,15 +33293,15 @@
   nil )
  (!pair  "dvirt_fn"
   (!type already_seen 23)
-  (!srcfileloc  "cp/class.c" 9719)
+  (!srcfileloc  "cp/class.c" 9727)
   nil )
  (!pair  "abort_fndecl_addr"
   (!type already_seen 23)
-  (!srcfileloc  "cp/class.c" 9718)
+  (!srcfileloc  "cp/class.c" 9726)
   nil )
  (!pair  "enum_to_min_precision"
   (!type already_seen 1891)
-  (!srcfileloc  "cp/class.c" 3302)
+  (!srcfileloc  "cp/class.c" 3310)
   (!options 
    (!option deletable string  "")
   )
