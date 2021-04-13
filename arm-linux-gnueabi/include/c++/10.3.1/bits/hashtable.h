@@ -450,10 +450,16 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 	static constexpr bool
 	_S_nothrow_move()
 	{
-	  if _GLIBCXX17_CONSTEXPR (_No_realloc)
-	    if _GLIBCXX17_CONSTEXPR (is_nothrow_copy_constructible<_H1>())
+#if __cplusplus <= 201402L
+	  return __and_<__bool_constant<_No_realloc>,
+			is_nothrow_copy_constructible<_H1>,
+			is_nothrow_copy_constructible<_Equal>>::value;
+#else
+	  if constexpr (_No_realloc)
+	    if constexpr (is_nothrow_copy_constructible<_H1>())
 	      return is_nothrow_copy_constructible<_Equal>();
 	  return false;
+#endif
 	}
 
       _Hashtable(_Hashtable&& __ht, __node_alloc_type&& __a,
@@ -1313,8 +1319,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 	       _H1, _H2, _Hash, _RehashPolicy, _Traits>::
     _Hashtable(_Hashtable&& __ht, __node_alloc_type&& __a,
 	       true_type /* alloc always equal */)
-    noexcept(std::is_nothrow_copy_constructible<_H1>::value &&
-	     std::is_nothrow_copy_constructible<_Equal>::value)
+    noexcept(_S_nothrow_move())
     : __hashtable_base(__ht),
       __map_base(__ht),
       __rehash_base(__ht),
