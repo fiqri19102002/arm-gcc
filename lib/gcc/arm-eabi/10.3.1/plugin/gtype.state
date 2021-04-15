@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "10.3.1 20210413")
+(!version  "10.3.1 20210415")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 217
@@ -229,7 +229,7 @@
 (!structures 1621
  
  (!type struct 1 nil  gc_used "source_range"
-  (!srcfileloc  "../libcpp/include/line-map.h" 749)
+  (!srcfileloc  "../libcpp/include/line-map.h" 745)
   (!fields 2 
    (!pair  "m_start"
     (!type scalar_nonchar 2 
@@ -269,7 +269,7 @@
    (!type already_seen 6)
   )
   gc_used "line_map_ordinary"
-  (!srcfileloc  "../libcpp/include/line-map.h" 718)
+  (!srcfileloc  "../libcpp/include/line-map.h" 714)
   (!fields 7 
    (!pair  "reason"
     (!type already_seen 2)
@@ -15231,7 +15231,7 @@
    (!type already_seen 691)
   )
   gc_used "line_map_macro"
-  (!srcfileloc  "../libcpp/include/line-map.h" 733)
+  (!srcfileloc  "../libcpp/include/line-map.h" 729)
   (!fields 4 
    (!pair  "n_tokens"
     (!type already_seen 2)
@@ -15266,43 +15266,43 @@
  )
  
  (!type struct 693 nil  gc_used "maps_info_ordinary"
-  (!srcfileloc  "../libcpp/include/line-map.h" 778)
+  (!srcfileloc  "../libcpp/include/line-map.h" 774)
   (!fields 3 
    (!pair  "maps"
     (!type already_seen 7)
-    (!srcfileloc  "../libcpp/include/line-map.h" 718)
+    (!srcfileloc  "../libcpp/include/line-map.h" 714)
     (!options 
      (!option length string  "%h.used")
     )
    )
    (!pair  "allocated"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 721)
+    (!srcfileloc  "../libcpp/include/line-map.h" 717)
     nil )
    (!pair  "used"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 725)
+    (!srcfileloc  "../libcpp/include/line-map.h" 721)
     nil )
   )
   nil 2047 nil nil )
  
  (!type struct 694 nil  gc_used "maps_info_macro"
-  (!srcfileloc  "../libcpp/include/line-map.h" 780)
+  (!srcfileloc  "../libcpp/include/line-map.h" 776)
   (!fields 3 
    (!pair  "maps"
     (!type already_seen 692)
-    (!srcfileloc  "../libcpp/include/line-map.h" 733)
+    (!srcfileloc  "../libcpp/include/line-map.h" 729)
     (!options 
      (!option length string  "%h.used")
     )
    )
    (!pair  "allocated"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 736)
+    (!srcfileloc  "../libcpp/include/line-map.h" 732)
     nil )
    (!pair  "used"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 740)
+    (!srcfileloc  "../libcpp/include/line-map.h" 736)
     nil )
   )
   nil 2047 nil nil )
@@ -15312,19 +15312,19 @@
    (!type already_seen 695)
   )
   gc_used "location_adhoc_data"
-  (!srcfileloc  "../libcpp/include/line-map.h" 751)
+  (!srcfileloc  "../libcpp/include/line-map.h" 747)
   (!fields 3 
    (!pair  "locus"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 748)
+    (!srcfileloc  "../libcpp/include/line-map.h" 744)
     nil )
    (!pair  "src_range"
     (!type already_seen 1)
-    (!srcfileloc  "../libcpp/include/line-map.h" 749)
+    (!srcfileloc  "../libcpp/include/line-map.h" 745)
     nil )
    (!pair  "data"
     (!type already_seen 3)
-    (!srcfileloc  "../libcpp/include/line-map.h" 750)
+    (!srcfileloc  "../libcpp/include/line-map.h" 746)
     (!options 
      (!option skip string  "")
     )
@@ -15335,26 +15335,26 @@
  (!type already_seen 338)
  
  (!type struct 697 nil  gc_used "location_adhoc_data_map"
-  (!srcfileloc  "../libcpp/include/line-map.h" 770)
+  (!srcfileloc  "../libcpp/include/line-map.h" 766)
   (!fields 4 
    (!pair  "htab"
     (!type already_seen 337)
-    (!srcfileloc  "../libcpp/include/line-map.h" 766)
+    (!srcfileloc  "../libcpp/include/line-map.h" 762)
     (!options 
      (!option skip string  "")
     )
    )
    (!pair  "curr_loc"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 767)
+    (!srcfileloc  "../libcpp/include/line-map.h" 763)
     nil )
    (!pair  "allocated"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 768)
+    (!srcfileloc  "../libcpp/include/line-map.h" 764)
     nil )
    (!pair  "data"
     (!type already_seen 696)
-    (!srcfileloc  "../libcpp/include/line-map.h" 769)
+    (!srcfileloc  "../libcpp/include/line-map.h" 765)
     (!options 
      (!option length string  "%h.allocated")
     )
@@ -15367,72 +15367,72 @@
    (!type already_seen 698)
   )
   gc_pointed_to "line_maps"
-  (!srcfileloc  "../libcpp/include/line-map.h" 819)
+  (!srcfileloc  "../libcpp/include/line-map.h" 815)
   (!fields 15 
    (!pair  "info_ordinary"
     (!type already_seen 693)
-    (!srcfileloc  "../libcpp/include/line-map.h" 778)
+    (!srcfileloc  "../libcpp/include/line-map.h" 774)
     nil )
    (!pair  "info_macro"
     (!type already_seen 694)
-    (!srcfileloc  "../libcpp/include/line-map.h" 780)
+    (!srcfileloc  "../libcpp/include/line-map.h" 776)
     nil )
    (!pair  "depth"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 783)
+    (!srcfileloc  "../libcpp/include/line-map.h" 779)
     nil )
    (!pair  "trace_includes"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 786)
+    (!srcfileloc  "../libcpp/include/line-map.h" 782)
     nil )
    (!pair  "highest_location"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 789)
+    (!srcfileloc  "../libcpp/include/line-map.h" 785)
     nil )
    (!pair  "highest_line"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 792)
+    (!srcfileloc  "../libcpp/include/line-map.h" 788)
     nil )
    (!pair  "max_column_hint"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 796)
+    (!srcfileloc  "../libcpp/include/line-map.h" 792)
     nil )
    (!pair  "reallocator"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 799)
+    (!srcfileloc  "../libcpp/include/line-map.h" 795)
     nil )
    (!pair  "round_alloc_size"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 803)
+    (!srcfileloc  "../libcpp/include/line-map.h" 799)
     nil )
    (!pair  "location_adhoc_data_map"
     (!type already_seen 697)
-    (!srcfileloc  "../libcpp/include/line-map.h" 805)
+    (!srcfileloc  "../libcpp/include/line-map.h" 801)
     nil )
    (!pair  "builtin_location"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 809)
+    (!srcfileloc  "../libcpp/include/line-map.h" 805)
     nil )
    (!pair  "seen_line_directive"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 812)
+    (!srcfileloc  "../libcpp/include/line-map.h" 808)
     nil )
    (!pair  "default_range_bits"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 815)
+    (!srcfileloc  "../libcpp/include/line-map.h" 811)
     nil )
    (!pair  "num_optimized_ranges"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 817)
+    (!srcfileloc  "../libcpp/include/line-map.h" 813)
     nil )
    (!pair  "num_unoptimized_ranges"
     (!type already_seen 2)
-    (!srcfileloc  "../libcpp/include/line-map.h" 818)
+    (!srcfileloc  "../libcpp/include/line-map.h" 814)
     nil )
   )
   nil 2047 nil nil )
  
- (!type struct 700 nil  gc_unused "anonymous:../../gcc/gcc/../libcpp/include/line-map.h:1251"nil 
+ (!type struct 700 nil  gc_unused "anonymous:../../gcc/gcc/../libcpp/include/line-map.h:1247"nil 
   (!fields 0 )
   nil 0 nil nil )
  
@@ -29269,7 +29269,7 @@
   nil )
  (!pair  "atomic_acces_t"
   (!type already_seen 2)
-  (!srcfileloc  "ada/gcc-interface/trans.c" 4776)
+  (!srcfileloc  "ada/gcc-interface/trans.c" 4781)
   nil )
  (!pair  "vec<loop_info,va_gc>"
   (!type already_seen 1739)
@@ -31675,27 +31675,27 @@
   nil )
  (!pair  "expanded_location"
   (!type already_seen 700)
-  (!srcfileloc  "../libcpp/include/line-map.h" 1264)
+  (!srcfileloc  "../libcpp/include/line-map.h" 1260)
   nil )
  (!pair  "maps_info_macro"
   (!type already_seen 694)
-  (!srcfileloc  "../libcpp/include/line-map.h" 780)
+  (!srcfileloc  "../libcpp/include/line-map.h" 776)
   nil )
  (!pair  "maps_info_ordinary"
   (!type already_seen 693)
-  (!srcfileloc  "../libcpp/include/line-map.h" 778)
+  (!srcfileloc  "../libcpp/include/line-map.h" 774)
   nil )
  (!pair  "source_range"
   (!type already_seen 1)
-  (!srcfileloc  "../libcpp/include/line-map.h" 749)
+  (!srcfileloc  "../libcpp/include/line-map.h" 745)
   nil )
  (!pair  "line_map_macro"
   (!type already_seen 691)
-  (!srcfileloc  "../libcpp/include/line-map.h" 733)
+  (!srcfileloc  "../libcpp/include/line-map.h" 729)
   nil )
  (!pair  "line_map_ordinary"
   (!type already_seen 6)
-  (!srcfileloc  "../libcpp/include/line-map.h" 718)
+  (!srcfileloc  "../libcpp/include/line-map.h" 714)
   nil )
  (!pair  "line_map_round_alloc_size_func"
   (!type already_seen 2)
@@ -33565,7 +33565,7 @@
   nil )
  (!pair  "gnat_eh_personality_decl"
   (!type already_seen 23)
-  (!srcfileloc  "ada/gcc-interface/misc.c" 1332)
+  (!srcfileloc  "ada/gcc-interface/misc.c" 1335)
   nil )
  (!pair  "built_in_attributes"
   (!type array 2160 nil  gc_used "(int) ATTR_LAST" 
@@ -33650,7 +33650,7 @@
  )
  (!pair  "thunk_labelno"
   (!type already_seen 2)
-  (!srcfileloc  "ada/gcc-interface/trans.c" 11162)
+  (!srcfileloc  "ada/gcc-interface/trans.c" 11146)
   nil )
  (!pair  "gnu_loop_stack"
   (!type already_seen 1740)
