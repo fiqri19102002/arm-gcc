@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20210425
+#define __GLIBCXX__ 20210510
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -939,15 +939,6 @@ namespace std
 /* Define to 1 if you have the <ieeefp.h> header file. */
 /* #undef _GLIBCXX_HAVE_IEEEFP_H */
 
-/* Define if int64_t is available in <stdint.h>. */
-#define _GLIBCXX_HAVE_INT64_T 1
-
-/* Define if int64_t is a long. */
-/* #undef _GLIBCXX_HAVE_INT64_T_LONG */
-
-/* Define if int64_t is a long long. */
-#define _GLIBCXX_HAVE_INT64_T_LONG_LONG 1
-
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define _GLIBCXX_HAVE_INTTYPES_H 1
 
@@ -1721,9 +1712,6 @@ namespace std
 
 /* Define if get_nprocs is available in <sys/sysinfo.h>. */
 #define _GLIBCXX_USE_GET_NPROCS 1
-
-/* Define if __int128 is supported on this host. */
-/* #undef _GLIBCXX_USE_INT128 */
 
 /* Define if LFS support is available. */
 #define _GLIBCXX_USE_LFS 1

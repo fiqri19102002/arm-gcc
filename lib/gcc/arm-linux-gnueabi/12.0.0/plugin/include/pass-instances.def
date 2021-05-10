@@ -47,7 +47,6 @@ along with GCC; see the file COPYING3.  If not see
   NEXT_PASS (pass_warn_function_return, 1);
   NEXT_PASS (pass_coroutine_early_expand_ifns, 1);
   NEXT_PASS (pass_expand_omp, 1);
-  NEXT_PASS (pass_warn_printf, 1);
   NEXT_PASS_WITH_ARG (pass_walloca, 1, /*strict_mode_p=*/true);
   NEXT_PASS (pass_build_cgraph_edges, 1);
   TERMINATE_PASS_LIST (all_lowering_passes)
@@ -60,6 +59,7 @@ along with GCC; see the file COPYING3.  If not see
   PUSH_INSERT_PASSES_WITHIN (pass_build_ssa_passes)
       NEXT_PASS (pass_fixup_cfg, 1);
       NEXT_PASS (pass_build_ssa, 1);
+      NEXT_PASS (pass_warn_printf, 1);
       NEXT_PASS (pass_warn_nonnull_compare, 1);
       NEXT_PASS (pass_early_warn_uninitialized, 1);
       NEXT_PASS (pass_ubsan, 1);
@@ -212,7 +212,11 @@ along with GCC; see the file COPYING3.  If not see
       NEXT_PASS (pass_merge_phi, 2);
       NEXT_PASS (pass_thread_jumps, 1);
       NEXT_PASS_WITH_ARG (pass_vrp, 1, true /* warn_array_bounds_p */);
+      NEXT_PASS (pass_dse, 2);
       NEXT_PASS (pass_dce, 2);
+      /* pass_stdarg is always run and at this point we execute
+         TODO_remove_unused_locals to prune CLOBBERs of dead
+	 variables which are otherwise a churn on alias walkings.  */
       NEXT_PASS (pass_stdarg, 1);
       NEXT_PASS (pass_call_cdce, 1);
       NEXT_PASS (pass_cselim, 1);
@@ -238,7 +242,6 @@ along with GCC; see the file COPYING3.  If not see
       /* Identify paths that should never be executed in a conforming
 	 program and isolate those paths.  */
       NEXT_PASS (pass_isolate_erroneous_paths, 1);
-      NEXT_PASS (pass_dse, 2);
       NEXT_PASS_WITH_ARG (pass_reassoc, 1, true /* insert_powi_p */);
       NEXT_PASS (pass_dce, 3);
       NEXT_PASS (pass_forwprop, 3);
@@ -256,6 +259,7 @@ along with GCC; see the file COPYING3.  If not see
       NEXT_PASS (pass_sancov, 1);
       NEXT_PASS (pass_asan, 1);
       NEXT_PASS (pass_tsan, 1);
+      NEXT_PASS (pass_dse, 3);
       NEXT_PASS (pass_dce, 4);
       /* Pass group that runs when 1) enabled, 2) there are loops
 	 in the function.  Make sure to run pass_fix_loops before
@@ -301,7 +305,7 @@ along with GCC; see the file COPYING3.  If not see
 	  NEXT_PASS (pass_pre_slp_scalar_cleanup, 1);
 	  PUSH_INSERT_PASSES_WITHIN (pass_pre_slp_scalar_cleanup)
 	      NEXT_PASS_WITH_ARG (pass_fre, 4, false /* may_iterate */);
-	      NEXT_PASS (pass_dse, 3);
+	      NEXT_PASS (pass_dse, 4);
 	  POP_INSERT_PASSES ()
 	  NEXT_PASS (pass_slp_vectorize, 1);
 	  NEXT_PASS (pass_loop_prefetch, 1);
@@ -334,10 +338,11 @@ along with GCC; see the file COPYING3.  If not see
       NEXT_PASS (pass_thread_jumps, 4);
       NEXT_PASS_WITH_ARG (pass_vrp, 2, false /* warn_array_bounds_p */);
       /* Threading can leave many const/copy propagations in the IL.
-	 Clean them up.  */
-      NEXT_PASS (pass_copy_prop, 5);
+	 Clean them up.  Instead of just copy_prop, we use ccp to
+	 compute alignment and nonzero bits.  */
+      NEXT_PASS_WITH_ARG (pass_ccp, 4, true /* nonzero_p */);
       NEXT_PASS (pass_warn_restrict, 1);
-      NEXT_PASS (pass_dse, 4);
+      NEXT_PASS (pass_dse, 5);
       NEXT_PASS_WITH_ARG (pass_cd_dce, 3, true /* update_address_taken_p */);
       /* After late CD DCE we rewrite no longer addressed locals into SSA
 	 form if possible.  */
@@ -369,7 +374,7 @@ along with GCC; see the file COPYING3.  If not see
       NEXT_PASS (pass_lower_vector_ssa, 2);
       NEXT_PASS (pass_lower_switch, 2);
       /* Perform simple scalar cleanup which is constant/copy propagation.  */
-      NEXT_PASS_WITH_ARG (pass_ccp, 4, true /* nonzero_p */);
+      NEXT_PASS_WITH_ARG (pass_ccp, 5, true /* nonzero_p */);
       NEXT_PASS (pass_post_ipa_warn, 2);
       NEXT_PASS (pass_object_sizes, 3);
       /* Fold remaining builtins.  */
@@ -377,7 +382,7 @@ along with GCC; see the file COPYING3.  If not see
       NEXT_PASS (pass_strlen, 2);
       /* Copy propagation also copy-propagates constants, this is necessary
          to forward object-size and builtin folding results properly.  */
-      NEXT_PASS (pass_copy_prop, 6);
+      NEXT_PASS (pass_copy_prop, 5);
       NEXT_PASS (pass_dce, 8);
       NEXT_PASS (pass_sancov, 2);
       NEXT_PASS (pass_asan, 2);
