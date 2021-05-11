@@ -3853,15 +3853,18 @@ available to Windows.
 '--preprocessor PROGRAM'
      When 'windres' reads an 'rc' file, it runs it through the C
      preprocessor first.  This option may be used to specify the
-     preprocessor to use, including any leading arguments.  The default
-     preprocessor argument is 'gcc -E -xc-header -DRC_INVOKED'.
+     preprocessor to use.  The default preprocessor is 'gcc'.
 
 '--preprocessor-arg OPTION'
      When 'windres' reads an 'rc' file, it runs it through the C
      preprocessor first.  This option may be used to specify additional
      text to be passed to preprocessor on its command line.  This option
      can be used multiple times to add multiple options to the
-     preprocessor command line.
+     preprocessor command line.  If the '--preprocessor' option has not
+     been specified then a default set of preprocessor arguments will be
+     used, with any '--preprocessor-arg' options being placed after them
+     on the command line.  These default arguments are '-E',
+     '-xc-header' and '-DRC_INVOKED'.
 
 '-I DIRECTORY'
 '--include-dir DIRECTORY'
@@ -5917,20 +5920,20 @@ Ref: c++filt-Footnote-1140621
 Node: addr2line140727
 Node: windmc146405
 Node: windres150064
-Node: dlltool156423
-Node: def file format169420
-Node: readelf171950
-Node: elfedit188587
-Node: Common Options191561
-Node: Selecting the Target System192595
-Node: Target Selection193523
-Node: Architecture Selection195504
-Node: debuginfod196332
-Node: Reporting Bugs197091
-Node: Bug Criteria197853
-Node: Bug Reporting198406
-Node: GNU Free Documentation License205277
-Node: Binutils Index230437
+Node: dlltool156634
+Node: def file format169631
+Node: readelf172161
+Node: elfedit188798
+Node: Common Options191772
+Node: Selecting the Target System192806
+Node: Target Selection193734
+Node: Architecture Selection195715
+Node: debuginfod196543
+Node: Reporting Bugs197302
+Node: Bug Criteria198064
+Node: Bug Reporting198617
+Node: GNU Free Documentation License205488
+Node: Binutils Index230648
 
 End Tag Table
 
