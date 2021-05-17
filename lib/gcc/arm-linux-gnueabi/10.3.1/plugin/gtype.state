@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "10.3.1 20210510")
+(!version  "10.3.1 20210517")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 222
@@ -23948,16 +23948,16 @@
   nil 0 nil nil )
  
  (!type struct 1554 nil  gc_unused "libcall_hasher"
-  (!srcfileloc  "config/arm/arm.c" 5736)
+  (!srcfileloc  "config/arm/arm.c" 5757)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1555 nil  gc_unused "hash_table<libcall_hasher>"
-  (!srcfileloc  "config/arm/arm.c" 5736)
+  (!srcfileloc  "config/arm/arm.c" 5757)
   (!fields 1 
    (!pair  "libcall_hasher"
     (!type already_seen 1554)
-    (!srcfileloc  "config/arm/arm.c" 5736)
+    (!srcfileloc  "config/arm/arm.c" 5757)
     nil )
   )
  )
@@ -29690,19 +29690,19 @@
   nil )
  (!pair  "arm_pragma_enum"
   (!type already_seen 2)
-  (!srcfileloc  "config/arm/arm.c" 7203)
+  (!srcfileloc  "config/arm/arm.c" 7224)
   nil )
  (!pair  "libcall_table_type"
   (!type already_seen 1555)
-  (!srcfileloc  "config/arm/arm.c" 5736)
+  (!srcfileloc  "config/arm/arm.c" 5757)
   nil )
  (!pair  "libcall_hasher"
   (!type already_seen 1554)
-  (!srcfileloc  "config/arm/arm.c" 5736)
+  (!srcfileloc  "config/arm/arm.c" 5757)
   nil )
  (!pair  "hash_table<libcall_hasher>"
   (!type already_seen 1555)
-  (!srcfileloc  "config/arm/arm.c" 5736)
+  (!srcfileloc  "config/arm/arm.c" 5757)
   nil )
  (!pair  "isr_attribute_arg"
   (!type already_seen 1553)
@@ -33863,15 +33863,15 @@
   nil )
  (!pair  "arm_previous_fndecl"
   (!type already_seen 23)
-  (!srcfileloc  "config/arm/arm.c" 32283)
+  (!srcfileloc  "config/arm/arm.c" 32304)
   nil )
  (!pair  "tls_get_addr_libfunc"
   (!type already_seen 100)
-  (!srcfileloc  "config/arm/arm.c" 8964)
+  (!srcfileloc  "config/arm/arm.c" 8985)
   nil )
  (!pair  "pic_labelno"
   (!type already_seen 2)
-  (!srcfileloc  "config/arm/arm.c" 8100)
+  (!srcfileloc  "config/arm/arm.c" 8121)
   nil )
  (!pair  "init_optimize"
   (!type already_seen 23)
