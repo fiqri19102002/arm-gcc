@@ -2093,11 +2093,13 @@ double underscores.
      mechanism based on 'setjmp' and 'longjmp' for exception handling.
 
 '__GXX_EXPERIMENTAL_CXX0X__'
-     This macro is defined when compiling a C++ source file with the
-     option '-std=c++0x' or '-std=gnu++0x'.  It indicates that some
-     features likely to be included in C++0x are available.  Note that
-     these features are experimental, and may change or be removed in
-     future versions of GCC.
+     This macro is defined when compiling a C++ source file with C++11
+     features enabled, i.e., for all C++ language dialects except
+     '-std=c++98' and '-std=gnu++98'.  This macro is obsolete, but can
+     be used to detect experimental C++0x features in very old versions
+     of GCC. Since GCC 4.7.0 the '__cplusplus' macro is defined
+     correctly, so most code should test '__cplusplus >= 201103L'
+     instead of using this macro.
 
 '__GXX_WEAK__'
      This macro is defined when compiling a C++ source file.  It has the
@@ -5505,55 +5507,55 @@ Node: Variadic Macros59129
 Node: Predefined Macros64081
 Node: Standard Predefined Macros64669
 Node: Common Predefined Macros71001
-Node: System-specific Predefined Macros92104
-Node: C++ Named Operators94127
-Node: Undefining and Redefining Macros95091
-Node: Directives Within Macro Arguments97189
-Node: Macro Pitfalls98130
-Node: Misnesting98663
-Node: Operator Precedence Problems99775
-Node: Swallowing the Semicolon101641
-Node: Duplication of Side Effects103664
-Node: Self-Referential Macros105847
-Node: Argument Prescan108256
-Node: Newlines in Arguments112007
-Node: Conditionals112958
-Node: Conditional Uses114654
-Node: Conditional Syntax116012
-Node: Ifdef116412
-Node: If119569
-Node: Defined121873
-Node: Else123266
-Node: Elif123836
-Node: __has_attribute125149
-Node: __has_cpp_attribute126683
-Node: __has_builtin127569
-Node: __has_include128704
-Node: Deleted Code130291
-Node: Diagnostics131538
-Node: Line Control133087
-Node: Pragmas135365
-Node: Other Directives139762
-Node: Preprocessor Output140812
-Node: Traditional Mode143965
-Node: Traditional lexical analysis145102
-Node: Traditional macros147605
-Node: Traditional miscellany151402
-Node: Traditional warnings152398
-Node: Implementation Details154595
-Node: Implementation-defined behavior155158
-Ref: Identifier characters155908
-Node: Implementation limits158956
-Node: Obsolete Features161629
-Node: Invocation164473
-Ref: dashMF170508
-Ref: fdollars-in-identifiers175087
-Ref: Wtrigraphs189213
-Node: Environment Variables191268
-Node: GNU Free Documentation License194961
-Node: Index of Directives220106
-Node: Option Index222259
-Node: Concept Index228288
+Node: System-specific Predefined Macros92241
+Node: C++ Named Operators94264
+Node: Undefining and Redefining Macros95228
+Node: Directives Within Macro Arguments97326
+Node: Macro Pitfalls98267
+Node: Misnesting98800
+Node: Operator Precedence Problems99912
+Node: Swallowing the Semicolon101778
+Node: Duplication of Side Effects103801
+Node: Self-Referential Macros105984
+Node: Argument Prescan108393
+Node: Newlines in Arguments112144
+Node: Conditionals113095
+Node: Conditional Uses114791
+Node: Conditional Syntax116149
+Node: Ifdef116549
+Node: If119706
+Node: Defined122010
+Node: Else123403
+Node: Elif123973
+Node: __has_attribute125286
+Node: __has_cpp_attribute126820
+Node: __has_builtin127706
+Node: __has_include128841
+Node: Deleted Code130428
+Node: Diagnostics131675
+Node: Line Control133224
+Node: Pragmas135502
+Node: Other Directives139899
+Node: Preprocessor Output140949
+Node: Traditional Mode144102
+Node: Traditional lexical analysis145239
+Node: Traditional macros147742
+Node: Traditional miscellany151539
+Node: Traditional warnings152535
+Node: Implementation Details154732
+Node: Implementation-defined behavior155295
+Ref: Identifier characters156045
+Node: Implementation limits159093
+Node: Obsolete Features161766
+Node: Invocation164610
+Ref: dashMF170645
+Ref: fdollars-in-identifiers175224
+Ref: Wtrigraphs189350
+Node: Environment Variables191405
+Node: GNU Free Documentation License195098
+Node: Index of Directives220243
+Node: Option Index222396
+Node: Concept Index228425
 
 End Tag Table
 
