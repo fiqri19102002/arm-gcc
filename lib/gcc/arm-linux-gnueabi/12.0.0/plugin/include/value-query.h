@@ -95,13 +95,28 @@ public:
   // rewrite all uses of it to the above API.
   virtual const class value_range_equiv *get_value_range (const_tree,
 							  gimple * = NULL);
+  virtual void dump (FILE *);
 
 protected:
   class value_range_equiv *allocate_value_range_equiv ();
   void free_value_range_equiv (class value_range_equiv *);
+  bool get_tree_range (irange &r, tree expr, gimple *stmt);
+  bool get_arith_expr_range (irange &r, tree expr, gimple *stmt);
 
 private:
   class equiv_allocator *equiv_alloc;
 };
+
+// Global ranges for SSA names using SSA_NAME_RANGE_INFO.
+
+class global_range_query : public range_query
+{
+public:
+  bool range_of_expr (irange &r, tree expr, gimple * = NULL) OVERRIDE;
+};
+
+extern global_range_query global_ranges;
+extern value_range gimple_range_global (tree name);
+extern bool update_global_range (irange &r, tree name);
 
 #endif // GCC_QUERY_H

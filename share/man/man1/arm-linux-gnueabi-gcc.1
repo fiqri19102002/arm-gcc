@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2021-05-25" "gcc-12.0.0" "GNU"
+.TH GCC 1 "2021-06-09" "gcc-12.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -9895,7 +9895,7 @@ When \fB\-fgcse\-after\-reload\fR is enabled, a redundant load elimination
 pass is performed after reload.  The purpose of this pass is to clean up
 redundant spilling.
 .Sp
-Enabled by \fB\-fprofile\-use\fR and \fB\-fauto\-profile\fR.
+Enabled by \fB\-O3\fR, \fB\-fprofile\-use\fR and \fB\-fauto\-profile\fR.
 .IP "\fB\-faggressive\-loop\-optimizations\fR" 4
 .IX Item "-faggressive-loop-optimizations"
 This option tells the loop optimizer to use language constraints to
@@ -13247,6 +13247,9 @@ we may be able to devirtualize speculatively.
 .IX Item "max-vrp-switch-assertions"
 The maximum number of assertions to add along the default edge of a switch
 statement during \s-1VRP.\s0
+.IP "\fBevrp-sparse-threshold\fR" 4
+.IX Item "evrp-sparse-threshold"
+Maximum number of basic blocks before \s-1EVRP\s0 uses a sparse cache.
 .IP "\fBevrp-mode\fR" 4
 .IX Item "evrp-mode"
 Specifies the mode Early \s-1VRP\s0 should operate in.
@@ -18486,7 +18489,7 @@ Enable cache bypass for volatile references.
 The following options fine tune code generation:
 .IP "\fB\-malign\-call\fR" 4
 .IX Item "-malign-call"
-Do alignment optimizations for call instructions.
+Does nothing.  Preserved for backward compatibility.
 .IP "\fB\-mauto\-modify\-reg\fR" 4
 .IX Item "-mauto-modify-reg"
 Enable the use of pre/post modify with register displacement.
@@ -18565,9 +18568,7 @@ instructions.  These instructions are only valid for CPUs with
 code-density feature.
 .IP "\fB\-mmixed\-code\fR" 4
 .IX Item "-mmixed-code"
-Tweak register allocation to help 16\-bit instruction generation.
-This generally has the effect of decreasing the average instruction size
-while increasing the instruction count.
+Does nothing.  Preserved for backward compatibility.
 .IP "\fB\-mq\-class\fR" 4
 .IX Item "-mq-class"
 Ths option is deprecated.  Enable \fBq\fR instruction alternatives.
@@ -18639,12 +18640,7 @@ Cost to assume for a multiply instruction, with \fB4\fR being equal to a
 normal instruction.
 .IP "\fB\-munalign\-prob\-threshold=\fR\fIprobability\fR" 4
 .IX Item "-munalign-prob-threshold=probability"
-Set probability threshold for unaligning branches.
-When tuning for \fB\s-1ARC700\s0\fR and optimizing for speed, branches without
-filled delay slot are preferably emitted unaligned and long, unless
-profiling indicates that the probability for the branch to be taken
-is below \fIprobability\fR.  
-The default is (\s-1REG_BR_PROB_BASE/2\s0), i.e. 5000.
+Does nothing.  Preserved for backward compatibility.
 .PP
 The following options are maintained for backward compatibility, but
 are now deprecated and will be removed in a future release:
@@ -19365,7 +19361,7 @@ For some \s-1ARM\s0 implementations better performance can be obtained by using
 this option.
 Permissible names are: \fBarm7tdmi\fR, \fBarm7tdmi\-s\fR, \fBarm710t\fR,
 \&\fBarm720t\fR, \fBarm740t\fR, \fBstrongarm\fR, \fBstrongarm110\fR,
-\&\fBstrongarm1100\fR, 0\fBstrongarm1110\fR, \fBarm8\fR, \fBarm810\fR,
+\&\fBstrongarm1100\fR, \fBstrongarm1110\fR, \fBarm8\fR, \fBarm810\fR,
 \&\fBarm9\fR, \fBarm9e\fR, \fBarm920\fR, \fBarm920t\fR, \fBarm922t\fR,
 \&\fBarm946e\-s\fR, \fBarm966e\-s\fR, \fBarm968e\-s\fR, \fBarm926ej\-s\fR,
 \&\fBarm940t\fR, \fBarm9tdmi\fR, \fBarm10tdmi\fR, \fBarm1020t\fR,
@@ -22699,7 +22695,7 @@ The M680x0 \fIcpu\fRs are: \fB68000\fR, \fB68010\fR, \fB68020\fR,
 and \fBcpu32\fR.  The ColdFire \fIcpu\fRs are given by the table
 below, which also classifies the CPUs into families:
 .RS 4
-.IP "Family : \fB\-mcpu\fR arguments" 4
+.IP "\fIFamily\fR : \fB\-mcpu\fR \fIarguments\fR" 4
 .IX Item "Family : -mcpu arguments"
 .PD 0
 .IP "\fB51\fR : \fB51\fR \fB51ac\fR \fB51ag\fR \fB51cn\fR \fB51em\fR \fB51je\fR \fB51jf\fR \fB51jg\fR \fB51jm\fR \fB51mm\fR \fB51qe\fR \fB51qm\fR" 4

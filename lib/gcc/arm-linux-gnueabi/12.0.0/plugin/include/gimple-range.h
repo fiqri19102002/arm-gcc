@@ -25,10 +25,10 @@ along with GCC; see the file COPYING3.  If not see
 
 #include "range.h"
 #include "range-op.h"
+#include "value-query.h"
 #include "gimple-range-edge.h"
 #include "gimple-range-gori.h"
 #include "gimple-range-cache.h"
-#include "value-query.h"
 
 // This file is the main include point for gimple ranges.
 // There are two fold_range routines of interest:
@@ -65,33 +65,52 @@ public:
   virtual void range_on_entry (irange &r, basic_block bb, tree name);
   virtual void range_on_exit (irange &r, basic_block bb, tree name);
   void export_global_ranges ();
-  void dump (FILE *f);
+  inline gori_compute &gori ()  { return m_cache.m_gori; }
+  virtual void dump (FILE *f) OVERRIDE;
+  void dump_bb (FILE *f, basic_block bb);
 protected:
   bool fold_range_internal (irange &r, gimple *s, tree name);
   ranger_cache m_cache;
 };
 
-// Source of an operand for fold_using_range.
-// It can specify a stmt or and edge, or thru an internal API which uses
-// the ranger cache.
-// Its primary function is to retreive an operand from the source via a
-// call thru the range_query object.
+// Source of all operands for fold_using_range and gori_compute.
+// It abstracts out the source of an operand so it can come from a stmt or
+// and edge or anywhere a derived classof fur_source wants.
 
 class fur_source
 {
-  friend class fold_using_range;
 public:
-  inline fur_source (range_query *q, edge e);
-  inline fur_source (range_query *q, gimple *s);
-  inline fur_source (range_query *q, class ranger_cache *g, edge e, gimple *s);
-  bool get_operand (irange &r, tree expr);
-protected:
-  ranger_cache *m_cache;
+  virtual bool get_operand (irange &r, tree expr);
+  virtual bool get_phi_operand (irange &r, tree expr, edge e);
+  virtual void register_dependency (tree lhs, tree rhs);
+  virtual range_query *query ();
+};
+
+// fur_stmt is the specification for drawing an operand from range_query Q
+// via a range_of_Expr call on stmt S.
+
+class fur_stmt : public fur_source
+{
+public:
+  fur_stmt (gimple *s, range_query *q = NULL);
+  virtual bool get_operand (irange &r, tree expr) OVERRIDE;
+  virtual bool get_phi_operand (irange &r, tree expr, edge e) OVERRIDE;
+  virtual range_query *query () OVERRIDE;
+private:
   range_query *m_query;
-  edge m_edge;
   gimple *m_stmt;
 };
 
+
+// Fold stmt S into range R using range query Q.
+bool fold_range (irange &r, gimple *s, range_query *q = NULL);
+// Recalculate stmt S into R using range query Q as if it were on edge ON_EDGE.
+bool fold_range (irange &r, gimple *s, edge on_edge, range_query *q = NULL);
+// These routines allow you to specify the operands to use when folding.
+// Any excess queries will be drawn from the current range_query.
+bool fold_range (irange &r, gimple *s, irange &r1);
+bool fold_range (irange &r, gimple *s, irange &r1, irange &r2);
+bool fold_range (irange &r, gimple *s, unsigned num_elements, irange *vector);
 
 // This class uses ranges to fold a gimple statement producinf a range for
 // the LHS.  The source of all operands is supplied via the fur_source class
@@ -116,63 +135,6 @@ protected:
 					 fur_source &src);
 };
 
-
-// Create a source for a query on an edge.
-
-inline
-fur_source::fur_source (range_query *q, edge e)
-{
-  m_query = q;
-  m_cache = NULL;
-  m_edge = e;
-  m_stmt = NULL;
-}
-
-// Create a source for a query at a statement.
-
-inline
-fur_source::fur_source (range_query *q, gimple *s)
-{
-  m_query = q;
-  m_cache = NULL;
-  m_edge = NULL;
-  m_stmt = s;
-}
-
-// Create a source for Ranger.  THis can recalculate from a different location
-// and can also set the dependency information as appropriate when invoked.
-
-inline
-fur_source::fur_source (range_query *q, ranger_cache *g, edge e, gimple *s)
-{
-  m_query = q;
-  m_cache = g;
-  m_edge = e;
-  m_stmt = s;
-}
-
-// Fold stmt S into range R using range query Q.
-
-inline bool
-fold_range (irange &r, gimple *s, range_query *q = NULL)
-{
-  fold_using_range f;
-  fur_source src (q, s);
-  return f.fold_stmt (r, s, src);
-}
-
-// Recalculate stmt S into R using range query Q as if it were on edge ON_EDGE.
-
-inline bool
-fold_range (irange &r, gimple *s, edge on_edge, range_query *q = NULL)
-{
-  fold_using_range f;
-  fur_source src (q, on_edge);
-  return f.fold_stmt (r, s, src);
-}
-
-// Calculate a basic range for a tree node expression.
-extern bool get_tree_range (irange &r, tree expr);
 
 // These routines provide a GIMPLE interface to the range-ops code.
 extern tree gimple_range_operand1 (const gimple *s);
@@ -226,50 +188,6 @@ range_compatible_p (tree type1, tree type2)
 	  && TYPE_SIGN (type1) == TYPE_SIGN (type2));
 }
 
-// Return the legacy GCC global range for NAME if it has one, otherwise
-// return VARYING.
-
-static inline value_range
-gimple_range_global (tree name)
-{
-  gcc_checking_assert (gimple_range_ssa_p (name));
-  tree type = TREE_TYPE (name);
-
-  if (SSA_NAME_IS_DEFAULT_DEF (name))
-    {
-      tree sym = SSA_NAME_VAR (name);
-      // Adapted from vr_values::get_lattice_entry().
-      // Use a range from an SSA_NAME's available range.
-      if (TREE_CODE (sym) == PARM_DECL)
-	{
-	  // Try to use the "nonnull" attribute to create ~[0, 0]
-	  // anti-ranges for pointers.  Note that this is only valid with
-	  // default definitions of PARM_DECLs.
-	  if (POINTER_TYPE_P (type)
-	      && (nonnull_arg_p (sym) || get_ptr_nonnull (name)))
-	    {
-	      value_range r;
-	      r.set_nonzero (type);
-	      return r;
-	    }
-	  else if (INTEGRAL_TYPE_P (type))
-	    {
-	      value_range r;
-	      get_range_info (name, r);
-	      if (r.undefined_p ())
-		r.set_varying (type);
-	      return r;
-	    }
-	}
-      // If this is a local automatic with no definition, use undefined.
-      else if (TREE_CODE (sym) != RESULT_DECL)
-	return value_range ();
-   }
-  // Otherwise return range for the type.
-  return value_range (type);
-}
-
-
 // This class overloads the ranger routines to provide tracing facilties
 // Entry and exit values to each of the APIs is placed in the dumpfile.
 
@@ -294,5 +212,8 @@ private:
 
 // Flag to enable debugging the various internal Caches.
 #define DEBUG_RANGE_CACHE (dump_file && (param_evrp_mode & EVRP_MODE_DEBUG))
+
+extern gimple_ranger *enable_ranger (struct function *);
+extern void disable_ranger (struct function *);
 
 #endif // GCC_GIMPLE_RANGE_STMT_H
