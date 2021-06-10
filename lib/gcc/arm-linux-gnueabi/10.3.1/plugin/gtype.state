@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "10.3.1 20210525")
+(!version  "10.3.1 20210610")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 222
@@ -27544,15 +27544,15 @@
    (!type already_seen 2002)
   )
   gc_pointed_to "hash_map<tree,tree_pair_p>"
-  (!srcfileloc  "cp/pt.c" 28947)
+  (!srcfileloc  "cp/pt.c" 28908)
   (!fields 2 
    (!pair  "tree_pair_p"
     (!type already_seen 539)
-    (!srcfileloc  "cp/pt.c" 28947)
+    (!srcfileloc  "cp/pt.c" 28908)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "cp/pt.c" 28947)
+    (!srcfileloc  "cp/pt.c" 28908)
     nil )
   )
  )
@@ -27887,7 +27887,7 @@
   nil 0 nil nil )
  
  (!type struct 2049 nil  gc_used "module_hasher"
-  (!srcfileloc  "fortran/trans-decl.c" 5133)
+  (!srcfileloc  "fortran/trans-decl.c" 5134)
   (!fields 0 )
   nil 32 nil nil )
  
@@ -27896,11 +27896,11 @@
    (!type already_seen 2050)
   )
   gc_pointed_to "hash_table<module_hasher>"
-  (!srcfileloc  "fortran/trans-decl.c" 5133)
+  (!srcfileloc  "fortran/trans-decl.c" 5134)
   (!fields 1 
    (!pair  "module_hasher"
     (!type already_seen 2049)
-    (!srcfileloc  "fortran/trans-decl.c" 5133)
+    (!srcfileloc  "fortran/trans-decl.c" 5134)
     nil )
   )
  )
@@ -28676,11 +28676,11 @@
   nil )
  (!pair  "module_hasher"
   (!type already_seen 2049)
-  (!srcfileloc  "fortran/trans-decl.c" 5133)
+  (!srcfileloc  "fortran/trans-decl.c" 5134)
   nil )
  (!pair  "hash_table<module_hasher>"
   (!type already_seen 2050)
-  (!srcfileloc  "fortran/trans-decl.c" 5133)
+  (!srcfileloc  "fortran/trans-decl.c" 5134)
   nil )
  (!pair  "tree_frame_info"
   (!type already_seen 660)
@@ -28780,7 +28780,7 @@
   nil )
  (!pair  "hash_map<tree,tree_pair_p>"
   (!type already_seen 2002)
-  (!srcfileloc  "cp/pt.c" 28947)
+  (!srcfileloc  "cp/pt.c" 28908)
   nil )
  (!pair  "pending_template"
   (!type already_seen 1988)
@@ -32689,7 +32689,7 @@
   nil )
  (!pair  "module_htab"
   (!type already_seen 2051)
-  (!srcfileloc  "fortran/trans-decl.c" 5133)
+  (!srcfileloc  "fortran/trans-decl.c" 5134)
   nil )
  (!pair  "saved_local_decls"
   (!type already_seen 23)
@@ -32861,7 +32861,7 @@
   nil )
  (!pair  "dguide_cache"
   (!type already_seen 2003)
-  (!srcfileloc  "cp/pt.c" 28947)
+  (!srcfileloc  "cp/pt.c" 28908)
   (!options 
    (!option deletable string  "")
   )
@@ -33863,7 +33863,7 @@
   nil )
  (!pair  "arm_previous_fndecl"
   (!type already_seen 23)
-  (!srcfileloc  "config/arm/arm.c" 32322)
+  (!srcfileloc  "config/arm/arm.c" 32327)
   nil )
  (!pair  "tls_get_addr_libfunc"
   (!type already_seen 100)
