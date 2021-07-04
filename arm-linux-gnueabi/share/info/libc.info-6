@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -2099,6 +2100,191 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: File Position Primitive,  Next: Descriptors and Streams,  Prev: I/O Primitives,  Up: Low-Level I/O
+
+13.3 Setting the File Position of a Descriptor
+==============================================
+
+Just as you can set the file position of a stream with ‘fseek’, you can
+set the file position of a descriptor with ‘lseek’.  This specifies the
+position in the file for the next ‘read’ or ‘write’ operation.  *Note
+File Positioning::, for more information on the file position and what
+it means.
+
+   To read the current file position value from a descriptor, use ‘lseek
+(DESC, 0, SEEK_CUR)’.
+
+ -- Function: off_t lseek (int FILEDES, off_t OFFSET, int WHENCE)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘lseek’ function is used to change the file position of the
+     file with descriptor FILEDES.
+
+     The WHENCE argument specifies how the OFFSET should be interpreted,
+     in the same way as for the ‘fseek’ function, and it must be one of
+     the symbolic constants ‘SEEK_SET’, ‘SEEK_CUR’, or ‘SEEK_END’.
+
+     ‘SEEK_SET’
+          Specifies that OFFSET is a count of characters from the
+          beginning of the file.
+
+     ‘SEEK_CUR’
+          Specifies that OFFSET is a count of characters from the
+          current file position.  This count may be positive or
+          negative.
+
+     ‘SEEK_END’
+          Specifies that OFFSET is a count of characters from the end of
+          the file.  A negative count specifies a position within the
+          current extent of the file; a positive count specifies a
+          position past the current end.  If you set the position past
+          the current end, and actually write data, you will extend the
+          file with zeros up to that position.
+
+     The return value from ‘lseek’ is normally the resulting file
+     position, measured in bytes from the beginning of the file.  You
+     can use this feature together with ‘SEEK_CUR’ to read the current
+     file position.
+
+     If you want to append to the file, setting the file position to the
+     current end of file with ‘SEEK_END’ is not sufficient.  Another
+     process may write more data after you seek but before you write,
+     extending the file so the position you write onto clobbers their
+     data.  Instead, use the ‘O_APPEND’ operating mode; *note Operating
+     Modes::.
+
+     You can set the file position past the current end of the file.
+     This does not by itself make the file longer; ‘lseek’ never changes
+     the file.  But subsequent output at that position will extend the
+     file.  Characters between the previous end of file and the new
+     position are filled with zeros.  Extending the file in this way can
+     create a “hole”: the blocks of zeros are not actually allocated on
+     disk, so the file takes up less space than it appears to; it is
+     then called a “sparse file”.
+
+     If the file position cannot be changed, or the operation is in some
+     way invalid, ‘lseek’ returns a value of -1.  The following ‘errno’
+     error conditions are defined for this function:
+
+     ‘EBADF’
+          The FILEDES is not a valid file descriptor.
+
+     ‘EINVAL’
+          The WHENCE argument value is not valid, or the resulting file
+          offset is not valid.  A file offset is invalid.
+
+     ‘ESPIPE’
+          The FILEDES corresponds to an object that cannot be
+          positioned, such as a pipe, FIFO or terminal device.  (POSIX.1
+          specifies this error only for pipes and FIFOs, but on GNU
+          systems, you always get ‘ESPIPE’ if the object is not
+          seekable.)
+
+     When the source file is compiled with ‘_FILE_OFFSET_BITS == 64’ the
+     ‘lseek’ function is in fact ‘lseek64’ and the type ‘off_t’ has 64
+     bits which makes it possible to handle files up to 2^63 bytes in
+     length.
+
+     This function is a cancellation point in multi-threaded programs.
+     This is a problem if the thread allocates some resources (like
+     memory, file descriptors, semaphores or whatever) at the time
+     ‘lseek’ is called.  If the thread gets canceled these resources
+     stay allocated until the program ends.  To avoid this calls to
+     ‘lseek’ should be protected using cancellation handlers.
+
+     The ‘lseek’ function is the underlying primitive for the ‘fseek’,
+     ‘fseeko’, ‘ftell’, ‘ftello’ and ‘rewind’ functions, which operate
+     on streams instead of file descriptors.
+
+ -- Function: off64_t lseek64 (int FILEDES, off64_t OFFSET, int WHENCE)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function is similar to the ‘lseek’ function.  The difference
+     is that the OFFSET parameter is of type ‘off64_t’ instead of
+     ‘off_t’ which makes it possible on 32 bit machines to address files
+     larger than 2^31 bytes and up to 2^63 bytes.  The file descriptor
+     ‘filedes’ must be opened using ‘open64’ since otherwise the large
+     offsets possible with ‘off64_t’ will lead to errors with a
+     descriptor in small file mode.
+
+     When the source file is compiled with ‘_FILE_OFFSET_BITS == 64’ on
+     a 32 bits machine this function is actually available under the
+     name ‘lseek’ and so transparently replaces the 32 bit interface.
+
+   You can have multiple descriptors for the same file if you open the
+file more than once, or if you duplicate a descriptor with ‘dup’.
+Descriptors that come from separate calls to ‘open’ have independent
+file positions; using ‘lseek’ on one descriptor has no effect on the
+other.  For example,
+
+     {
+       int d1, d2;
+       char buf[4];
+       d1 = open ("foo", O_RDONLY);
+       d2 = open ("foo", O_RDONLY);
+       lseek (d1, 1024, SEEK_SET);
+       read (d2, buf, 4);
+     }
+
+will read the first four characters of the file ‘foo’.  (The
+error-checking code necessary for a real program has been omitted here
+for brevity.)
+
+   By contrast, descriptors made by duplication share a common file
+position with the original descriptor that was duplicated.  Anything
+which alters the file position of one of the duplicates, including
+reading or writing data, affects all of them alike.  Thus, for example,
+
+     {
+       int d1, d2, d3;
+       char buf1[4], buf2[4];
+       d1 = open ("foo", O_RDONLY);
+       d2 = dup (d1);
+       d3 = dup (d2);
+       lseek (d3, 1024, SEEK_SET);
+       read (d1, buf1, 4);
+       read (d2, buf2, 4);
+     }
+
+will read four characters starting with the 1024’th character of ‘foo’,
+and then four more characters starting with the 1028’th character.
+
+ -- Data Type: off_t
+
+     This is a signed integer type used to represent file sizes.  In the
+     GNU C Library, this type is no narrower than ‘int’.
+
+     If the source is compiled with ‘_FILE_OFFSET_BITS == 64’ this type
+     is transparently replaced by ‘off64_t’.
+
+ -- Data Type: off64_t
+
+     This type is used similar to ‘off_t’.  The difference is that even
+     on 32 bit machines, where the ‘off_t’ type would have 32 bits,
+     ‘off64_t’ has 64 bits and so is able to address files up to 2^63
+     bytes in length.
+
+     When compiling with ‘_FILE_OFFSET_BITS == 64’ this type is
+     available under the name ‘off_t’.
+
+   These aliases for the ‘SEEK_...’ constants exist for the sake of
+compatibility with older BSD systems.  They are defined in two different
+header files: ‘fcntl.h’ and ‘sys/file.h’.
+
+‘L_SET’
+     An alias for ‘SEEK_SET’.
+
+‘L_INCR’
+     An alias for ‘SEEK_CUR’.
+
+‘L_XTND’
+     An alias for ‘SEEK_END’.
 
 
 File: libc.info,  Node: Descriptors and Streams,  Next: Stream/Descriptor Precautions,  Prev: File Position Primitive,  Up: Low-Level I/O
@@ -7071,97 +7257,4 @@ names (*note Hard Links::), it remains accessible under those names.
      This is the ISO C function to remove a file.  It works like
      ‘unlink’ for files and like ‘rmdir’ for directories.  ‘remove’ is
      declared in ‘stdio.h’.
-
-
-File: libc.info,  Node: Renaming Files,  Next: Creating Directories,  Prev: Deleting Files,  Up: File System Interface
-
-14.7 Renaming Files
-===================
-
-The ‘rename’ function is used to change a file’s name.
-
- -- Function: int rename (const char *OLDNAME, const char *NEWNAME)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘rename’ function renames the file OLDNAME to NEWNAME.  The
-     file formerly accessible under the name OLDNAME is afterwards
-     accessible as NEWNAME instead.  (If the file had any other names
-     aside from OLDNAME, it continues to have those names.)
-
-     The directory containing the name NEWNAME must be on the same file
-     system as the directory containing the name OLDNAME.
-
-     One special case for ‘rename’ is when OLDNAME and NEWNAME are two
-     names for the same file.  The consistent way to handle this case is
-     to delete OLDNAME.  However, in this case POSIX requires that
-     ‘rename’ do nothing and report success—which is inconsistent.  We
-     don’t know what your operating system will do.
-
-     If OLDNAME is not a directory, then any existing file named NEWNAME
-     is removed during the renaming operation.  However, if NEWNAME is
-     the name of a directory, ‘rename’ fails in this case.
-
-     If OLDNAME is a directory, then either NEWNAME must not exist or it
-     must name a directory that is empty.  In the latter case, the
-     existing directory named NEWNAME is deleted first.  The name
-     NEWNAME must not specify a subdirectory of the directory ‘oldname’
-     which is being renamed.
-
-     One useful feature of ‘rename’ is that the meaning of NEWNAME
-     changes “atomically” from any previously existing file by that name
-     to its new meaning (i.e., the file that was called OLDNAME).  There
-     is no instant at which NEWNAME is non-existent “in between” the old
-     meaning and the new meaning.  If there is a system crash during the
-     operation, it is possible for both names to still exist; but
-     NEWNAME will always be intact if it exists at all.
-
-     If ‘rename’ fails, it returns ‘-1’.  In addition to the usual file
-     name errors (*note File Name Errors::), the following ‘errno’ error
-     conditions are defined for this function:
-
-     ‘EACCES’
-          One of the directories containing NEWNAME or OLDNAME refuses
-          write permission; or NEWNAME and OLDNAME are directories and
-          write permission is refused for one of them.
-
-     ‘EBUSY’
-          A directory named by OLDNAME or NEWNAME is being used by the
-          system in a way that prevents the renaming from working.  This
-          includes directories that are mount points for filesystems,
-          and directories that are the current working directories of
-          processes.
-
-     ‘ENOTEMPTY’
-     ‘EEXIST’
-          The directory NEWNAME isn’t empty.  GNU/Linux and GNU/Hurd
-          systems always return ‘ENOTEMPTY’ for this, but some other
-          systems return ‘EEXIST’.
-
-     ‘EINVAL’
-          OLDNAME is a directory that contains NEWNAME.
-
-     ‘EISDIR’
-          NEWNAME is a directory but the OLDNAME isn’t.
-
-     ‘EMLINK’
-          The parent directory of NEWNAME would have too many links
-          (entries).
-
-     ‘ENOENT’
-          The file OLDNAME doesn’t exist.
-
-     ‘ENOSPC’
-          The directory that would contain NEWNAME has no room for
-          another entry, and there is no space left in the file system
-          to expand it.
-
-     ‘EROFS’
-          The operation would involve writing to a directory on a
-          read-only file system.
-
-     ‘EXDEV’
-          The two file names NEWNAME and OLDNAME are on different file
-          systems.
 

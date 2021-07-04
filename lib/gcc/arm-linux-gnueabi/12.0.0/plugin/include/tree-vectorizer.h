@@ -167,6 +167,11 @@ struct _slp_tree {
 
   int vertex;
 
+  /* If not NULL this is a cached failed SLP discovery attempt with
+     the lanes that failed during SLP discovery as 'false'.  This is
+     a copy of the matches array.  */
+  bool *failed;
+
   /* Allocate from slp_tree_pool.  */
   static void *operator new (size_t);
 
@@ -185,6 +190,7 @@ enum slp_instance_kind {
     slp_inst_kind_store,
     slp_inst_kind_reduc_group,
     slp_inst_kind_reduc_chain,
+    slp_inst_kind_bb_reduc,
     slp_inst_kind_ctor
 };
 
@@ -1966,6 +1972,7 @@ extern tree vect_get_loop_len (loop_vec_info, vec_loop_lens *, unsigned int,
 			       unsigned int);
 extern gimple_seq vect_gen_len (tree, tree, tree, tree);
 extern stmt_vec_info info_for_reduction (vec_info *, stmt_vec_info);
+extern bool reduction_fn_for_scalar_code (enum tree_code, internal_fn *);
 
 /* Drive for loop transformation stage.  */
 extern class loop *vect_transform_loop (loop_vec_info, gimple *);
@@ -2005,7 +2012,7 @@ extern void vect_free_slp_instance (slp_instance);
 extern bool vect_transform_slp_perm_load (vec_info *, slp_tree, vec<tree>,
 					  gimple_stmt_iterator *, poly_uint64,
 					  bool, unsigned *,
-					  unsigned * = nullptr);
+					  unsigned * = nullptr, bool = false);
 extern bool vect_slp_analyze_operations (vec_info *);
 extern void vect_schedule_slp (vec_info *, vec<slp_instance>);
 extern opt_result vect_analyze_slp (vec_info *, unsigned);
@@ -2093,7 +2100,8 @@ class vect_pattern
       this->m_ifn = ifn;
       this->m_node = node;
       this->m_ops.create (0);
-      this->m_ops.safe_splice (*m_ops);
+      if (m_ops)
+	this->m_ops.safe_splice (*m_ops);
     }
 
   public:

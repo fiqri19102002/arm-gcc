@@ -176,6 +176,7 @@ enum cp_tree_index
     CPTI_HEAP_DELETED_IDENTIFIER,
     CPTI_HEAP_VEC_UNINIT_IDENTIFIER,
     CPTI_HEAP_VEC_IDENTIFIER,
+    CPTI_OMP_IDENTIFIER,
 
     CPTI_LANG_NAME_C,
     CPTI_LANG_NAME_CPLUSPLUS,
@@ -337,6 +338,7 @@ extern GTY(()) tree cp_global_trees[CPTI_MAX];
 #define heap_deleted_identifier		cp_global_trees[CPTI_HEAP_DELETED_IDENTIFIER]
 #define heap_vec_uninit_identifier	cp_global_trees[CPTI_HEAP_VEC_UNINIT_IDENTIFIER]
 #define heap_vec_identifier		cp_global_trees[CPTI_HEAP_VEC_IDENTIFIER]
+#define omp_identifier			cp_global_trees[CPTI_OMP_IDENTIFIER]
 #define lang_name_c			cp_global_trees[CPTI_LANG_NAME_C]
 #define lang_name_cplusplus		cp_global_trees[CPTI_LANG_NAME_CPLUSPLUS]
 
@@ -478,6 +480,7 @@ extern GTY(()) tree cp_global_trees[CPTI_MAX];
       AGGR_INIT_ZERO_FIRST (in AGGR_INIT_EXPR)
       CONSTRUCTOR_MUTABLE_POISON (in CONSTRUCTOR)
       OVL_HIDDEN_P (in OVERLOAD)
+      IF_STMT_CONSTEVAL_P (in IF_STMT)
       SWITCH_STMT_NO_BREAK_P (in SWITCH_STMT)
       LAMBDA_EXPR_CAPTURE_OPTIMIZED (in LAMBDA_EXPR)
       IMPLICIT_CONV_EXPR_BRACED_INIT (in IMPLICIT_CONV_EXPR)
@@ -1813,9 +1816,12 @@ struct GTY(()) saved_scope {
   BOOL_BITFIELD x_processing_explicit_instantiation : 1;
   BOOL_BITFIELD need_pop_function_context : 1;
 
-/* Nonzero if we are parsing the discarded statement of a constexpr
-   if-statement.  */
+  /* Nonzero if we are parsing the discarded statement of a constexpr
+     if-statement.  */
   BOOL_BITFIELD discarded_stmt : 1;
+  /* Nonzero if we are parsing or instantiating the compound-statement
+     of consteval if statement.  */
+  BOOL_BITFIELD consteval_if_p : 1;
 
   int unevaluated_operand;
   int inhibit_evaluation_warnings;
@@ -1879,6 +1885,7 @@ extern GTY(()) struct saved_scope *scope_chain;
 #define processing_explicit_instantiation scope_chain->x_processing_explicit_instantiation
 
 #define in_discarded_stmt scope_chain->discarded_stmt
+#define in_consteval_if_p scope_chain->consteval_if_p
 
 #define current_ref_temp_count scope_chain->ref_temp_count
 
@@ -5211,6 +5218,7 @@ more_aggr_init_expr_args_p (const aggr_init_expr_arg_iterator *iter)
 #define ELSE_CLAUSE(NODE)	TREE_OPERAND (IF_STMT_CHECK (NODE), 2)
 #define IF_SCOPE(NODE)		TREE_OPERAND (IF_STMT_CHECK (NODE), 3)
 #define IF_STMT_CONSTEXPR_P(NODE) TREE_LANG_FLAG_0 (IF_STMT_CHECK (NODE))
+#define IF_STMT_CONSTEVAL_P(NODE) TREE_LANG_FLAG_2 (IF_STMT_CHECK (NODE))
 
 /* Like PACK_EXPANSION_EXTRA_ARGS, for constexpr if.  IF_SCOPE is used while
    building an IF_STMT; IF_STMT_EXTRA_ARGS is used after it is complete.  */
@@ -6431,6 +6439,8 @@ extern void complain_about_bad_argument	(location_t arg_loc,
 						 tree from_type, tree to_type,
 						 tree fndecl, int parmnum);
 extern void maybe_inform_about_fndecl_for_bogus_argument_init (tree, int);
+extern tree perform_dguide_overload_resolution	(tree, const vec<tree, va_gc> *,
+						 tsubst_flags_t);
 
 
 /* A class for recording information about access failures (e.g. private
@@ -8244,6 +8254,7 @@ extern bool reduced_constant_expression_p       (tree);
 extern bool is_instantiation_of_constexpr       (tree);
 extern bool var_in_constexpr_fn                 (tree);
 extern bool var_in_maybe_constexpr_fn           (tree);
+extern bool maybe_constexpr_fn			(tree);
 extern void explain_invalid_constexpr_fn        (tree);
 extern vec<tree> cx_error_context               (void);
 extern tree fold_sizeof_expr			(tree);
@@ -8454,21 +8465,24 @@ is_constrained_auto (const_tree t)
   return is_auto (t) && PLACEHOLDER_TYPE_CONSTRAINTS_INFO (t);
 }
 
-/* RAII class to push/pop class scope T; if T is not a class, do nothing.  */
+/* RAII class to push/pop the access scope for T.  */
 
-struct push_nested_class_guard
+struct push_access_scope_guard
 {
-  bool push;
-  push_nested_class_guard (tree t)
-    : push (t && CLASS_TYPE_P (t))
+  tree decl;
+  push_access_scope_guard (tree t)
+    : decl (t)
   {
-    if (push)
-      push_nested_class (t);
+    if (VAR_OR_FUNCTION_DECL_P (decl)
+	|| TREE_CODE (decl) == TYPE_DECL)
+      push_access_scope (decl);
+    else
+      decl = NULL_TREE;
   }
-  ~push_nested_class_guard ()
+  ~push_access_scope_guard ()
   {
-    if (push)
-      pop_nested_class ();
+    if (decl)
+      pop_access_scope (decl);
   }
 };
 

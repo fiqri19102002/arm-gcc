@@ -402,7 +402,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 
       /// Dereference the stored pointer.
       typename add_lvalue_reference<element_type>::type
-      operator*() const
+      operator*() const noexcept(noexcept(*std::declval<pointer>()))
       {
 	__glibcxx_assert(get() != pointer());
 	return *get();

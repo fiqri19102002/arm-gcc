@@ -1432,6 +1432,12 @@
 #endif
 
 
+/* Define if your assembler has fixed global_load functions. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_GCN_ASM_GLOBAL_LOAD_FIXED */
+#endif
+
+
 /* Define to 1 if you have the `getchar_unlocked' function. */
 #ifndef USED_FOR_TARGET
 #define HAVE_GETCHAR_UNLOCKED 1
@@ -1502,7 +1508,7 @@
 /* Define 0/1 if .init_array/.fini_array sections are available and working.
    */
 #ifndef USED_FOR_TARGET
-#define HAVE_INITFINI_ARRAY_SUPPORT 0
+#define HAVE_INITFINI_ARRAY_SUPPORT 1
 #endif
 
 

@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2021-06-09" "gcc-12.0.0" "GNU"
+.TH GCC 1 "2021-07-04" "gcc-12.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -226,17 +226,17 @@ in the following sections.
 \&\fB\-fdump\-ada\-spec\fR[\fB\-slim\fR]  \fB\-fada\-spec\-parent=\fR\fIunit\fR  \fB\-fdump\-go\-spec=\fR\fIfile\fR
 .IP "\fIC Language Options\fR" 4
 .IX Item "C Language Options"
-\&\fB\-ansi  \-std=\fR\fIstandard\fR  \fB\-fgnu89\-inline 
-\&\-fpermitted\-flt\-eval\-methods=\fR\fIstandard\fR 
-\&\fB\-aux\-info\fR \fIfilename\fR  \fB\-fallow\-parameterless\-variadic\-functions 
-\&\-fno\-asm  \-fno\-builtin  \-fno\-builtin\-\fR\fIfunction\fR  \fB\-fgimple
-\&\-fhosted  \-ffreestanding 
-\&\-fopenacc  \-fopenacc\-dim=\fR\fIgeom\fR 
+\&\fB\-ansi  \-std=\fR\fIstandard\fR  \fB\-aux\-info\fR \fIfilename\fR 
+\&\fB\-fallow\-parameterless\-variadic\-functions  \-fno\-asm  
+\&\-fno\-builtin  \-fno\-builtin\-\fR\fIfunction\fR  \fB\-fcond\-mismatch 
+\&\-ffreestanding  \-fgimple  \-fgnu\-tm  \-fgnu89\-inline  \-fhosted 
+\&\-flax\-vector\-conversions  \-fms\-extensions 
+\&\-foffload=\fR\fIarg\fR  \fB\-foffload\-options=\fR\fIarg\fR 
+\&\fB\-fopenacc  \-fopenacc\-dim=\fR\fIgeom\fR 
 \&\fB\-fopenmp  \-fopenmp\-simd 
-\&\-fms\-extensions  \-fplan9\-extensions  \-fsso\-struct=\fR\fIendianness\fR 
-\&\fB\-fallow\-single\-precision  \-fcond\-mismatch  \-flax\-vector\-conversions 
-\&\-fsigned\-bitfields  \-fsigned\-char 
-\&\-funsigned\-bitfields  \-funsigned\-char\fR
+\&\-fpermitted\-flt\-eval\-methods=\fR\fIstandard\fR 
+\&\fB\-fplan9\-extensions  \-fsigned\-bitfields  \-funsigned\-bitfields 
+\&\-fsigned\-char  \-funsigned\-char  \-fsso\-struct=\fR\fIendianness\fR
 .IP "\fI\*(C+ Language Options\fR" 4
 .IX Item " Language Options"
 \&\fB\-fabi\-version=\fR\fIn\fR  \fB\-fno\-access\-control 
@@ -283,7 +283,7 @@ in the following sections.
 \&\-Wno\-inherited\-variadic\-ctor  \-Wno\-init\-list\-lifetime 
 \&\-Winvalid\-imported\-macros 
 \&\-Wno\-invalid\-offsetof  \-Wno\-literal\-suffix 
-\&\-Wno\-mismatched\-new\-delete \-Wmismatched\-tags 
+\&\-Wmismatched\-new\-delete \-Wmismatched\-tags 
 \&\-Wmultiple\-inheritance  \-Wnamespaces  \-Wnarrowing 
 \&\-Wnoexcept  \-Wnoexcept\-type  \-Wnon\-virtual\-dtor 
 \&\-Wpessimizing\-move  \-Wno\-placement\-new  \-Wplacement\-new=\fR\fIn\fR 
@@ -487,6 +487,7 @@ in the following sections.
 .IP "\fIDebugging Options\fR" 4
 .IX Item "Debugging Options"
 \&\fB\-g  \-g\fR\fIlevel\fR  \fB\-gdwarf  \-gdwarf\-\fR\fIversion\fR 
+\&\fB\-gbtf \-gctf  \-gctf\fR\fIlevel\fR 
 \&\fB\-ggdb  \-grecord\-gcc\-switches  \-gno\-record\-gcc\-switches 
 \&\-gstabs  \-gstabs+  \-gstrict\-dwarf  \-gno\-strict\-dwarf 
 \&\-gas\-loc\-support  \-gno\-as\-loc\-support 
@@ -1184,8 +1185,8 @@ See \s-1RS/6000\s0 and PowerPC Options.
 \&\-mriscv\-attribute  \-mmo\-riscv\-attribute 
 \&\-malign\-data=\fR\fItype\fR 
 \&\fB\-mbig\-endian  \-mlittle\-endian 
-+\-mstack\-protector\-guard=\fR\fIguard\fR \fB\-mstack\-protector\-guard\-reg=\fR\fIreg\fR 
-\&\fB+\-mstack\-protector\-guard\-offset=\fR\fIoffset\fR
+\&\-mstack\-protector\-guard=\fR\fIguard\fR \fB\-mstack\-protector\-guard\-reg=\fR\fIreg\fR 
+\&\fB\-mstack\-protector\-guard\-offset=\fR\fIoffset\fR
 .Sp
 \&\fI\s-1RL78\s0 Options\fR
 \&\fB\-msim  \-mmul=none  \-mmul=g13  \-mmul=g14  \-mallregs 
@@ -2513,44 +2514,6 @@ releases.
 .RE
 .RS 4
 .RE
-.IP "\fB\-fgnu89\-inline\fR" 4
-.IX Item "-fgnu89-inline"
-The option \fB\-fgnu89\-inline\fR tells \s-1GCC\s0 to use the traditional
-\&\s-1GNU\s0 semantics for \f(CW\*(C`inline\*(C'\fR functions when in C99 mode.
-.Sp
-Using this option is roughly equivalent to adding the
-\&\f(CW\*(C`gnu_inline\*(C'\fR function attribute to all inline functions.
-.Sp
-The option \fB\-fno\-gnu89\-inline\fR explicitly tells \s-1GCC\s0 to use the
-C99 semantics for \f(CW\*(C`inline\*(C'\fR when in C99 or gnu99 mode (i.e., it
-specifies the default behavior).
-This option is not supported in \fB\-std=c90\fR or
-\&\fB\-std=gnu90\fR mode.
-.Sp
-The preprocessor macros \f(CW\*(C`_\|_GNUC_GNU_INLINE_\|_\*(C'\fR and
-\&\f(CW\*(C`_\|_GNUC_STDC_INLINE_\|_\*(C'\fR may be used to check which semantics are
-in effect for \f(CW\*(C`inline\*(C'\fR functions.
-.IP "\fB\-fpermitted\-flt\-eval\-methods=\fR\fIstyle\fR" 4
-.IX Item "-fpermitted-flt-eval-methods=style"
-\&\s-1ISO/IEC TS 18661\-3\s0 defines new permissible values for
-\&\f(CW\*(C`FLT_EVAL_METHOD\*(C'\fR that indicate that operations and constants with
-a semantic type that is an interchange or extended format should be
-evaluated to the precision and range of that type.  These new values are
-a superset of those permitted under C99/C11, which does not specify the
-meaning of other positive values of \f(CW\*(C`FLT_EVAL_METHOD\*(C'\fR.  As such, code
-conforming to C11 may not have been written expecting the possibility of
-the new values.
-.Sp
-\&\fB\-fpermitted\-flt\-eval\-methods\fR specifies whether the compiler
-should allow only the values of \f(CW\*(C`FLT_EVAL_METHOD\*(C'\fR specified in C99/C11,
-or the extended set of values specified in \s-1ISO/IEC TS 18661\-3.\s0
-.Sp
-\&\fIstyle\fR is either \f(CW\*(C`c11\*(C'\fR or \f(CW\*(C`ts\-18661\-3\*(C'\fR as appropriate.
-.Sp
-The default when in a standards compliant mode (\fB\-std=c11\fR or similar)
-is \fB\-fpermitted\-flt\-eval\-methods=c11\fR.  The default when in a \s-1GNU\s0
-dialect (\fB\-std=gnu11\fR or similar) is
-\&\fB\-fpermitted\-flt\-eval\-methods=ts\-18661\-3\fR.
 .IP "\fB\-aux\-info\fR \fIfilename\fR" 4
 .IX Item "-aux-info filename"
 Output to the given filename prototyped declarations for all functions
@@ -2623,18 +2586,11 @@ built-in functions selectively when using \fB\-fno\-builtin\fR or
 \&        #define abs(n)          _\|_builtin_abs ((n))
 \&        #define strcpy(d, s)    _\|_builtin_strcpy ((d), (s))
 .Ve
-.IP "\fB\-fgimple\fR" 4
-.IX Item "-fgimple"
-Enable parsing of function definitions marked with \f(CW\*(C`_\|_GIMPLE\*(C'\fR.
-This is an experimental feature that allows unit testing of \s-1GIMPLE\s0
-passes.
-.IP "\fB\-fhosted\fR" 4
-.IX Item "-fhosted"
-Assert that compilation targets a hosted environment.  This implies
-\&\fB\-fbuiltin\fR.  A hosted environment is one in which the
-entire standard library is available, and in which \f(CW\*(C`main\*(C'\fR has a return
-type of \f(CW\*(C`int\*(C'\fR.  Examples are nearly everything except a kernel.
-This is equivalent to \fB\-fno\-freestanding\fR.
+.IP "\fB\-fcond\-mismatch\fR" 4
+.IX Item "-fcond-mismatch"
+Allow conditional expressions with mismatched types in the second and
+third arguments.  The value of such an expression is void.  This option
+is not supported for \*(C+.
 .IP "\fB\-ffreestanding\fR" 4
 .IX Item "-ffreestanding"
 Assert that compilation targets a freestanding environment.  This
@@ -2642,6 +2598,110 @@ implies \fB\-fno\-builtin\fR.  A freestanding environment
 is one in which the standard library may not exist, and program startup may
 not necessarily be at \f(CW\*(C`main\*(C'\fR.  The most obvious example is an \s-1OS\s0 kernel.
 This is equivalent to \fB\-fno\-hosted\fR.
+.IP "\fB\-fgimple\fR" 4
+.IX Item "-fgimple"
+Enable parsing of function definitions marked with \f(CW\*(C`_\|_GIMPLE\*(C'\fR.
+This is an experimental feature that allows unit testing of \s-1GIMPLE\s0
+passes.
+.IP "\fB\-fgnu\-tm\fR" 4
+.IX Item "-fgnu-tm"
+When the option \fB\-fgnu\-tm\fR is specified, the compiler
+generates code for the Linux variant of Intel's current Transactional
+Memory \s-1ABI\s0 specification document (Revision 1.1, May 6 2009).  This is
+an experimental feature whose interface may change in future versions
+of \s-1GCC,\s0 as the official specification changes.  Please note that not
+all architectures are supported for this feature.
+.Sp
+For more information on \s-1GCC\s0's support for transactional memory,
+.Sp
+Note that the transactional memory feature is not supported with
+non-call exceptions (\fB\-fnon\-call\-exceptions\fR).
+.IP "\fB\-fgnu89\-inline\fR" 4
+.IX Item "-fgnu89-inline"
+The option \fB\-fgnu89\-inline\fR tells \s-1GCC\s0 to use the traditional
+\&\s-1GNU\s0 semantics for \f(CW\*(C`inline\*(C'\fR functions when in C99 mode.
+.Sp
+Using this option is roughly equivalent to adding the
+\&\f(CW\*(C`gnu_inline\*(C'\fR function attribute to all inline functions.
+.Sp
+The option \fB\-fno\-gnu89\-inline\fR explicitly tells \s-1GCC\s0 to use the
+C99 semantics for \f(CW\*(C`inline\*(C'\fR when in C99 or gnu99 mode (i.e., it
+specifies the default behavior).
+This option is not supported in \fB\-std=c90\fR or
+\&\fB\-std=gnu90\fR mode.
+.Sp
+The preprocessor macros \f(CW\*(C`_\|_GNUC_GNU_INLINE_\|_\*(C'\fR and
+\&\f(CW\*(C`_\|_GNUC_STDC_INLINE_\|_\*(C'\fR may be used to check which semantics are
+in effect for \f(CW\*(C`inline\*(C'\fR functions.
+.IP "\fB\-fhosted\fR" 4
+.IX Item "-fhosted"
+Assert that compilation targets a hosted environment.  This implies
+\&\fB\-fbuiltin\fR.  A hosted environment is one in which the
+entire standard library is available, and in which \f(CW\*(C`main\*(C'\fR has a return
+type of \f(CW\*(C`int\*(C'\fR.  Examples are nearly everything except a kernel.
+This is equivalent to \fB\-fno\-freestanding\fR.
+.IP "\fB\-flax\-vector\-conversions\fR" 4
+.IX Item "-flax-vector-conversions"
+Allow implicit conversions between vectors with differing numbers of
+elements and/or incompatible element types.  This option should not be
+used for new code.
+.IP "\fB\-fms\-extensions\fR" 4
+.IX Item "-fms-extensions"
+Accept some non-standard constructs used in Microsoft header files.
+.Sp
+In \*(C+ code, this allows member names in structures to be similar
+to previous types declarations.
+.Sp
+.Vb 4
+\&        typedef int UOW;
+\&        struct ABC {
+\&          UOW UOW;
+\&        };
+.Ve
+.Sp
+Some cases of unnamed fields in structures and unions are only
+accepted with this option.
+.Sp
+Note that this option is off for all targets except for x86
+targets using ms-abi.
+.IP "\fB\-foffload=disable\fR" 4
+.IX Item "-foffload=disable"
+.PD 0
+.IP "\fB\-foffload=default\fR" 4
+.IX Item "-foffload=default"
+.IP "\fB\-foffload=\fR\fItarget-list\fR" 4
+.IX Item "-foffload=target-list"
+.PD
+Specify for which OpenMP and OpenACC offload targets code should be generated.
+The default behavior, equivalent to \fB\-foffload=default\fR, is to generate
+code for all supported offload targets.  The \fB\-foffload=disable\fR form
+generates code only for the host fallback, while
+\&\fB\-foffload=\fR\fItarget-list\fR generates code only for the specified
+comma-separated list of offload targets.
+.Sp
+Offload targets are specified in \s-1GCC\s0's internal target-triplet format. You can
+run the compiler with \fB\-v\fR to show the list of configured offload targets
+under \f(CW\*(C`OFFLOAD_TARGET_NAMES\*(C'\fR.
+.IP "\fB\-foffload\-options=\fR\fIoptions\fR" 4
+.IX Item "-foffload-options=options"
+.PD 0
+.IP "\fB\-foffload\-options=\fR\fItarget-triplet-list\fR\fB=\fR\fIoptions\fR" 4
+.IX Item "-foffload-options=target-triplet-list=options"
+.PD
+With \fB\-foffload\-options=\fR\fIoptions\fR, \s-1GCC\s0 passes the specified
+\&\fIoptions\fR to the compilers for all enabled offloading targets.  You can
+specify options that apply only to a specific target or targets by using
+the \fB\-foffload\-options=\fR\fItarget-list\fR\fB=\fR\fIoptions\fR form.  The
+\&\fItarget-list\fR is a comma-separated list in the same format as for the
+\&\fB\-foffload=\fR option.
+.Sp
+Typical command lines are
+.Sp
+.Vb 3
+\&        \-foffload\-options=\-lgfortran \-foffload\-options=\-lm
+\&        \-foffload\-options="\-lgfortran \-lm" \-foffload\-options=nvptx\-none=\-latomic
+\&        \-foffload\-options=amdgcn\-amdhsa=\-march=gfx906 \-foffload\-options=\-lm
+.Ve
 .IP "\fB\-fopenacc\fR" 4
 .IX Item "-fopenacc"
 Enable handling of OpenACC directives \f(CW\*(C`#pragma acc\*(C'\fR in C/\*(C+ and
@@ -2670,38 +2730,27 @@ have support for \fB\-pthread\fR. \fB\-fopenmp\fR implies
 Enable handling of OpenMP's \s-1SIMD\s0 directives with \f(CW\*(C`#pragma omp\*(C'\fR
 in C/\*(C+ and \f(CW\*(C`!$omp\*(C'\fR in Fortran. Other OpenMP directives
 are ignored.
-.IP "\fB\-fgnu\-tm\fR" 4
-.IX Item "-fgnu-tm"
-When the option \fB\-fgnu\-tm\fR is specified, the compiler
-generates code for the Linux variant of Intel's current Transactional
-Memory \s-1ABI\s0 specification document (Revision 1.1, May 6 2009).  This is
-an experimental feature whose interface may change in future versions
-of \s-1GCC,\s0 as the official specification changes.  Please note that not
-all architectures are supported for this feature.
+.IP "\fB\-fpermitted\-flt\-eval\-methods=\fR\fIstyle\fR" 4
+.IX Item "-fpermitted-flt-eval-methods=style"
+\&\s-1ISO/IEC TS 18661\-3\s0 defines new permissible values for
+\&\f(CW\*(C`FLT_EVAL_METHOD\*(C'\fR that indicate that operations and constants with
+a semantic type that is an interchange or extended format should be
+evaluated to the precision and range of that type.  These new values are
+a superset of those permitted under C99/C11, which does not specify the
+meaning of other positive values of \f(CW\*(C`FLT_EVAL_METHOD\*(C'\fR.  As such, code
+conforming to C11 may not have been written expecting the possibility of
+the new values.
 .Sp
-For more information on \s-1GCC\s0's support for transactional memory,
+\&\fB\-fpermitted\-flt\-eval\-methods\fR specifies whether the compiler
+should allow only the values of \f(CW\*(C`FLT_EVAL_METHOD\*(C'\fR specified in C99/C11,
+or the extended set of values specified in \s-1ISO/IEC TS 18661\-3.\s0
 .Sp
-Note that the transactional memory feature is not supported with
-non-call exceptions (\fB\-fnon\-call\-exceptions\fR).
-.IP "\fB\-fms\-extensions\fR" 4
-.IX Item "-fms-extensions"
-Accept some non-standard constructs used in Microsoft header files.
+\&\fIstyle\fR is either \f(CW\*(C`c11\*(C'\fR or \f(CW\*(C`ts\-18661\-3\*(C'\fR as appropriate.
 .Sp
-In \*(C+ code, this allows member names in structures to be similar
-to previous types declarations.
-.Sp
-.Vb 4
-\&        typedef int UOW;
-\&        struct ABC {
-\&          UOW UOW;
-\&        };
-.Ve
-.Sp
-Some cases of unnamed fields in structures and unions are only
-accepted with this option.
-.Sp
-Note that this option is off for all targets except for x86
-targets using ms-abi.
+The default when in a standards compliant mode (\fB\-std=c11\fR or similar)
+is \fB\-fpermitted\-flt\-eval\-methods=c11\fR.  The default when in a \s-1GNU\s0
+dialect (\fB\-std=gnu11\fR or similar) is
+\&\fB\-fpermitted\-flt\-eval\-methods=ts\-18661\-3\fR.
 .IP "\fB\-fplan9\-extensions\fR" 4
 .IX Item "-fplan9-extensions"
 Accept some non-standard constructs used in Plan 9 code.
@@ -2711,16 +2760,27 @@ structures with anonymous fields to functions that expect pointers to
 elements of the type of the field, and permits referring to anonymous
 fields declared using a typedef.    This is only
 supported for C, not \*(C+.
-.IP "\fB\-fcond\-mismatch\fR" 4
-.IX Item "-fcond-mismatch"
-Allow conditional expressions with mismatched types in the second and
-third arguments.  The value of such an expression is void.  This option
-is not supported for \*(C+.
-.IP "\fB\-flax\-vector\-conversions\fR" 4
-.IX Item "-flax-vector-conversions"
-Allow implicit conversions between vectors with differing numbers of
-elements and/or incompatible element types.  This option should not be
-used for new code.
+.IP "\fB\-fsigned\-bitfields\fR" 4
+.IX Item "-fsigned-bitfields"
+.PD 0
+.IP "\fB\-funsigned\-bitfields\fR" 4
+.IX Item "-funsigned-bitfields"
+.IP "\fB\-fno\-signed\-bitfields\fR" 4
+.IX Item "-fno-signed-bitfields"
+.IP "\fB\-fno\-unsigned\-bitfields\fR" 4
+.IX Item "-fno-unsigned-bitfields"
+.PD
+These options control whether a bit-field is signed or unsigned, when the
+declaration does not use either \f(CW\*(C`signed\*(C'\fR or \f(CW\*(C`unsigned\*(C'\fR.  By
+default, such a bit-field is signed, because this is consistent: the
+basic integer types such as \f(CW\*(C`int\*(C'\fR are signed types.
+.IP "\fB\-fsigned\-char\fR" 4
+.IX Item "-fsigned-char"
+Let the type \f(CW\*(C`char\*(C'\fR be signed, like \f(CW\*(C`signed char\*(C'\fR.
+.Sp
+Note that this is equivalent to \fB\-fno\-unsigned\-char\fR, which is
+the negative form of \fB\-funsigned\-char\fR.  Likewise, the option
+\&\fB\-fno\-signed\-char\fR is equivalent to \fB\-funsigned\-char\fR.
 .IP "\fB\-funsigned\-char\fR" 4
 .IX Item "-funsigned-char"
 Let the type \f(CW\*(C`char\*(C'\fR be unsigned, like \f(CW\*(C`unsigned char\*(C'\fR.
@@ -2739,27 +2799,6 @@ make such a program work with the opposite default.
 The type \f(CW\*(C`char\*(C'\fR is always a distinct type from each of
 \&\f(CW\*(C`signed char\*(C'\fR or \f(CW\*(C`unsigned char\*(C'\fR, even though its behavior
 is always just like one of those two.
-.IP "\fB\-fsigned\-char\fR" 4
-.IX Item "-fsigned-char"
-Let the type \f(CW\*(C`char\*(C'\fR be signed, like \f(CW\*(C`signed char\*(C'\fR.
-.Sp
-Note that this is equivalent to \fB\-fno\-unsigned\-char\fR, which is
-the negative form of \fB\-funsigned\-char\fR.  Likewise, the option
-\&\fB\-fno\-signed\-char\fR is equivalent to \fB\-funsigned\-char\fR.
-.IP "\fB\-fsigned\-bitfields\fR" 4
-.IX Item "-fsigned-bitfields"
-.PD 0
-.IP "\fB\-funsigned\-bitfields\fR" 4
-.IX Item "-funsigned-bitfields"
-.IP "\fB\-fno\-signed\-bitfields\fR" 4
-.IX Item "-fno-signed-bitfields"
-.IP "\fB\-fno\-unsigned\-bitfields\fR" 4
-.IX Item "-fno-unsigned-bitfields"
-.PD
-These options control whether a bit-field is signed or unsigned, when the
-declaration does not use either \f(CW\*(C`signed\*(C'\fR or \f(CW\*(C`unsigned\*(C'\fR.  By
-default, such a bit-field is signed, because this is consistent: the
-basic integer types such as \f(CW\*(C`int\*(C'\fR are signed types.
 .IP "\fB\-fsso\-struct=\fR\fIendianness\fR" 4
 .IX Item "-fsso-struct=endianness"
 Set the default scalar storage order of structures and unions to the
@@ -3849,8 +3888,8 @@ rules disallow templates, and this may be used to enforce that rule.
 The warning is inactive inside a system header file, such as the \s-1STL,\s0 so
 one can still use the \s-1STL.\s0  One may also instantiate or specialize
 templates.
-.IP "\fB\-Wno\-mismatched\-new\-delete\fR (\*(C+ and Objective\-\*(C+ only)" 4
-.IX Item "-Wno-mismatched-new-delete ( and Objective- only)"
+.IP "\fB\-Wmismatched\-new\-delete\fR (\*(C+ and Objective\-\*(C+ only)" 4
+.IX Item "-Wmismatched-new-delete ( and Objective- only)"
 Warn for mismatches between calls to \f(CW\*(C`operator new\*(C'\fR or \f(CW\*(C`operator
 delete\*(C'\fR and the corresponding call to the allocation or deallocation function.
 This includes invocations of \*(C+ \f(CW\*(C`operator delete\*(C'\fR with pointers
@@ -3880,7 +3919,7 @@ The related option \fB\-Wmismatched\-dealloc\fR diagnoses mismatches
 involving allocation and deallocation functions other than \f(CW\*(C`operator
 new\*(C'\fR and \f(CW\*(C`operator delete\*(C'\fR.
 .Sp
-\&\fB\-Wmismatched\-new\-delete\fR is enabled by default.
+\&\fB\-Wmismatched\-new\-delete\fR is included in \fB\-Wall\fR.
 .IP "\fB\-Wmismatched\-tags\fR (\*(C+ and Objective\-\*(C+ only)" 4
 .IX Item "-Wmismatched-tags ( and Objective- only)"
 Warn for declarations of structs, classes, and class templates and their
@@ -4920,8 +4959,7 @@ might be printed in \s-1JSON\s0 form (after formatting) like this:
 \&                    }
 \&                ]
 \&                "column\-origin": 1,
-\&            },
-\&            ...
+\&            }
 \&        ]
 .Ve
 .Sp
@@ -5279,6 +5317,8 @@ Options\fR and \fBObjective-C and Objective\-\*(C+ Dialect Options\fR.
 \&\-Wmemset\-elt\-size 
 \&\-Wmemset\-transposed\-args 
 \&\-Wmisleading\-indentation\fR (only for C/\*(C+) 
+\&\fB\-Wmismatched\-dealloc 
+\&\-Wmismatched\-new\-delete\fR (only for C/\*(C+) 
 \&\fB\-Wmissing\-attributes 
 \&\-Wmissing\-braces\fR (only for C/ObjC) 
 \&\fB\-Wmultistatement\-macros  
@@ -5505,9 +5545,18 @@ disable the error.  Disabling the error for this warning can result in
 poorly optimized code and is useful only in the
 case of very minor changes such as bug fixes to an existing code-base.
 Completely disabling the warning is not recommended.
-.IP "\fB\-Wno\-cpp\fR" 4
-.IX Item "-Wno-cpp"
-(C, Objective-C, \*(C+, Objective\-\*(C+ and Fortran only)
+.IP "\fB\-Wno\-coverage\-invalid\-line\-number\fR" 4
+.IX Item "-Wno-coverage-invalid-line-number"
+Warn in case a function ends earlier than it begins due
+to an invalid linenum macros.  The warning is emitted only
+with \fB\-\-coverage\fR enabled.
+.Sp
+By default, this warning is enabled and is treated as an
+error.  \fB\-Wno\-coverage\-invalid\-line\-number\fR can be used to disable the
+warning or \fB\-Wno\-error=coverage\-invalid\-line\-number\fR can be used to
+disable the error.
+.IP "\fB\-Wno\-cpp\fR (C, Objective-C, \*(C+, Objective\-\*(C+ and Fortran only)" 4
+.IX Item "-Wno-cpp (C, Objective-C, , Objective- and Fortran only)"
 Suppress warning messages emitted by \f(CW\*(C`#warning\*(C'\fR directives.
 .IP "\fB\-Wdouble\-promotion\fR (C, \*(C+, Objective-C and Objective\-\*(C+ only)" 4
 .IX Item "-Wdouble-promotion (C, , Objective-C and Objective- only)"
@@ -6093,8 +6142,8 @@ Ignoring the warning can result in poorly optimized code.
 \&\fB\-Wno\-missing\-profile\fR can be used to
 disable the warning, but this is not recommended and should be done only
 when non-existent profile data is justified.
-.IP "\fB\-Wno\-mismatched\-dealloc\fR" 4
-.IX Item "-Wno-mismatched-dealloc"
+.IP "\fB\-Wmismatched\-dealloc\fR" 4
+.IX Item "-Wmismatched-dealloc"
 Warn for calls to deallocation functions with pointer arguments returned
 from from allocations functions for which the former isn't a suitable
 deallocator.  A pair of functions can be associated as matching allocators
@@ -6124,7 +6173,7 @@ example \f(CW\*(C`mydealloc\*(C'\fR is the deallocator for pointers returned fro
 In \*(C+, the related option \fB\-Wmismatched\-new\-delete\fR diagnoses
 mismatches involving either \f(CW\*(C`operator new\*(C'\fR or \f(CW\*(C`operator delete\*(C'\fR.
 .Sp
-Option \fB\-Wmismatched\-dealloc\fR is enabled by default.
+Option \fB\-Wmismatched\-dealloc\fR is included in \fB\-Wall\fR.
 .IP "\fB\-Wmultistatement\-macros\fR" 4
 .IX Item "-Wmultistatement-macros"
 Warn about unsafe multiple statement macros that appear to be guarded
@@ -7465,8 +7514,8 @@ Warnings controlled by the option can be disabled either by specifying
 .IX Item "-Wno-frame-larger-than"
 Disable \fB\-Wframe\-larger\-than=\fR warnings.  The option is equivalent
 to \fB\-Wframe\-larger\-than=\fR\fB\s-1SIZE_MAX\s0\fR or larger.
-.IP "\fB\-Wno\-free\-nonheap\-object\fR" 4
-.IX Item "-Wno-free-nonheap-object"
+.IP "\fB\-Wfree\-nonheap\-object\fR" 4
+.IX Item "-Wfree-nonheap-object"
 Warn when attempting to deallocate an object that was either not allocated
 on the heap, or by using a pointer that was not returned from a prior call
 to the corresponding allocation function.  For example, because the call
@@ -7483,7 +7532,7 @@ diagnosed.
 \&        }
 .Ve
 .Sp
-\&\fB\-Wfree\-nonheap\-object\fR is enabled by default.
+\&\fB\-Wfree\-nonheap\-object\fR is included in \fB\-Wall\fR.
 .IP "\fB\-Wstack\-usage=\fR\fIbyte-size\fR" 4
 .IX Item "-Wstack-usage=byte-size"
 Warn if the stack usage of a function might exceed \fIbyte-size\fR.
@@ -8906,7 +8955,9 @@ in the \*(L"exploded graph\*(R" and diagnostics associated with them.
 .SS "Options for Debugging Your Program"
 .IX Subsection "Options for Debugging Your Program"
 To tell \s-1GCC\s0 to emit extra information for use by a debugger, in almost 
-all cases you need only to add \fB\-g\fR to your other options.
+all cases you need only to add \fB\-g\fR to your other options.  Some debug
+formats can co-exist (like \s-1DWARF\s0 with \s-1CTF\s0) when each of them is enabled
+explicitly by adding the respective command line option to your other options.
 .PP
 \&\s-1GCC\s0 allows you to use \fB\-g\fR with
 \&\fB\-O\fR.  The shortcuts taken by optimized code may occasionally
@@ -8965,6 +9016,34 @@ different than Version 2 and later.  For historical reasons, some
 other DWARF-related options such as
 \&\fB\-fno\-dwarf2\-cfi\-asm\fR) retain a reference to \s-1DWARF\s0 Version 2
 in their names, but apply to all currently-supported versions of \s-1DWARF.\s0
+.IP "\fB\-gbtf\fR" 4
+.IX Item "-gbtf"
+Request \s-1BTF\s0 debug information.  \s-1BTF\s0 is the default debugging format for the
+eBPF target.  On other targets, like x86, \s-1BTF\s0 debug information can be
+generated along with \s-1DWARF\s0 debug information when both of the debug formats are
+enabled explicitly via their respective command line options.
+.IP "\fB\-gctf\fR" 4
+.IX Item "-gctf"
+.PD 0
+.IP "\fB\-gctf\fR\fIlevel\fR" 4
+.IX Item "-gctflevel"
+.PD
+Request \s-1CTF\s0 debug information and use level to specify how much \s-1CTF\s0 debug
+information should be produced.  If \fB\-gctf\fR is specified
+without a value for level, the default level of \s-1CTF\s0 debug information is 2.
+.Sp
+\&\s-1CTF\s0 debug information can be generated along with \s-1DWARF\s0 debug information when
+both of the debug formats are enabled explicitly via their respective command
+line options.
+.Sp
+Level 0 produces no \s-1CTF\s0 debug information at all.  Thus, \fB\-gctf0\fR
+negates \fB\-gctf\fR.
+.Sp
+Level 1 produces \s-1CTF\s0 information for tracebacks only.  This includes callsite
+information, but does not include type information.
+.Sp
+Level 2 produces type information for entities (functions, data objects etc.)
+at file-scope or global-scope only.
 .IP "\fB\-gstabs\fR" 4
 .IX Item "-gstabs"
 Produce debugging information in stabs format (if that is supported),
@@ -9187,7 +9266,7 @@ This option causes \s-1GCC\s0 to create markers in the internal representation
 at the beginning of statements, and to keep them roughly in place
 throughout compilation, using them to guide the output of \f(CW\*(C`is_stmt\*(C'\fR
 markers in the line number table.  This is enabled by default when
-compiling with optimization (\fB\-Os\fR, \fB\-O\fR, \fB\-O2\fR,
+compiling with optimization (\fB\-Os\fR, \fB\-O1\fR, \fB\-O2\fR,
 \&...), and outputting \s-1DWARF 2\s0 debug information at the normal level.
 .IP "\fB\-gvariable\-location\-views\fR" 4
 .IX Item "-gvariable-location-views"
@@ -9448,7 +9527,7 @@ that do not involve a space-speed tradeoff.
 As compared to \fB\-O\fR, this option increases both compilation time
 and the performance of the generated code.
 .Sp
-\&\fB\-O2\fR turns on all optimization flags specified by \fB\-O\fR.  It
+\&\fB\-O2\fR turns on all optimization flags specified by \fB\-O1\fR.  It
 also turns on the following optimization flags:
 .Sp
 \&\fB\-falign\-functions  \-falign\-jumps 
@@ -9582,7 +9661,7 @@ instructions and checks if the result can be simplified.  If loop unrolling
 is active, two passes are performed and the second is scheduled after
 loop unrolling.
 .Sp
-This option is enabled by default at optimization levels \fB\-O\fR,
+This option is enabled by default at optimization levels \fB\-O1\fR,
 \&\fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
 .IP "\fB\-ffp\-contract=\fR\fIstyle\fR" 4
 .IX Item "-ffp-contract=style"
@@ -9608,7 +9687,7 @@ Note that \fB\-fno\-omit\-frame\-pointer\fR doesn't guarantee the frame pointer
 is used in all functions.  Several targets always omit the frame pointer in
 leaf functions.
 .Sp
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-foptimize\-sibling\-calls\fR" 4
 .IX Item "-foptimize-sibling-calls"
 Optimize sibling and tail recursive calls.
@@ -9747,7 +9826,7 @@ This option is the default for optimized compilation if the assembler and
 linker support it.  Use \fB\-fno\-merge\-constants\fR to inhibit this
 behavior.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
 .IP "\fB\-fmerge\-all\-constants\fR" 4
 .IX Item "-fmerge-all-constants"
 Attempt to merge identical constants and identical variables.
@@ -9822,7 +9901,7 @@ long\*(C'\fR on a 32\-bit system, split the registers apart and allocate them
 independently.  This normally generates better code for those types,
 but may make debugging more difficult.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR,
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR,
 \&\fB\-Os\fR.
 .IP "\fB\-fsplit\-wide\-types\-early\fR" 4
 .IX Item "-fsplit-wide-types-early"
@@ -9921,16 +10000,16 @@ Enabled at levels \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
 .IX Item "-fauto-inc-dec"
 Combine increments or decrements of addresses with memory accesses.
 This pass is always skipped on architectures that do not have
-instructions to support this.  Enabled by default at \fB\-O\fR and
+instructions to support this.  Enabled by default at \fB\-O1\fR and
 higher on architectures that support this.
 .IP "\fB\-fdce\fR" 4
 .IX Item "-fdce"
 Perform dead code elimination (\s-1DCE\s0) on \s-1RTL.\s0
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fdse\fR" 4
 .IX Item "-fdse"
 Perform dead store elimination (\s-1DSE\s0) on \s-1RTL.\s0
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fif\-conversion\fR" 4
 .IX Item "-fif-conversion"
 Attempt to transform conditional jumps into branch-less equivalents.  This
@@ -9938,14 +10017,14 @@ includes use of conditional moves, min, max, set flags and abs instructions, and
 some tricks doable by standard arithmetics.  The use of conditional execution
 on chips where it is available is controlled by \fB\-fif\-conversion2\fR.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR, but
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR, but
 not with \fB\-Og\fR.
 .IP "\fB\-fif\-conversion2\fR" 4
 .IX Item "-fif-conversion2"
 Use conditional execution (where available) to transform conditional jumps into
 branch-less equivalents.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR, but
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR, but
 not with \fB\-Og\fR.
 .IP "\fB\-fdeclone\-ctor\-dtor\fR" 4
 .IX Item "-fdeclone-ctor-dtor"
@@ -10105,7 +10184,7 @@ If supported for the target machine, attempt to reorder instructions
 to exploit instruction slots available after delayed branch
 instructions.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR,
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR,
 but not at \fB\-Og\fR.
 .IP "\fB\-fschedule\-insns\fR" 4
 .IX Item "-fschedule-insns"
@@ -10318,7 +10397,7 @@ and the \fBlarge-stack-frame-growth\fR parameter to 400.
 .IP "\fB\-ftree\-reassoc\fR" 4
 .IX Item "-ftree-reassoc"
 Perform reassociation on trees.  This flag is enabled by default
-at \fB\-O\fR and higher.
+at \fB\-O1\fR and higher.
 .IP "\fB\-fcode\-hoisting\fR" 4
 .IX Item "-fcode-hoisting"
 Perform code hoisting.  Code hoisting tries to move the
@@ -10337,18 +10416,18 @@ enabled by default at \fB\-O3\fR.
 .IP "\fB\-ftree\-forwprop\fR" 4
 .IX Item "-ftree-forwprop"
 Perform forward propagation on trees.  This flag is enabled by default
-at \fB\-O\fR and higher.
+at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-fre\fR" 4
 .IX Item "-ftree-fre"
 Perform full redundancy elimination (\s-1FRE\s0) on trees.  The difference
 between \s-1FRE\s0 and \s-1PRE\s0 is that \s-1FRE\s0 only considers expressions
 that are computed on all paths leading to the redundant computation.
 This analysis is faster than \s-1PRE,\s0 though it exposes fewer redundancies.
-This flag is enabled by default at \fB\-O\fR and higher.
+This flag is enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-phiprop\fR" 4
 .IX Item "-ftree-phiprop"
 Perform hoisting of loads from conditional pointers on trees.  This
-pass is enabled by default at \fB\-O\fR and higher.
+pass is enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fhoist\-adjacent\-loads\fR" 4
 .IX Item "-fhoist-adjacent-loads"
 Speculatively hoist loads from both branches of an if-then-else if the
@@ -10358,21 +10437,21 @@ by default at \fB\-O2\fR and higher.
 .IP "\fB\-ftree\-copy\-prop\fR" 4
 .IX Item "-ftree-copy-prop"
 Perform copy propagation on trees.  This pass eliminates unnecessary
-copy operations.  This flag is enabled by default at \fB\-O\fR and
+copy operations.  This flag is enabled by default at \fB\-O1\fR and
 higher.
 .IP "\fB\-fipa\-pure\-const\fR" 4
 .IX Item "-fipa-pure-const"
 Discover which functions are pure or constant.
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fipa\-reference\fR" 4
 .IX Item "-fipa-reference"
 Discover which static variables do not escape the
 compilation unit.
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fipa\-reference\-addressable\fR" 4
 .IX Item "-fipa-reference-addressable"
 Discover read-only, write-only and non-addressable static variables.
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fipa\-stack\-alignment\fR" 4
 .IX Item "-fipa-stack-alignment"
 Reduce stack alignment on call sites if possible.
@@ -10390,13 +10469,13 @@ cold functions are marked as cold. Also functions executed once (such as
 \&\f(CW\*(C`cold\*(C'\fR, \f(CW\*(C`noreturn\*(C'\fR, static constructors or destructors) are
 identified. Cold functions and loop less parts of functions executed once are
 then optimized for size.
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fipa\-modref\fR" 4
 .IX Item "-fipa-modref"
 Perform interprocedural mod/ref analysis.  This optimization analyzes the side
 effects of functions (memory locations that are modified or referenced) and
 enables better optimization across the function call boundary.  This flag is
-enabled by default at \fB\-O\fR and higher.
+enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fipa\-cp\fR" 4
 .IX Item "-fipa-cp"
 Perform interprocedural constant propagation.
@@ -10513,7 +10592,7 @@ currently enabled, but may be enabled by \fB\-O2\fR in the future.
 .IP "\fB\-ftree\-sink\fR" 4
 .IX Item "-ftree-sink"
 Perform forward store motion on trees.  This flag is
-enabled by default at \fB\-O\fR and higher.
+enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-bit\-ccp\fR" 4
 .IX Item "-ftree-bit-ccp"
 Perform sparse conditional bit constant propagation on trees and propagate
@@ -10525,13 +10604,13 @@ It requires that \fB\-ftree\-ccp\fR is enabled.
 .IX Item "-ftree-ccp"
 Perform sparse conditional constant propagation (\s-1CCP\s0) on trees.  This
 pass only operates on local scalar variables and is enabled by default
-at \fB\-O\fR and higher.
+at \fB\-O1\fR and higher.
 .IP "\fB\-fssa\-backprop\fR" 4
 .IX Item "-fssa-backprop"
 Propagate information about uses of a value up the definition chain
 in order to simplify the definitions.  For example, this pass strips
 sign operations if the sign of a value never matters.  The flag is
-enabled by default at \fB\-O\fR and higher.
+enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fssa\-phiopt\fR" 4
 .IX Item "-fssa-phiopt"
 Perform pattern matching on \s-1SSA PHI\s0 nodes to optimize conditional
@@ -10553,7 +10632,7 @@ be limited using \fBmax-tail-merge-comparisons\fR parameter and
 .IP "\fB\-ftree\-dce\fR" 4
 .IX Item "-ftree-dce"
 Perform dead code elimination (\s-1DCE\s0) on trees.  This flag is enabled by
-default at \fB\-O\fR and higher.
+default at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-builtin\-call\-dce\fR" 4
 .IX Item "-ftree-builtin-call-dce"
 Perform conditional dead code elimination (\s-1DCE\s0) for calls to built-in functions
@@ -10574,23 +10653,23 @@ Perform a variety of simple scalar cleanups (constant/copy
 propagation, redundancy elimination, range propagation and expression
 simplification) based on a dominator tree traversal.  This also
 performs jump threading (to reduce jumps to jumps). This flag is
-enabled by default at \fB\-O\fR and higher.
+enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-dse\fR" 4
 .IX Item "-ftree-dse"
 Perform dead store elimination (\s-1DSE\s0) on trees.  A dead store is a store into
 a memory location that is later overwritten by another store without
 any intervening loads.  In this case the earlier store can be deleted.  This
-flag is enabled by default at \fB\-O\fR and higher.
+flag is enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-ch\fR" 4
 .IX Item "-ftree-ch"
 Perform loop header copying on trees.  This is beneficial since it increases
 effectiveness of code motion optimizations.  It also saves one jump.  This flag
-is enabled by default at \fB\-O\fR and higher.  It is not enabled
+is enabled by default at \fB\-O1\fR and higher.  It is not enabled
 for \fB\-Os\fR, since it usually increases code size.
 .IP "\fB\-ftree\-loop\-optimize\fR" 4
 .IX Item "-ftree-loop-optimize"
 Perform loop optimizations on trees.  This flag is enabled by default
-at \fB\-O\fR and higher.
+at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-loop\-linear\fR" 4
 .IX Item "-ftree-loop-linear"
 .PD 0
@@ -10746,7 +10825,7 @@ in such a way that its value when exiting the loop can be determined using
 only its initial value and the number of loop iterations, replace uses of
 the final value by such a computation, provided it is sufficiently cheap.
 This reduces data dependencies and may allow further simplifications.
-Enabled by default at \fB\-O\fR and higher.
+Enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-fivopts\fR" 4
 .IX Item "-fivopts"
 Perform induction variable optimizations (strength reduction, induction
@@ -10782,12 +10861,12 @@ Perform temporary expression replacement during the \s-1SSA\-\s0>normal phase.  
 use/single def temporaries are replaced at their use location with their
 defining expression.  This results in non-GIMPLE code, but gives the expanders
 much more complex trees to work on resulting in better \s-1RTL\s0 generation.  This is
-enabled by default at \fB\-O\fR and higher.
+enabled by default at \fB\-O1\fR and higher.
 .IP "\fB\-ftree\-slsr\fR" 4
 .IX Item "-ftree-slsr"
 Perform straight-line strength reduction on trees.  This recognizes related
 expressions involving multiplications and replaces them by less expensive
-calculations when possible.  This is enabled by default at \fB\-O\fR and
+calculations when possible.  This is enabled by default at \fB\-O1\fR and
 higher.
 .IP "\fB\-ftree\-vectorize\fR" 4
 .IX Item "-ftree-vectorize"
@@ -10950,7 +11029,7 @@ The default is \fB\-fguess\-branch\-probability\fR at levels
 Reorder basic blocks in the compiled function in order to reduce number of
 taken branches and improve code locality.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
 .IP "\fB\-freorder\-blocks\-algorithm=\fR\fIalgorithm\fR" 4
 .IX Item "-freorder-blocks-algorithm=algorithm"
 Use the specified algorithm for basic block reordering.  The
@@ -10960,7 +11039,7 @@ or \fBstc\fR, the \*(L"software trace cache\*(R" algorithm, which tries to
 put all often executed code together, minimizing the number of branches
 executed by making extra copies of code.
 .Sp
-The default is \fBsimple\fR at levels \fB\-O\fR, \fB\-Os\fR, and
+The default is \fBsimple\fR at levels \fB\-O1\fR, \fB\-Os\fR, and
 \&\fBstc\fR at levels \fB\-O2\fR, \fB\-O3\fR.
 .IP "\fB\-freorder\-blocks\-and\-partition\fR" 4
 .IX Item "-freorder-blocks-and-partition"
@@ -11537,14 +11616,14 @@ explicit comparison operation.
 This pass only applies to certain targets that cannot explicitly represent
 the comparison operation before register allocation is complete.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
 .IP "\fB\-fcprop\-registers\fR" 4
 .IX Item "-fcprop-registers"
 After register allocation and post-register allocation instruction splitting,
 perform a copy-propagation pass to try to reduce scheduling dependencies
 and occasionally eliminate the copy.
 .Sp
-Enabled at levels \fB\-O\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
+Enabled at levels \fB\-O1\fR, \fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
 .IP "\fB\-fprofile\-correction\fR" 4
 .IX Item "-fprofile-correction"
 Profiles collected using an instrumented binary for multi-threaded programs may
@@ -16038,6 +16117,11 @@ Moreover, code compiled with \fB\-ftrampolines\fR and code compiled with
 \&\fB\-fno\-trampolines\fR are not binary compatible if nested functions are
 present.  This option must therefore be used on a program-wide basis and be
 manipulated with extreme care.
+.Sp
+For languages other than Ada, the \f(CW\*(C`\-ftrampolines\*(C'\fR and
+\&\f(CW\*(C`\-fno\-trampolines\*(C'\fR options currently have no effect, and
+trampolines are always generated on platforms that need them
+for nested functions.
 .IP "\fB\-fvisibility=\fR[\fBdefault\fR|\fBinternal\fR|\fBhidden\fR|\fBprotected\fR]" 4
 .IX Item "-fvisibility=[default|internal|hidden|protected]"
 Set the default \s-1ELF\s0 image symbol visibility to the specified option\-\-\-all
@@ -30654,8 +30738,8 @@ startup object and entry point.
 .IX Item "-mnop-fun-dllimport"
 This option is available for Cygwin and MinGW targets.  It
 specifies that the \f(CW\*(C`dllimport\*(C'\fR attribute should be ignored.
-.IP "\fB\-mthread\fR" 4
-.IX Item "-mthread"
+.IP "\fB\-mthreads\fR" 4
+.IX Item "-mthreads"
 This option is available for MinGW targets. It specifies
 that MinGW-specific thread support is to be used.
 .IP "\fB\-municode\fR" 4

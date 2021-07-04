@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -4739,9 +4740,9 @@ on semantics undefined within the standard.
      ‘_FILE_OFFSET_BITS’ allows the 64 bit interface to replace the old
      interface.
 
-     If ‘_FILE_OFFSET_BITS’ is undefined, or if it is defined to the
-     value ‘32’, nothing changes.  The 32 bit interface is used and
-     types like ‘off_t’ have a size of 32 bits on 32 bit systems.
+     If ‘_FILE_OFFSET_BITS’ is defined to the value ‘32’, the 32 bit
+     interface is used and types like ‘off_t’ have a size of 32 bits on
+     32 bit systems.
 
      If the macro is defined to the value ‘64’, the large file interface
      replaces the old interface.  I.e., the functions are not made
@@ -4750,6 +4751,10 @@ on semantics undefined within the standard.
      reference the new functions, e.g., a call to ‘fseeko’ now indeed
      calls ‘fseeko64’.
 
+     If the macro is not defined it currently defaults to ‘32’, but this
+     default is planned to change due to a need to update ‘time_t’ for
+     Y2038 safety, and applications should not rely on the default.
+
      This macro should only be selected if the system provides
      mechanisms for handling large files.  On 64 bit systems this macro
      has no effect since the ‘*64’ functions are identical to the normal
@@ -4757,6 +4762,38 @@ on semantics undefined within the standard.
 
      This macro was introduced as part of the Large File Support
      extension (LFS).
+
+ -- Macro: _TIME_BITS
+     This macro determines the bit size of ‘time_t’, and therefore the
+     bit size of all ‘time_t’-derived types and the prototypes of all
+     related functions.
+
+       1. If ‘_TIME_BITS’ is undefined, the bit size of ‘time_t’ is
+          architecture dependent.  Currently it defaults to 64 bits on
+          most architectures.  Although it defaults to 32 bits on some
+          traditional architectures (i686, ARM), this is planned to
+          change and applications should not rely on this.
+
+       2. If ‘_TIME_BITS’ is defined to be 64, ‘time_t’ is defined to be
+          a 64-bit integer.  On platforms where ‘time_t’ was
+          traditionally 32 bits, calls to proper syscalls depend on the
+          Linux kernel version on which the system is running.  For
+          Linux kernel version above 5.1 syscalls supporting 64-bit time
+          are used.  Otherwise, a fallback code is used with legacy
+          (i.e.  32-bit) syscalls.
+
+       3. If ‘_TIME_BITS’ is defined to be 32, ‘time_t’ is defined to be
+          a 32-bit integer where that is supported.  This is not
+          recommended, as 32-bit ‘time_t’ stops working in the year
+          2038.
+
+       4. For any other use case a compile-time error is emitted.
+
+     ‘_TIME_BITS=64’ can be defined only when ‘_FILE_OFFSET_BITS=64’ is
+     also defined.
+
+     By using this macro certain ports gain support for 64-bit time and
+     as a result become immune to the Y2038 problem.
 
  -- Macro: _ISOC99_SOURCE
 

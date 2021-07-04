@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -2099,6 +2100,61 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Flags for Sigaction,  Next: Initial Signal Actions,  Prev: Sigaction Function Example,  Up: Signal Actions
+
+24.3.5 Flags for ‘sigaction’
+----------------------------
+
+The ‘sa_flags’ member of the ‘sigaction’ structure is a catch-all for
+special features.  Most of the time, ‘SA_RESTART’ is a good value to use
+for this field.
+
+   The value of ‘sa_flags’ is interpreted as a bit mask.  Thus, you
+should choose the flags you want to set, OR those flags together, and
+store the result in the ‘sa_flags’ member of your ‘sigaction’ structure.
+
+   Each signal number has its own set of flags.  Each call to
+‘sigaction’ affects one particular signal number, and the flags that you
+specify apply only to that particular signal.
+
+   In the GNU C Library, establishing a handler with ‘signal’ sets all
+the flags to zero except for ‘SA_RESTART’, whose value depends on the
+settings you have made with ‘siginterrupt’.  *Note Interrupted
+Primitives::, to see what this is about.
+
+   These macros are defined in the header file ‘signal.h’.
+
+ -- Macro: int SA_NOCLDSTOP
+
+     This flag is meaningful only for the ‘SIGCHLD’ signal.  When the
+     flag is set, the system delivers the signal for a terminated child
+     process but not for one that is stopped.  By default, ‘SIGCHLD’ is
+     delivered for both terminated children and stopped children.
+
+     Setting this flag for a signal other than ‘SIGCHLD’ has no effect.
+
+ -- Macro: int SA_ONSTACK
+
+     If this flag is set for a particular signal number, the system uses
+     the signal stack when delivering that kind of signal.  *Note Signal
+     Stack::.  If a signal with this flag arrives and you have not set a
+     signal stack, the system terminates the program with ‘SIGILL’.
+
+ -- Macro: int SA_RESTART
+
+     This flag controls what happens when a signal is delivered during
+     certain primitives (such as ‘open’, ‘read’ or ‘write’), and the
+     signal handler returns normally.  There are two alternatives: the
+     library function can resume, or it can return failure with error
+     code ‘EINTR’.
+
+     The choice is controlled by the ‘SA_RESTART’ flag for the
+     particular kind of signal that was delivered.  If the flag is set,
+     returning from a handler resumes the library function.  If the flag
+     is clear, returning from a handler makes the function fail.  *Note
+     Interrupted Primitives::.
 
 
 File: libc.info,  Node: Initial Signal Actions,  Prev: Flags for Sigaction,  Up: Signal Actions
@@ -7185,12 +7241,12 @@ This section gives an overview of processes and of the steps involved in
 creating a process and making it run another program.
 
    A new processes is created when one of the functions ‘posix_spawn’,
-‘fork’, or ‘vfork’ is called.  (The ‘system’ and ‘popen’ also create new
-processes internally.)  Due to the name of the ‘fork’ function, the act
-of creating a new process is sometimes called “forking” a process.  Each
-new process (the “child process” or “subprocess”) is allocated a process
-ID, distinct from the process ID of the parent process.  *Note Process
-Identification::.
+‘fork’, ‘_Fork’ or ‘vfork’ is called.  (The ‘system’ and ‘popen’ also
+create new processes internally.)  Due to the name of the ‘fork’
+function, the act of creating a new process is sometimes called
+“forking” a process.  Each new process (the “child process” or
+“subprocess”) is allocated a process ID, distinct from the process ID of
+the parent process.  *Note Process Identification::.
 
    After forking a child process, both the parent and child processes
 continue to execute normally.  If you want your program to wait for a
@@ -7201,9 +7257,9 @@ information about why the child terminated—for example, its exit status
 code.
 
    A newly forked child process continues to execute the same program as
-its parent process, at the point where the ‘fork’ call returns.  You can
-use the return value from ‘fork’ to tell whether the program is running
-in the parent process or the child.
+its parent process, at the point where the ‘fork’ or ‘_Fork’ call
+returns.  You can use the return value from ‘fork’ or ‘_Fork’ to tell
+whether the program is running in the parent process or the child.
 
    Having several processes run the same program is only occasionally
 useful.  But the child can execute another program using one of the
@@ -7344,6 +7400,20 @@ parent process are:
    • The set of pending signals (*note Delivery of Signal::) for the
      child process is cleared.  (The child process inherits its mask of
      blocked signals and signal actions from the parent process.)
+
+ -- Function: pid_t _Fork (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘_Fork’ function is similar to ‘fork’, but it does not invoke
+     any callbacks registered with ‘pthread_atfork’, nor does it reset
+     any internal state or locks (such as the ‘malloc’ locks).  In the
+     new subprocess, only async-signal-safe functions may be called,
+     such as ‘dup2’ or ‘execve’.
+
+     The ‘_Fork’ function is an async-signal-safe replacement of ‘fork’.
+     It is a GNU extension.
 
  -- Function: pid_t vfork (void)
 

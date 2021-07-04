@@ -1208,7 +1208,9 @@ enum c_omp_region_type
   C_ORT_OMP			= 1 << 0,
   C_ORT_ACC			= 1 << 1,
   C_ORT_DECLARE_SIMD		= 1 << 2,
-  C_ORT_OMP_DECLARE_SIMD	= C_ORT_OMP | C_ORT_DECLARE_SIMD
+  C_ORT_TARGET			= 1 << 3,
+  C_ORT_OMP_DECLARE_SIMD	= C_ORT_OMP | C_ORT_DECLARE_SIMD,
+  C_ORT_OMP_TARGET		= C_ORT_OMP | C_ORT_TARGET
 };
 
 extern tree c_finish_omp_master (location_t, tree);
@@ -1243,6 +1245,25 @@ extern tree c_omp_check_context_selector (location_t, tree);
 extern void c_omp_mark_declare_variant (location_t, tree, tree);
 extern const char *c_omp_map_clause_name (tree, bool);
 extern void c_omp_adjust_map_clauses (tree, bool);
+
+enum c_omp_directive_kind {
+  C_OMP_DIR_STANDALONE,
+  C_OMP_DIR_CONSTRUCT,
+  C_OMP_DIR_DECLARATIVE,
+  C_OMP_DIR_UTILITY,
+  C_OMP_DIR_INFORMATIONAL
+};
+
+struct c_omp_directive {
+  const char *first, *second, *third;
+  unsigned int id;
+  enum c_omp_directive_kind kind;
+  bool simd;
+};
+
+extern const struct c_omp_directive *c_omp_categorize_directive (const char *,
+								 const char *,
+								 const char *);
 
 /* Return next tree in the chain for chain_next walking of tree nodes.  */
 static inline tree

@@ -50,7 +50,7 @@ public:
   block_range_cache ();
   ~block_range_cache ();
 
-  void set_bb_range (tree name, const basic_block bb, const irange &r);
+  bool set_bb_range (tree name, const basic_block bb, const irange &r);
   bool get_bb_range (irange &r, tree name, const basic_block bb);
   bool bb_range_p (tree name, const basic_block bb);
 
@@ -90,7 +90,7 @@ private:
 class ranger_cache : public range_query
 {
 public:
-  ranger_cache (class gimple_ranger &q);
+  ranger_cache ();
   ~ranger_cache ();
 
   virtual bool range_of_expr (irange &r, tree name, gimple *stmt);
@@ -101,8 +101,7 @@ public:
   bool get_non_stale_global_range (irange &r, tree name);
   void set_global_range (tree name, const irange &r);
 
-  void enable_new_values ();
-  void disable_new_values ();
+  bool enable_new_values (bool state);
   non_null_ref m_non_null;
   gori_compute m_gori;
 
@@ -116,25 +115,15 @@ private:
   void fill_block_cache (tree name, basic_block bb, basic_block def_bb);
   void propagate_cache (tree name);
 
-  void range_of_def (irange &r, tree name, basic_block bb);
+  void range_of_def (irange &r, tree name, basic_block bb = NULL);
   void entry_range (irange &r, tree expr, basic_block bb);
   void exit_range (irange &r, tree expr, basic_block bb);
 
   void propagate_updated_value (tree name, basic_block bb);
 
+  bitmap m_propfail;
   vec<basic_block> m_workback;
   vec<basic_block> m_update_list;
-
-  // Iterative "poor value" calculations.
-  struct update_record
-  {
-    basic_block bb;	// Block which value needs to be calculated in.
-    tree calc;		// SSA_NAME which needs its value calculated.
-  };
-  bool push_poor_value (basic_block bb, tree name);
-  vec<update_record> m_poor_value_list;
-  class gimple_ranger &query;
-  bool m_new_value_p;
 };
 
 #endif // GCC_SSA_RANGE_CACHE_H
