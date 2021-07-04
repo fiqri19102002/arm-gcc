@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -5875,6 +5876,14 @@ File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunabl
 
      The default value of this tunable is ‘100’.
 
+ -- Tunable: glibc.pthread.stack_cache_size
+     This tunable configures the maximum size of the stack cache.  Once
+     the stack cache exceeds this size, unused thread stacks are
+     returned to the kernel, to bring the cache size below this limit.
+
+     The value is measured in bytes.  The default is ‘41943040’ (fourty
+     mibibytes).
+
 
 File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
 
@@ -10277,6 +10286,10 @@ it.
 ‘_FORTIFY_SOURCE’
 
      _no header_ (GNU): *note Feature Test Macros::.
+
+‘pid_t _Fork (void)’
+
+     ‘unistd.h’ (GNU): *note Creating a Process::.
 
 ‘_GNU_SOURCE’
 

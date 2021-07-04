@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -7163,59 +7164,4 @@ action for ‘SIGINT’ without changing that action.
        /* ‘SIGINT’ is ignored. */
      else
        /* A programmer-defined signal handler is in effect. */
-
-
-File: libc.info,  Node: Flags for Sigaction,  Next: Initial Signal Actions,  Prev: Sigaction Function Example,  Up: Signal Actions
-
-24.3.5 Flags for ‘sigaction’
-----------------------------
-
-The ‘sa_flags’ member of the ‘sigaction’ structure is a catch-all for
-special features.  Most of the time, ‘SA_RESTART’ is a good value to use
-for this field.
-
-   The value of ‘sa_flags’ is interpreted as a bit mask.  Thus, you
-should choose the flags you want to set, OR those flags together, and
-store the result in the ‘sa_flags’ member of your ‘sigaction’ structure.
-
-   Each signal number has its own set of flags.  Each call to
-‘sigaction’ affects one particular signal number, and the flags that you
-specify apply only to that particular signal.
-
-   In the GNU C Library, establishing a handler with ‘signal’ sets all
-the flags to zero except for ‘SA_RESTART’, whose value depends on the
-settings you have made with ‘siginterrupt’.  *Note Interrupted
-Primitives::, to see what this is about.
-
-   These macros are defined in the header file ‘signal.h’.
-
- -- Macro: int SA_NOCLDSTOP
-
-     This flag is meaningful only for the ‘SIGCHLD’ signal.  When the
-     flag is set, the system delivers the signal for a terminated child
-     process but not for one that is stopped.  By default, ‘SIGCHLD’ is
-     delivered for both terminated children and stopped children.
-
-     Setting this flag for a signal other than ‘SIGCHLD’ has no effect.
-
- -- Macro: int SA_ONSTACK
-
-     If this flag is set for a particular signal number, the system uses
-     the signal stack when delivering that kind of signal.  *Note Signal
-     Stack::.  If a signal with this flag arrives and you have not set a
-     signal stack, the system terminates the program with ‘SIGILL’.
-
- -- Macro: int SA_RESTART
-
-     This flag controls what happens when a signal is delivered during
-     certain primitives (such as ‘open’, ‘read’ or ‘write’), and the
-     signal handler returns normally.  There are two alternatives: the
-     library function can resume, or it can return failure with error
-     code ‘EINTR’.
-
-     The choice is controlled by the ‘SA_RESTART’ flag for the
-     particular kind of signal that was delivered.  If the flag is set,
-     returning from a handler resumes the library function.  If the flag
-     is clear, returning from a handler makes the function fail.  *Note
-     Interrupted Primitives::.
 

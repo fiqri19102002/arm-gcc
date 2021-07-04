@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -2212,6 +2213,8 @@ Type Index
                                                               (line   6)
 * glibc.pthread.mutex_spin_count:        POSIX Thread Tunables.
                                                               (line  12)
+* glibc.pthread.stack_cache_size:        POSIX Thread Tunables.
+                                                              (line  24)
 * glibc.rtld:                            Dynamic Linking Tunables.
                                                               (line   6)
 * glibc.rtld.nns:                        Dynamic Linking Tunables.
@@ -2453,6 +2456,7 @@ Function and Macro Index
 * _Exit:                                 Termination Internals.
                                                               (line  18)
 * _flushlbf:                             Flushing Buffers.    (line  54)
+* _Fork:                                 Creating a Process.  (line  62)
 * _tolower:                              Case Conversion.     (line  50)
 * _toupper:                              Case Conversion.     (line  58)
 * __fbufsize:                            Controlling Buffering.
@@ -4635,7 +4639,7 @@ Function and Macro Index
                                                               (line  57)
 * versionsort64:                         Scanning Directory Content.
                                                               (line 109)
-* vfork:                                 Creating a Process.  (line  62)
+* vfork:                                 Creating a Process.  (line  76)
 * vfprintf:                              Variable Arguments Output.
                                                               (line  72)
 * vfscanf:                               Variable Arguments Input.
