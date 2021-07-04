@@ -161,7 +161,7 @@ enum gf_mask {
     GF_OMP_FOR_KIND_SIMD	= 5,
     GF_OMP_FOR_COMBINED		= 1 << 3,
     GF_OMP_FOR_COMBINED_INTO	= 1 << 4,
-    GF_OMP_TARGET_KIND_MASK	= (1 << 4) - 1,
+    GF_OMP_TARGET_KIND_MASK	= (1 << 5) - 1,
     GF_OMP_TARGET_KIND_REGION	= 0,
     GF_OMP_TARGET_KIND_DATA	= 1,
     GF_OMP_TARGET_KIND_UPDATE	= 2,
@@ -172,18 +172,19 @@ enum gf_mask {
     GF_OMP_TARGET_KIND_OACC_SERIAL = 7,
     GF_OMP_TARGET_KIND_OACC_DATA = 8,
     GF_OMP_TARGET_KIND_OACC_UPDATE = 9,
-    GF_OMP_TARGET_KIND_OACC_ENTER_EXIT_DATA = 10,
-    GF_OMP_TARGET_KIND_OACC_DECLARE = 11,
-    GF_OMP_TARGET_KIND_OACC_HOST_DATA = 12,
+    GF_OMP_TARGET_KIND_OACC_ENTER_DATA = 10,
+    GF_OMP_TARGET_KIND_OACC_EXIT_DATA = 11,
+    GF_OMP_TARGET_KIND_OACC_DECLARE = 12,
+    GF_OMP_TARGET_KIND_OACC_HOST_DATA = 13,
     /* A 'GF_OMP_TARGET_KIND_OACC_PARALLEL' representing an OpenACC 'kernels'
        decomposed part, parallelized.  */
-    GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_PARALLELIZED = 13,
+    GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_PARALLELIZED = 14,
     /* A 'GF_OMP_TARGET_KIND_OACC_PARALLEL' representing an OpenACC 'kernels'
        decomposed part, "gang-single".  */
-    GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_GANG_SINGLE = 14,
+    GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_GANG_SINGLE = 15,
     /* A 'GF_OMP_TARGET_KIND_OACC_DATA' representing an OpenACC 'kernels'
        decomposed parts' 'data' construct.  */
-    GF_OMP_TARGET_KIND_OACC_DATA_KERNELS = 15,
+    GF_OMP_TARGET_KIND_OACC_DATA_KERNELS = 16,
     GF_OMP_TEAMS_HOST		= 1 << 0,
 
     /* True on an GIMPLE_OMP_RETURN statement if the return does not require
@@ -1634,6 +1635,24 @@ extern bool gimple_inexpensive_call_p (gcall *);
 extern bool stmt_can_terminate_bb_p (gimple *);
 extern location_t gimple_or_expr_nonartificial_location (gimple *, tree);
 
+/* Return the disposition for a warning (or all warnings by default)
+   for a statement.  */
+extern bool warning_suppressed_p (const gimple *, opt_code = all_warnings)
+  ATTRIBUTE_NONNULL (1);
+/* Set the disposition for a warning (or all warnings by default)
+   at a location to enabled by default.  */
+extern void suppress_warning (gimple *, opt_code = all_warnings,
+			      bool = true) ATTRIBUTE_NONNULL (1);
+
+/* Copy the warning disposition mapping from one statement to another.  */
+extern void copy_warning (gimple *, const gimple *)
+  ATTRIBUTE_NONNULL (1) ATTRIBUTE_NONNULL (2);
+/* Copy the warning disposition mapping from an expression to a statement.  */
+extern void copy_warning (gimple *, const_tree)
+  ATTRIBUTE_NONNULL (1) ATTRIBUTE_NONNULL (2);
+/* Copy the warning disposition mapping from a statement to an expression.  */
+extern void copy_warning (tree, const gimple *)
+  ATTRIBUTE_NONNULL (1) ATTRIBUTE_NONNULL (2);
 
 /* Formal (expression) temporary table handling: multiple occurrences of
    the same scalar expression are evaluated into the same temporary.  */
@@ -1854,15 +1873,16 @@ gimple_block (const gimple *g)
   return LOCATION_BLOCK (g->location);
 }
 
+/* Forward declare.  */
+static inline void gimple_set_location (gimple *, location_t);
 
 /* Set BLOCK to be the lexical scope block holding statement G.  */
 
 static inline void
 gimple_set_block (gimple *g, tree block)
 {
-  g->location = set_block (g->location, block);
+  gimple_set_location (g, set_block (g->location, block));
 }
-
 
 /* Return location information for statement G.  */
 
@@ -1886,6 +1906,8 @@ gimple_location_safe (const gimple *g)
 static inline void
 gimple_set_location (gimple *g, location_t location)
 {
+  /* Copy the no-warning data to the statement location.  */
+  copy_warning (location, g->location);
   g->location = location;
 }
 
@@ -6501,6 +6523,14 @@ is_gimple_omp_oacc (const gimple *stmt)
   gcc_assert (is_gimple_omp (stmt));
   switch (gimple_code (stmt))
     {
+    case GIMPLE_OMP_ATOMIC_LOAD:
+    case GIMPLE_OMP_ATOMIC_STORE:
+    case GIMPLE_OMP_CONTINUE:
+    case GIMPLE_OMP_RETURN:
+      /* Codes shared between OpenACC and OpenMP cannot be used to disambiguate
+	 the two.  */
+      gcc_unreachable ();
+
     case GIMPLE_OMP_FOR:
       switch (gimple_omp_for_kind (stmt))
 	{
@@ -6517,7 +6547,8 @@ is_gimple_omp_oacc (const gimple *stmt)
 	case GF_OMP_TARGET_KIND_OACC_SERIAL:
 	case GF_OMP_TARGET_KIND_OACC_DATA:
 	case GF_OMP_TARGET_KIND_OACC_UPDATE:
-	case GF_OMP_TARGET_KIND_OACC_ENTER_EXIT_DATA:
+	case GF_OMP_TARGET_KIND_OACC_ENTER_DATA:
+	case GF_OMP_TARGET_KIND_OACC_EXIT_DATA:
 	case GF_OMP_TARGET_KIND_OACC_DECLARE:
 	case GF_OMP_TARGET_KIND_OACC_HOST_DATA:
 	case GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_PARALLELIZED:

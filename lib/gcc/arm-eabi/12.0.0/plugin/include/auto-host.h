@@ -1432,6 +1432,12 @@
 #endif
 
 
+/* Define if your assembler has fixed global_load functions. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_GCN_ASM_GLOBAL_LOAD_FIXED */
+#endif
+
+
 /* Define to 1 if you have the `getchar_unlocked' function. */
 #ifndef USED_FOR_TARGET
 #define HAVE_GETCHAR_UNLOCKED 1
@@ -2089,7 +2095,7 @@
 
 /* Define if isl is in use. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_isl */
+#define HAVE_isl 1
 #endif
 
 
