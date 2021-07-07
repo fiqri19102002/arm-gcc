@@ -5599,11 +5599,11 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunab
      This tunable supersedes the ‘MALLOC_CHECK_’ environment variable
      and is identical in features.
 
-     Setting this tunable to a non-zero value enables a special (less
-     efficient) memory allocator for the ‘malloc’ family of functions
-     that is designed to be tolerant against simple errors such as
-     double calls of free with the same argument, or overruns of a
-     single byte (off-by-one bugs).  Not all such errors can be
+     Setting this tunable to a non-zero value less than 4 enables a
+     special (less efficient) memory allocator for the ‘malloc’ family
+     of functions that is designed to be tolerant against simple errors
+     such as double calls of free with the same argument, or overruns of
+     a single byte (off-by-one bugs).  Not all such errors can be
      protected against, however, and memory leaks can result.  Any
      detected heap corruption results in immediate termination of the
      process.

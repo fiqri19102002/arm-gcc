@@ -2567,7 +2567,7 @@ which describe the location and size of each buffer.
 
      This function is similar to the ‘readv’ function, with the
      difference it adds an extra OFFSET parameter of type ‘off_t’
-     similar to ‘pread’.  The data is written to the file starting at
+     similar to ‘pread’.  The data is read from the file starting at
      position OFFSET.  The position of the file descriptor itself is not
      affected by the operation.  The value is the same as before the
      call.
