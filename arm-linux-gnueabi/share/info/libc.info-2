@@ -2190,12 +2190,12 @@ the ‘mcheck’ function.  This function is a GNU extension, declared in
 
    Another possibility to check for and guard against bugs in the use of
 ‘malloc’, ‘realloc’ and ‘free’ is to set the environment variable
-‘MALLOC_CHECK_’.  When ‘MALLOC_CHECK_’ is set to a non-zero value, a
-special (less efficient) implementation is used which is designed to be
-tolerant against simple errors, such as double calls of ‘free’ with the
-same argument, or overruns of a single byte (off-by-one bugs).  Not all
-such errors can be protected against, however, and memory leaks can
-result.
+‘MALLOC_CHECK_’.  When ‘MALLOC_CHECK_’ is set to a non-zero value less
+than 4, a special (less efficient) implementation is used which is
+designed to be tolerant against simple errors, such as double calls of
+‘free’ with the same argument, or overruns of a single byte (off-by-one
+bugs).  Not all such errors can be protected against, however, and
+memory leaks can result.
 
    Any detected heap corruption results in immediate termination of the
 process.
