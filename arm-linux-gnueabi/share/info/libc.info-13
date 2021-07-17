@@ -716,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -10275,6 +10277,10 @@ it.
 
      _no header_ (GNU): *note Feature Test Macros::.
 
+‘_DYNAMIC_STACK_SIZE_SOURCE’
+
+     _no header_ (GNU): *note Feature Test Macros::.
+
 ‘void _Exit (int STATUS)’
 
      ‘stdlib.h’ (ISO): *note Termination Internals::.
@@ -10946,10 +10952,6 @@ it.
 ‘_SC_SIGSTKSZ’
 
      ‘unistd.h’ (GNU): *note Constants for Sysconf::.
-
-‘_SC_SIGSTKSZ_SOURCE’
-
-     _no header_ (GNU): *note Feature Test Macros::.
 
 ‘_SC_SSIZE_MAX’
 
@@ -12167,9 +12169,17 @@ it.
 
      ‘unistd.h’ (POSIX.1): *note Opening and Closing Files::.
 
+‘int close_range (unsigned int LOWFD, unsigned int MAXFD, int FLAGS)’
+
+     ‘unistd.h’ (Linux): *note Opening and Closing Files::.
+
 ‘int closedir (DIR *DIRSTREAM)’
 
      ‘dirent.h’ (POSIX.1): *note Reading/Closing Directory::.
+
+‘void closefrom (int LOWFD)’
+
+     ‘unistd.h’ (GNU): *note Opening and Closing Files::.
 
 ‘void closelog (void)’
 

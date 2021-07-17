@@ -716,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -7097,71 +7099,4 @@ consistently within a single program.
 ISO C, while ‘sigaction’ is part of the POSIX.1 standard.  If you are
 concerned about portability to non-POSIX systems, then you should use
 the ‘signal’ function instead.
-
-
-File: libc.info,  Node: Sigaction Function Example,  Next: Flags for Sigaction,  Prev: Signal and Sigaction,  Up: Signal Actions
-
-24.3.4 ‘sigaction’ Function Example
------------------------------------
-
-In *note Basic Signal Handling::, we gave an example of establishing a
-simple handler for termination signals using ‘signal’.  Here is an
-equivalent example using ‘sigaction’:
-
-     #include <signal.h>
-
-     void
-     termination_handler (int signum)
-     {
-       struct temp_file *p;
-
-       for (p = temp_file_list; p; p = p->next)
-         unlink (p->name);
-     }
-
-     int
-     main (void)
-     {
-       ...
-       struct sigaction new_action, old_action;
-
-       /* Set up the structure to specify the new action. */
-       new_action.sa_handler = termination_handler;
-       sigemptyset (&new_action.sa_mask);
-       new_action.sa_flags = 0;
-
-       sigaction (SIGINT, NULL, &old_action);
-       if (old_action.sa_handler != SIG_IGN)
-         sigaction (SIGINT, &new_action, NULL);
-       sigaction (SIGHUP, NULL, &old_action);
-       if (old_action.sa_handler != SIG_IGN)
-         sigaction (SIGHUP, &new_action, NULL);
-       sigaction (SIGTERM, NULL, &old_action);
-       if (old_action.sa_handler != SIG_IGN)
-         sigaction (SIGTERM, &new_action, NULL);
-       ...
-     }
-
-   The program just loads the ‘new_action’ structure with the desired
-parameters and passes it in the ‘sigaction’ call.  The usage of
-‘sigemptyset’ is described later; see *note Blocking Signals::.
-
-   As in the example using ‘signal’, we avoid handling signals
-previously set to be ignored.  Here we can avoid altering the signal
-handler even momentarily, by using the feature of ‘sigaction’ that lets
-us examine the current action without specifying a new one.
-
-   Here is another example.  It retrieves information about the current
-action for ‘SIGINT’ without changing that action.
-
-     struct sigaction query_action;
-
-     if (sigaction (SIGINT, NULL, &query_action) < 0)
-       /* ‘sigaction’ returns -1 in case of error. */
-     else if (query_action.sa_handler == SIG_DFL)
-       /* ‘SIGINT’ is handled in the default, fatal manner. */
-     else if (query_action.sa_handler == SIG_IGN)
-       /* ‘SIGINT’ is ignored. */
-     else
-       /* A programmer-defined signal handler is in effect. */
 

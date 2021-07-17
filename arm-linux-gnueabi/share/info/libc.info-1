@@ -716,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -4879,10 +4881,10 @@ on semantics undefined within the standard.
      are applied.  If defined to 3, the GNU C Library may also use
      checks that may have an additional performance overhead.
 
- -- Macro: _SC_SIGSTKSZ_SOURCE
+ -- Macro: _DYNAMIC_STACK_SIZE_SOURCE
 
      If this macro is defined, correct (but non compile-time constant)
-     MINSIGSTKSZ and SIGSTKSZ are defined.
+     MINSIGSTKSZ, SIGSTKSZ and PTHREAD_STACK_MIN are defined.
 
  -- Macro: _REENTRANT
  -- Macro: _THREAD_SAFE

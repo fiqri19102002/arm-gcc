@@ -716,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -2848,7 +2850,11 @@ Function and Macro Index
                                                               (line 150)
 * closedir:                              Reading/Closing Directory.
                                                               (line 143)
+* closefrom:                             Opening and Closing Files.
+                                                              (line 252)
 * closelog:                              closelog.            (line   9)
+* close_range:                           Opening and Closing Files.
+                                                              (line 205)
 * cnd_broadcast:                         ISO C Condition Variables.
                                                               (line  43)
 * cnd_destroy:                           ISO C Condition Variables.

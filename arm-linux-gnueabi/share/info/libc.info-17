@@ -716,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -2129,6 +2131,7 @@ Variable and Constant Macro Index
 * _CS_LFS_LINTFLAGS:                     String Parameters.   (line  64)
 * _CS_PATH:                              String Parameters.   (line  38)
 * _DEFAULT_SOURCE:                       Feature Test Macros. (line 264)
+* _DYNAMIC_STACK_SIZE_SOURCE:            Feature Test Macros. (line 291)
 * _FILE_OFFSET_BITS:                     Feature Test Macros. (line 143)
 * _FORTIFY_SOURCE:                       Feature Test Macros. (line 284)
 * _GNU_SOURCE:                           Feature Test Macros. (line 257)
@@ -2415,7 +2418,6 @@ Variable and Constant Macro Index
                                                               (line 166)
 * _SC_SIGSTKSZ:                          Constants for Sysconf.
                                                               (line 649)
-* _SC_SIGSTKSZ_SOURCE:                   Feature Test Macros. (line 291)
 * _SC_SSIZE_MAX:                         Constants for Sysconf.
                                                               (line 574)
 * _SC_STREAM_MAX:                        Constants for Sysconf.
@@ -2680,6 +2682,10 @@ Variable and Constant Macro Index
 * CLOCKS_PER_SEC:                        CPU Time.            (line  33)
 * CLOCK_MONOTONIC:                       Getting the Time.    (line  61)
 * CLOCK_REALTIME:                        Getting the Time.    (line  49)
+* CLOSE_RANGE_CLOEXEC:                   Opening and Closing Files.
+                                                              (line 226)
+* CLOSE_RANGE_UNSHARE:                   Opening and Closing Files.
+                                                              (line 222)
 * CODESET:                               The Elegant and Fast Way.
                                                               (line  31)
 * COLL_WEIGHTS_MAX:                      Utility Limits.      (line  35)

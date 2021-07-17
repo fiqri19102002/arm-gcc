@@ -716,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -6923,6 +6925,64 @@ in the header file ‘fcntl.h’, while ‘close’ is declared in ‘unistd.h�
 trying to close its underlying file descriptor with ‘close’.  This
 flushes any buffered output and updates the stream object to indicate
 that it is closed.
+
+ -- Function: int close_range (unsigned int LOWFD, unsigned int MAXFD,
+          int FLAGS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe fd | *Note POSIX Safety
+     Concepts::.
+
+     The function ‘close_range’ closes the file descriptor from LOWFD to
+     MAXFD (inclusive).  This function is similar to call ‘close’ in
+     specified file descriptor range depending on the FLAGS.
+
+     This is function is only supported on recent Linux versions and the
+     GNU C Library does not provide any fallback (the application will
+     need to handle possible ‘ENOSYS’).
+
+     The FLAGS add options on how the files are closes.  Linux currently
+     supports:
+
+     ‘CLOSE_RANGE_UNSHARE’
+          Unshare the file descriptor table before closing file
+          descriptors.
+
+     ‘CLOSE_RANGE_CLOEXEC’
+          Set the ‘FD_CLOEXEC’ bit instead of closing the file
+          descriptor.
+
+     The normal return value from ‘close_range’ is 0; a value of -1 is
+     returned in case of failure.  The following ‘errno’ error
+     conditions are defined for this function:
+
+     ‘EINVAL’
+          The LOWFD value is larger than MAXFD or an unsupported FLAGS
+          is used.
+
+     ‘ENOMEM’
+          Either there is not enough memory for the operation, or the
+          process is out of address space.  It can only happnes when
+          ‘CLOSE_RANGE_UNSHARED’ flag is used.
+
+     ‘EMFILE’
+          The process has too many files open and it can only happens
+          when ‘CLOSE_RANGE_UNSHARED’ flag is used.  The maximum number
+          of file descriptors is controlled by the ‘RLIMIT_NOFILE’
+          resource limit; *note Limits on Resources::.
+
+     ‘ENOSYS’
+          The kernel does not implement the required functionality.
+
+ -- Function: void closefrom (int LOWFD)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe fd | *Note POSIX Safety
+     Concepts::.
+
+     The function ‘closefrom’ closes all file descriptors larger than or
+     equal to LOWFD then LOWFD.  This function is similar to calling
+     ‘close’ for all open file descriptors not less than LOWFD.
+
+     Already closed file descriptors are ignored.
 
 
 File: libc.info,  Node: I/O Primitives,  Next: File Position Primitive,  Prev: Opening and Closing Files,  Up: Low-Level I/O
