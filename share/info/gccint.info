@@ -38163,7 +38163,8 @@ This is about addressing modes.
      to not vectorize scatter stores.
 
  -- Target Hook: int TARGET_SIMD_CLONE_COMPUTE_VECSIZE_AND_SIMDLEN
-          (struct cgraph_node *, struct cgraph_simd_clone *, TREE, INT)
+          (struct cgraph_node *, struct cgraph_simd_clone *, TREE, INT,
+          BOOL)
      This hook should set VECSIZE_MANGLE, VECSIZE_INT, VECSIZE_FLOAT
      fields in SIMD_CLONE structure pointed by CLONE_INFO argument and
      also SIMDLEN field if it was previously 0.  VECSIZE_MANGLE is a
@@ -57183,15 +57184,15 @@ Concept Index
                                                              (line   39)
 * TARGET_GIMPLE_FOLD_BUILTIN:            Misc.               (line  699)
 * TARGET_GIMPLIFY_VA_ARG_EXPR:           Register Arguments. (line  301)
-* TARGET_GOACC_ADJUST_PRIVATE_DECL:      Addressing Modes.   (line  591)
+* TARGET_GOACC_ADJUST_PRIVATE_DECL:      Addressing Modes.   (line  592)
 * TARGET_GOACC_CREATE_WORKER_BROADCAST_RECORD: Addressing Modes.
-                                                             (line  618)
-* TARGET_GOACC_DIM_LIMIT:                Addressing Modes.   (line  552)
-* TARGET_GOACC_EXPAND_VAR_DECL:          Addressing Modes.   (line  605)
-* TARGET_GOACC_FORK_JOIN:                Addressing Modes.   (line  556)
-* TARGET_GOACC_REDUCTION:                Addressing Modes.   (line  567)
-* TARGET_GOACC_SHARED_MEM_LAYOUT:        Addressing Modes.   (line  629)
-* TARGET_GOACC_VALIDATE_DIMS:            Addressing Modes.   (line  539)
+                                                             (line  619)
+* TARGET_GOACC_DIM_LIMIT:                Addressing Modes.   (line  553)
+* TARGET_GOACC_EXPAND_VAR_DECL:          Addressing Modes.   (line  606)
+* TARGET_GOACC_FORK_JOIN:                Addressing Modes.   (line  557)
+* TARGET_GOACC_REDUCTION:                Addressing Modes.   (line  568)
+* TARGET_GOACC_SHARED_MEM_LAYOUT:        Addressing Modes.   (line  630)
+* TARGET_GOACC_VALIDATE_DIMS:            Addressing Modes.   (line  540)
 * TARGET_HANDLE_C_OPTION:                Run-time Target.    (line   73)
 * TARGET_HANDLE_GENERIC_ATTRIBUTE:       Target Attributes.  (line   93)
 * TARGET_HANDLE_OPTION:                  Run-time Target.    (line   59)
@@ -57304,7 +57305,7 @@ Concept Index
 * TARGET_OBJFMT_CPP_BUILTINS:            Run-time Target.    (line   45)
 * TARGET_OFFLOAD_OPTIONS:                Misc.               (line 1187)
 * TARGET_OMIT_STRUCT_RETURN_REG:         Scalar Return.      (line  117)
-* TARGET_OMP_DEVICE_KIND_ARCH_ISA:       Addressing Modes.   (line  531)
+* TARGET_OMP_DEVICE_KIND_ARCH_ISA:       Addressing Modes.   (line  532)
 * TARGET_OPTAB_SUPPORTED_P:              Costs.              (line  306)
 * TARGET_OPTF:                           Misc.               (line  973)
 * TARGET_OPTION_FUNCTION_VERSIONS:       Target Attributes.  (line  165)
@@ -57329,7 +57330,7 @@ Concept Index
 * TARGET_PRECOMPUTE_TLS_P:               Addressing Modes.   (line  221)
 * TARGET_PREDICT_DOLOOP_P:               Misc.               (line  729)
 * TARGET_PREFERRED_DOLOOP_MODE:          Misc.               (line  793)
-* TARGET_PREFERRED_ELSE_VALUE:           Addressing Modes.   (line  575)
+* TARGET_PREFERRED_ELSE_VALUE:           Addressing Modes.   (line  576)
 * TARGET_PREFERRED_OUTPUT_RELOAD_CLASS:  Register Classes.   (line  284)
 * TARGET_PREFERRED_RELOAD_CLASS:         Register Classes.   (line  213)
 * TARGET_PREFERRED_RENAME_CLASS:         Register Classes.   (line  201)
@@ -57426,11 +57427,11 @@ Concept Index
                                                              (line   27)
 * TARGET_SHRINK_WRAP_SET_HANDLED_COMPONENTS: Shrink-wrapping separate components.
                                                              (line   58)
-* TARGET_SIMD_CLONE_ADJUST:              Addressing Modes.   (line  518)
+* TARGET_SIMD_CLONE_ADJUST:              Addressing Modes.   (line  519)
 * TARGET_SIMD_CLONE_COMPUTE_VECSIZE_AND_SIMDLEN: Addressing Modes.
                                                              (line  507)
-* TARGET_SIMD_CLONE_USABLE:              Addressing Modes.   (line  522)
-* TARGET_SIMT_VF:                        Addressing Modes.   (line  528)
+* TARGET_SIMD_CLONE_USABLE:              Addressing Modes.   (line  523)
+* TARGET_SIMT_VF:                        Addressing Modes.   (line  529)
 * TARGET_SLOW_UNALIGNED_ACCESS:          Costs.              (line  132)
 * TARGET_SMALL_REGISTER_CLASSES_FOR_MODE_P: Register Arguments.
                                                              (line  442)
@@ -58424,94 +58425,94 @@ Node: Varargs1584347
 Node: Trampolines1592441
 Node: Library Calls1602134
 Node: Addressing Modes1607221
-Node: Anchored Addresses1639097
-Node: Condition Code1641740
-Node: MODE_CC Condition Codes1643585
-Node: Costs1650348
-Node: Scheduling1672668
-Node: Sections1696590
-Node: PIC1712960
-Node: Assembler Format1715019
-Node: File Framework1716157
-Ref: TARGET_HAVE_SWITCHABLE_BSS_SECTIONS1723756
-Node: Data Output1725431
-Node: Uninitialized Data1733719
-Node: Label Output1738734
-Node: Initialization1763347
-Node: Macros for Initialization1769308
-Node: Instruction Output1776459
-Node: Dispatch Tables1787089
-Node: Exception Region Output1792840
-Node: Alignment Output1799922
-Node: Debugging Info1803609
-Node: All Debuggers1804159
-Node: DWARF1807092
-Node: VMS Debug1812867
-Node: CTF Debug1813464
-Node: BTF Debug1813825
-Node: Floating Point1814168
-Node: Mode Switching1816923
-Node: Target Attributes1821360
-Node: Emulated TLS1832763
-Node: MIPS Coprocessors1836153
-Node: PCH Target1837312
-Node: C++ ABI1839154
-Node: D Language and ABI1843946
-Node: Named Address Spaces1847170
-Node: Misc1853097
-Ref: TARGET_SHIFT_TRUNCATION_MASK1860968
-Node: Host Config1922296
-Node: Host Common1923365
-Node: Filesystem1925739
-Node: Host Misc1929854
-Node: Fragments1932303
-Node: Target Fragment1933498
-Node: Host Fragment1944310
-Node: Collect21944550
-Node: Header Dirs1947186
-Node: Type Information1948609
-Node: GTY Options1952140
-Node: Inheritance and GTY1964571
-Ref: Inheritance and GTY-Footnote-11966136
-Node: User GC1966406
-Node: GGC Roots1970157
-Node: Files1970870
-Node: Invoking the garbage collector1973501
-Node: Troubleshooting1975143
-Node: Plugins1976218
-Node: Plugins loading1977347
-Node: Plugin API1978446
-Node: Plugins pass1986313
-Node: Plugins GC1988284
-Node: Plugins description1990001
-Node: Plugins attr1990537
-Node: Plugins recording1992817
-Node: Plugins gate1993667
-Node: Plugins tracking1994258
-Node: Plugins building1994846
-Node: LTO1998349
-Node: LTO Overview1999221
-Node: LTO object file layout2004977
-Node: IPA2009621
-Node: WHOPR2018673
-Node: Internal flags2023233
-Node: Match and Simplify2024644
-Node: GIMPLE API2025614
-Node: The Language2028416
-Node: Static Analyzer2041043
-Node: Analyzer Internals2041308
-Node: Debugging the Analyzer2057195
-Node: User Experience Guidelines2061193
-Node: Guidelines for Diagnostics2062129
-Ref: input_location_example2070304
-Node: Guidelines for Options2079989
-Node: Funding2080166
-Node: GNU Project2082673
-Node: Copying2083324
-Node: GNU Free Documentation License2120838
-Node: Contributors2145961
-Node: Option Index2186945
-Node: Concept Index2187822
+Node: Anchored Addresses1639113
+Node: Condition Code1641756
+Node: MODE_CC Condition Codes1643601
+Node: Costs1650364
+Node: Scheduling1672684
+Node: Sections1696606
+Node: PIC1712976
+Node: Assembler Format1715035
+Node: File Framework1716173
+Ref: TARGET_HAVE_SWITCHABLE_BSS_SECTIONS1723772
+Node: Data Output1725447
+Node: Uninitialized Data1733735
+Node: Label Output1738750
+Node: Initialization1763363
+Node: Macros for Initialization1769324
+Node: Instruction Output1776475
+Node: Dispatch Tables1787105
+Node: Exception Region Output1792856
+Node: Alignment Output1799938
+Node: Debugging Info1803625
+Node: All Debuggers1804175
+Node: DWARF1807108
+Node: VMS Debug1812883
+Node: CTF Debug1813480
+Node: BTF Debug1813841
+Node: Floating Point1814184
+Node: Mode Switching1816939
+Node: Target Attributes1821376
+Node: Emulated TLS1832779
+Node: MIPS Coprocessors1836169
+Node: PCH Target1837328
+Node: C++ ABI1839170
+Node: D Language and ABI1843962
+Node: Named Address Spaces1847186
+Node: Misc1853113
+Ref: TARGET_SHIFT_TRUNCATION_MASK1860984
+Node: Host Config1922312
+Node: Host Common1923381
+Node: Filesystem1925755
+Node: Host Misc1929870
+Node: Fragments1932319
+Node: Target Fragment1933514
+Node: Host Fragment1944326
+Node: Collect21944566
+Node: Header Dirs1947202
+Node: Type Information1948625
+Node: GTY Options1952156
+Node: Inheritance and GTY1964587
+Ref: Inheritance and GTY-Footnote-11966152
+Node: User GC1966422
+Node: GGC Roots1970173
+Node: Files1970886
+Node: Invoking the garbage collector1973517
+Node: Troubleshooting1975159
+Node: Plugins1976234
+Node: Plugins loading1977363
+Node: Plugin API1978462
+Node: Plugins pass1986329
+Node: Plugins GC1988300
+Node: Plugins description1990017
+Node: Plugins attr1990553
+Node: Plugins recording1992833
+Node: Plugins gate1993683
+Node: Plugins tracking1994274
+Node: Plugins building1994862
+Node: LTO1998365
+Node: LTO Overview1999237
+Node: LTO object file layout2004993
+Node: IPA2009637
+Node: WHOPR2018689
+Node: Internal flags2023249
+Node: Match and Simplify2024660
+Node: GIMPLE API2025630
+Node: The Language2028432
+Node: Static Analyzer2041059
+Node: Analyzer Internals2041324
+Node: Debugging the Analyzer2057211
+Node: User Experience Guidelines2061209
+Node: Guidelines for Diagnostics2062145
+Ref: input_location_example2070320
+Node: Guidelines for Options2080005
+Node: Funding2080182
+Node: GNU Project2082689
+Node: Copying2083340
+Node: GNU Free Documentation License2120854
+Node: Contributors2145977
+Node: Option Index2186961
+Node: Concept Index2187838
 
 End Tag Table
 
