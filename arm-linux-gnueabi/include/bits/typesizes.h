@@ -1,4 +1,4 @@
-/* bits/typesizes.h -- underlying types for *_t.  Generic version.
+/* bits/typesizes.h -- underlying types for *_t.  ARM version.
    Copyright (C) 2002-2022 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
@@ -62,31 +62,10 @@
 #define __SYSCALL_ULONG_TYPE	__ULONGWORD_TYPE
 #define __CPU_MASK_TYPE 	__ULONGWORD_TYPE
 
-#ifdef __LP64__
-/* Tell the libc code that off_t and off64_t are actually the same type
-   for all ABI purposes, even if possibly expressed as different base types
-   for C type-checking purposes.  */
-# define __OFF_T_MATCHES_OFF64_T	1
-
-/* Same for ino_t and ino64_t.  */
-# define __INO_T_MATCHES_INO64_T	1
-
-/* And for rlim_t and rlim64_t.  */
-# define __RLIM_T_MATCHES_RLIM64_T	1
-
-/* And for fsblkcnt_t, fsblkcnt64_t, fsfilcnt_t and fsfilcnt64_t.  */
-# define __STATFS_MATCHES_STATFS64  1
-
+#define __RLIM_T_MATCHES_RLIM64_T		0
+#define __STATFS_MATCHES_STATFS64		0
 /* And for getitimer, setitimer and rusage  */
-# define __KERNEL_OLD_TIMEVAL_MATCHES_TIMEVAL64 1
-#else
-# define __RLIM_T_MATCHES_RLIM64_T	0
-
-# define __STATFS_MATCHES_STATFS64  0
-
-/* And for getitimer, setitimer and rusage  */
-# define __KERNEL_OLD_TIMEVAL_MATCHES_TIMEVAL64 0
-#endif
+#define __KERNEL_OLD_TIMEVAL_MATCHES_TIMEVAL64	0
 
 /* Number of descriptors that can fit in an `fd_set'.  */
 #define	__FD_SETSIZE		1024
