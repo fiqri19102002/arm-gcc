@@ -19,8 +19,8 @@ import gdb
 import os
 import os.path
 
-pythondir = '/drone/src/builder/arm-eabi/share/gcc-12.2.0/python'
-libdir = '/drone/src/builder/arm-eabi/arm-eabi/lib'
+pythondir = '/workspace/build-tools-gcc/arm-eabi/share/gcc-12.2.0/python'
+libdir = '/workspace/build-tools-gcc/arm-eabi/arm-eabi/lib'
 
 # This file might be loaded when there is no current objfile.  This
 # can happen if the user loads it manually.  In this case we don't

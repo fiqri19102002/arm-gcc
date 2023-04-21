@@ -1060,7 +1060,7 @@
 /* Define to 1 if we found a declaration for 'mallinfo2', otherwise define to
    0. */
 #ifndef USED_FOR_TARGET
-#define HAVE_DECL_MALLINFO2 0
+#define HAVE_DECL_MALLINFO2 1
 #endif
 
 
@@ -1845,7 +1845,7 @@
 
 /* Define to 1 if you have the `mallinfo2' function. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_MALLINFO2 */
+#define HAVE_MALLINFO2 1
 #endif
 
 
@@ -2181,7 +2181,7 @@
 
 /* Define if you have a working <zstd.h> header file. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_ZSTD_H */
+#define HAVE_ZSTD_H 1
 #endif
 
 

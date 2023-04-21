@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/drone/src/builder/arm-eabi/libexec/gcc/arm-eabi/12.2.0'
+libdir='/workspace/build-tools-gcc/arm-eabi/libexec/gcc/arm-eabi/12.2.0'

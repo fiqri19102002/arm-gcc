@@ -1638,7 +1638,7 @@ namespace std
 /* Define if C99 functions in <complex.h> should be used in <complex> for
    C++11. Using compiler builtins for these functions requires corresponding
    C99 library functions to be present. */
-/* #undef _GLIBCXX11_USE_C99_COMPLEX */
+#define _GLIBCXX11_USE_C99_COMPLEX 1
 
 /* Define if C99 functions or macros in <math.h> should be imported in <cmath>
    in namespace std for C++11. */
@@ -1659,7 +1659,7 @@ namespace std
 /* Define if C99 functions in <complex.h> should be used in <complex> for
    C++98. Using compiler builtins for these functions requires corresponding
    C99 library functions to be present. */
-/* #undef _GLIBCXX98_USE_C99_COMPLEX */
+#define _GLIBCXX98_USE_C99_COMPLEX 1
 
 /* Define if C99 functions or macros in <math.h> should be imported in <cmath>
    in namespace std for C++98. */
@@ -1746,12 +1746,12 @@ namespace std
 
 /* Define if C99 functions or macros from <wchar.h>, <math.h>, <complex.h>,
    <stdio.h>, and <stdlib.h> can be used or exposed. */
-/* #undef _GLIBCXX_USE_C99 */
+#define _GLIBCXX_USE_C99 1
 
 /* Define if C99 functions in <complex.h> should be used in <tr1/complex>.
    Using compiler builtins for these functions requires corresponding C99
    library functions to be present. */
-/* #undef _GLIBCXX_USE_C99_COMPLEX_TR1 */
+#define _GLIBCXX_USE_C99_COMPLEX_TR1 1
 
 /* Define if C99 functions in <ctype.h> should be imported in <tr1/cctype> in
    namespace std::tr1. */
@@ -1849,7 +1849,7 @@ namespace std
 /* #undef _GLIBCXX_USE_SCHED_YIELD */
 
 /* Define if _SC_NPROCESSORS_ONLN is available in <unistd.h>. */
-/* #undef _GLIBCXX_USE_SC_NPROCESSORS_ONLN */
+#define _GLIBCXX_USE_SC_NPROCESSORS_ONLN 1
 
 /* Define if _SC_NPROC_ONLN is available in <unistd.h>. */
 /* #undef _GLIBCXX_USE_SC_NPROC_ONLN */

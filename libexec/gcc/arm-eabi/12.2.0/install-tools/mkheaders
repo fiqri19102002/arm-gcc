@@ -53,7 +53,7 @@ if [ x$1 != x ] ; then
   prefix=$1
   shift
 else
-  prefix=/drone/src/builder/arm-eabi
+  prefix=/workspace/build-tools-gcc/arm-eabi
 fi
 
 # Allow for alternate isysroot in which to find headers
